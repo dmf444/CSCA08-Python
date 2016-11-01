@@ -5,7 +5,8 @@
 # This code is provided without comments on purpose. Students should
 # not feel that they have to try to understand this code. 
 try:
-    import ex2 as mf
+    from Exercise2 import ex2 as mf
+
     imported_correctly = True
 except ImportError:
     imported_correctly = False
