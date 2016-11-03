@@ -136,7 +136,7 @@ test_person()
 
 
 class Student(Person):
-    '''a class that represents a student as a person - we're not'''
+    """a class that represents a student as a person - we're not"""
 
     def __init__(self, name, age, height, gender, gpa):
         super().__init__(name, age, gender)
