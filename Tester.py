@@ -11,6 +11,10 @@ class Person():
         self.set_age(age)
         self.set_gender(gender)
 
+    def __str__(self):
+        return "My name is " + self.get_name() + "and I'm " + \
+               str(self.get_age()) + "yrs old"
+
     def set_age(self, new_age):
         self._age = new_age
 
