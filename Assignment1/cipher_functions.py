@@ -151,7 +151,9 @@ def move_joker_1(card_list):
 
 def move_joker_2(card_list):
     '''
-    This function takes in a card_list, finds the second joker value (28) and moves it up the list 2 positions.
+    This function takes in a card_list, finds the second joker value (28) and moves it up the list 2 positions. This
+    function treats the dec as circular and will move Joker2 back to the begining of the list if it cannot move to a
+    higher index.
     (list of integers) -> NoneType
     REQ: card_list must be a list of integers
     >>> list1 = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 3, 6, 9, 12, 15, 18, 21, 24, 27, 2, 5, 8, 11, 14, 17, 20, 23, 26]
@@ -181,6 +183,40 @@ def move_joker_2(card_list):
     swap_cards(card_list, current_index)
     swap_cards(card_list, (current_index + 1) % len(card_list))
 
+
+def triple_cut(card_list):
+    ''' (list of integer) -> NoneType
+    This function takes a card_list, finds all number above the second joker and put them at the bottom of the list.
+    At the same time it takes all number below the first joker and puts them at the top of the list. If the jokers are
+    on the top or bottom of the list, no numbers are changed.
+    REQ: card_list must be a list of integers, cannot be empty
+    REQ: card_list.index(JOKER1) > card_list.index(JOKER2)
+    >>> list3 = [1, 4, 7, 10, 13, 16, 19, 22, 25, 23, 3, 6, 28, 9, 12, 15, 18, 21, 24, 27, 2, 5, 8, 11, 14, 17, 20, 26]
+    >>> triple_cut(list3)
+    >>> print(list3)
+    [2, 5, 8, 11, 14, 17, 20, 26, 28, 9, 12, 15, 18, 21, 24, 27, 1, 4, 7, 10, 13, 16, 19, 22, 25, 23, 3, 6]
+    >>> list2 = [28, 1, 4, 7, 10, 13, 16, 19, 22, 25, 23, 3, 6, 9, 12, 15, 18, 21, 24, 2, 5, 8, 11, 14, 17, 20, 26, 27]
+    >>> triple_cut(list2)
+    >>> print(list2)
+    [28, 1, 4, 7, 10, 13, 16, 19, 22, 25, 23, 3, 6, 9, 12, 15, 18, 21, 24, 2, 5, 8, 11, 14, 17, 20, 26, 27]
+    >>> list2 = [1, 4, 7, 10, 13, 16, 19, 22, 25, 23, 3, 6, 28, 27, 9, 12, 15, 18, 21, 24, 2, 5, 8, 11, 14, 17, 20, 26]
+    >>> triple_cut(list2)
+    >>> print(list2)
+    [9, 12, 15, 18, 21, 24, 2, 5, 8, 11, 14, 17, 20, 26, 28, 27, 1, 4, 7, 10, 13, 16, 19, 22, 25, 23, 3, 6]
+    '''
+    # Get the index of the two jokers
+    joker_1_index = card_list.index(JOKER1)  # card value of 27
+    joker_2_index = card_list.index(JOKER2)  # card value of 28
+    # Cut the card list into three parts, representing all cards from 0 to JOKER2, JOKER2 to JOKER1 and JOKER1 to the
+    # end of the list
+    start_index = card_list[0:joker_2_index]
+    middle_index = card_list[joker_2_index:joker_1_index + 1]
+    final_index = card_list[joker_1_index + 1:len(card_list)]
+    # Create a new list with the splices. Put the final slice first and the first slice last
+    new_list = final_index + middle_index + start_index
+    # Remove all traces of the inputted list, add the newly created list to the inputted list
+    card_list.clear()
+    card_list += new_list
 
 import doctest
 doctest.testmod()
