@@ -1,0 +1,6 @@
+asmith Alice Smith 31 F alice.smith@utsc.utoronto.ca
+bharrington Brian Harrington 33 M brian.harrington@utsc.utoronto.ca
+ddrumpf Donald Drumpf 70 F tinyhands@buildawall.net
+hclinton Hillary Clinton 69 F publicaddress@privateserver.notgov
+cmangler Code Mangler 103 F cm@mangler.net
+ajones Alice Jones 44 F alice@alicejones.net
