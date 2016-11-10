@@ -5,7 +5,7 @@ Encrypt or decrypt the contents of a message file using a deck of cards.
 import cipher_functions
 
 DECK_FILENAME = 'deck2.txt'
-MSG_FILENAME = 'secret8.txt'
+MSG_FILENAME = 'secret6.txt'
 MODE = 'd'  # 'e' for encryption, 'd' for decryption.
 
 

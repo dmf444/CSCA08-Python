@@ -365,7 +365,7 @@ def read_messages(open_file_handler):
     for message in list_of_strings:
         new_message = message.replace("\n", "")
         new_list.append(new_message)
-    return new_message
+    return new_list
 
 
 def read_deck(open_file_handler):
