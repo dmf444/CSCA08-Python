@@ -5,7 +5,7 @@ Encrypt or decrypt the contents of a message file using a deck of cards.
 import cipher_functions
 
 DECK_FILENAME = 'deck2.txt'
-MSG_FILENAME = 'totrans1.txt'
+MSG_FILENAME = 'secret4.txt'
 MODE = 'd'  # 'e' for encryption, 'd' for decryption.
 
 
@@ -36,8 +36,8 @@ def main():
     # For every word in the encryption list
     for encrypted_message in encryption_list:
         # Turn the list into one word
-        encrypted_msg += encrypted_message
-    # Print out the message
-    print(encrypted_msg)
+        # encrypted_msg += encrypted_message
+        # Print out the message
+        print(encrypted_message)
 
 main()
