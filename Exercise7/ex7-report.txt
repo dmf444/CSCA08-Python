@@ -1,0 +1,182 @@
+Autotested Results for ex7 submitted by [REDACTED]
+Generated at 2016-11-13T22:04:01
+
+Summary of Results: 4 out of 8 tests successfully passed
+--
+
+Tests for test_2_update_field.TestUpdateField (4/6 passed)
+--
+
+1) test_2_update_field.TestUpdateField.test_update_first_name                         .. ok!
+2) test_2_update_field.TestUpdateField.test_update_gender                             .. ok!
+3) test_2_update_field.TestUpdateField.test_update_age                                .. ok!
+4) test_2_update_field.TestUpdateField.test_update_last_name                          .. ok!
+5) test_2_update_field.TestUpdateField.test_update_multiple                           .. failed
+.. because {'jsm[24 chars]', 'jane.smithson@utsc.utoronto.ca', 37, 'F'],[277 chars]'M']} != {'jsm[24 chars]', 'john.smith@utsc.utoronto.ca', 37, 'F'], 'r[274 chars]'M']}
+  {'ajones': ['Jones', 'Alice', 'alice@alicejones.net', 44, 'F'],
+   'bharrington': ['Harrington',
+                   'Brian',
+                   'brian.harrington@utsc.utoronto.ca',
+                   31,
+                   'M'],
+-  'jsmith': ['Smithson', 'Jane', 'jane.smithson@utsc.utoronto.ca', 37, 'F'],
+?                                   ^ -      ---
+
++  'jsmith': ['Smithson', 'Jane', 'john.smith@utsc.utoronto.ca', 37, 'F'],
+?                                   ^^
+
+   'mduffy': ['Duffy', 'Mike', 'ireallydolivehere@cavendish.ca', 67, 'M'],
+   'rford': ['Ford', 'Rob', 'robford@crackshack.com', 44, 'M']} : Testing multiple, consecutive update_field() calls. The contents of the mutated dictionary are incorrect. (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex7/test_2_update_field.py", line 152, in test_update_multiple
+        "Testing multiple, consecutive update_field() calls. The contents of the mutated dictionary are incorrect.")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 1088, in assertDictEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 642, in fail
+        raise self.failureException(msg)
+
+    AssertionError: {'jsm[24 chars]', 'jane.smithson@utsc.utoronto.ca', 37, 'F'],[277 chars]'M']} != {'jsm[24 chars]', 'john.smith@utsc.utoronto.ca', 37, 'F'], 'r[274 chars]'M']}
+      {'ajones': ['Jones', 'Alice', 'alice@alicejones.net', 44, 'F'],
+       'bharrington': ['Harrington',
+                       'Brian',
+                       'brian.harrington@utsc.utoronto.ca',
+                       31,
+                       'M'],
+    -  'jsmith': ['Smithson', 'Jane', 'jane.smithson@utsc.utoronto.ca', 37, 'F'],
+    ?                                   ^ -      ---
+
+    +  'jsmith': ['Smithson', 'Jane', 'john.smith@utsc.utoronto.ca', 37, 'F'],
+    ?                                   ^^
+
+       'mduffy': ['Duffy', 'Mike', 'ireallydolivehere@cavendish.ca', 67, 'M'],
+       'rford': ['Ford', 'Rob', 'robford@crackshack.com', 44, 'M']} : Testing multiple, consecutive update_field() calls. The contents of the mutated dictionary are incorrect.
+
+6) test_2_update_field.TestUpdateField.test_update_email                              .. failed
+.. because {'jsm[283 chars]: ['Duffy', 'Mike', 'iliveinpei@cavendish.ca', 67, 'M']} != {'jsm[283 chars]: ['Duffy', 'Mike', 'ireallydolivehere@cavendish.ca', 67, 'M']}
+  {'ajones': ['Jones', 'Alice', 'alice@alicejones.net', 44, 'F'],
+   'bharrington': ['Harrington',
+                   'Brian',
+                   'brian.harrington@utsc.utoronto.ca',
+                   31,
+                   'M'],
+   'jsmith': ['Smith', 'John', 'john.smith@utsc.utoronto.ca', 31, 'M'],
+-  'mduffy': ['Duffy', 'Mike', 'iliveinpei@cavendish.ca', 67, 'M'],
+?                                    ^^^ ^
+
++  'mduffy': ['Duffy', 'Mike', 'ireallydolivehere@cavendish.ca', 67, 'M'],
+?                                ++++++++    ^ ^^
+
+   'rford': ['Ford', 'Rob', 'robford@crackshack.com', 44, 'M']} : Testing update_field() with an email address. The contents of the mutated dictionary are incorrect. (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex7/test_2_update_field.py", line 72, in test_update_email
+        "Testing update_field() with an email address. The contents of the mutated dictionary are incorrect.")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 1088, in assertDictEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 642, in fail
+        raise self.failureException(msg)
+
+    AssertionError: {'jsm[283 chars]: ['Duffy', 'Mike', 'iliveinpei@cavendish.ca', 67, 'M']} != {'jsm[283 chars]: ['Duffy', 'Mike', 'ireallydolivehere@cavendish.ca', 67, 'M']}
+      {'ajones': ['Jones', 'Alice', 'alice@alicejones.net', 44, 'F'],
+       'bharrington': ['Harrington',
+                       'Brian',
+                       'brian.harrington@utsc.utoronto.ca',
+                       31,
+                       'M'],
+       'jsmith': ['Smith', 'John', 'john.smith@utsc.utoronto.ca', 31, 'M'],
+    -  'mduffy': ['Duffy', 'Mike', 'iliveinpei@cavendish.ca', 67, 'M'],
+    ?                                    ^^^ ^
+
+    +  'mduffy': ['Duffy', 'Mike', 'ireallydolivehere@cavendish.ca', 67, 'M'],
+    ?                                ++++++++    ^ ^^
+
+       'rford': ['Ford', 'Rob', 'robford@crackshack.com', 44, 'M']} : Testing update_field() with an email address. The contents of the mutated dictionary are incorrect.
+
+
+
+Tests for test_1_create_dict.TestCreateDict (0/1 passed)
+--
+
+1) test_1_create_dict.TestCreateDict.test_create_dict                                 .. failed
+.. because {'jsmith': ['Smith', 'John', 'john.smith@ut[303 chars]'M']} != {'mduffy': ['Duffy', 'Mike', 'ireallydolive[313 chars]'F']}
+Diff is 1038 characters long. Set self.maxDiff to None to see it. : Testing create_dict(). The returned object is not a dictionary or the contents of the dictionary are incorrect. (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex7/test_1_create_dict.py", line 18, in test_create_dict
+        "Testing create_dict(). The returned object is not a dictionary or the contents of the dictionary are incorrect.")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 1088, in assertDictEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 642, in fail
+        raise self.failureException(msg)
+
+    AssertionError: {'jsmith': ['Smith', 'John', 'john.smith@ut[303 chars]'M']} != {'mduffy': ['Duffy', 'Mike', 'ireallydolive[313 chars]'F']}
+    Diff is 1038 characters long. Set self.maxDiff to None to see it. : Testing create_dict(). The returned object is not a dictionary or the contents of the dictionary are incorrect.
+
+
+
+Tests for test_pep8.TestPEP8 (0/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. failed
+.. because 10 != 0 : Found code style errors (and warnings):
+E501: line too long (119 > 80 characters) (10) (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex7/test_pep8.py", line 19, in test_pep8
+        self.assertEqual(result.total_errors, 0, report_output)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 10 != 0 : Found code style errors (and warnings):
+    E501: line too long (119 > 80 characters) (10)
+
+
+

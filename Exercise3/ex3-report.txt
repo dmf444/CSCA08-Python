@@ -1,0 +1,33 @@
+Autotested Results for ex3 submitted by [REDACTED]
+Generated at 2016-10-09T00:24:19
+
+Summary of Results: 19 out of 19 tests successfully passed
+--
+
+Tests for test_ex3.TestE3 (12/12 passed)
+--
+
+1) Testing percent_to_gpv(67)..                                                       .. ok!
+2) Testing percent_to_gpv(66)..                                                       .. ok!
+3) Testing card_namer() with an King..                                                .. ok!
+4) Testing card_namer() with an 10..                                                  .. ok!
+5) Testing card_namer() with an Jack..                                                .. ok!
+6) Testing percent_to_gpv(100)..                                                      .. ok!
+7) Testing card_namer() with an invalid suit..                                        .. ok!
+8) Testing percent_to_gpv(78)..                                                       .. ok!
+9) Testing card_namer() with an Ace..                                                 .. ok!
+10) Testing card_namer() with an 5..                                                   .. ok!
+11) Testing card_namer() with an Queen..                                               .. ok!
+12) Testing percent_to_gpv(50)..                                                       .. ok!
+
+
+Tests for test_ex3.TestE3Bonus (7/7 passed)
+--
+
+1) Bonus: Testing my_str() with a string..                                            .. ok!
+2) Bonus: Testing my_str() with an empty string..                                     .. ok!
+3) Bonus: Testing my_str() with a float with 3 decimal places..                       .. ok!
+4) Bonus: Testing my_str() with a medium integer..                                    .. ok!
+5) Bonus: Testing my_str() with a float with 1 decimal place..                        .. ok!
+6) Bonus: Testing my_str() with a large integer..                                     .. ok!
+7) Bonus: Testing my_str() with a list..                                              .. ok!

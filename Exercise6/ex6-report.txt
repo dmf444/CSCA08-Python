@@ -1,0 +1,55 @@
+Autotested Results for ex6 submitted by [REDACTED]
+Generated at 2016-11-06T21:46:54
+
+Summary of Results: 10 out of 11 tests successfully passed
+--
+
+Tests for test_pep8.TestPEP8 (0/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. failed
+.. because 4 != 0 : Found code style errors (and warnings):
+E501: line too long (117 > 80 characters) (4) (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex6/test_pep8.py", line 19, in test_pep8
+        self.assertEqual(result.total_errors, 0, report_output)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 4 != 0 : Found code style errors (and warnings):
+    E501: line too long (117 > 80 characters) (4)
+
+
+
+Tests for test_copy_me.TestCopyMe (5/5 passed)
+--
+
+1) test_copy_me.TestCopyMe.test_copy_me_floats                                        .. ok!
+2) test_copy_me.TestCopyMe.test_copy_me_strings                                       .. ok!
+3) test_copy_me.TestCopyMe.test_copy_me_integers                                      .. ok!
+4) test_copy_me.TestCopyMe.test_copy_me_booleans                                      .. ok!
+5) test_copy_me.TestCopyMe.test_copy_me_mixed                                         .. ok!
+
+
+Tests for test_mutate_me.TestMutateMe (5/5 passed)
+--
+
+1) test_mutate_me.TestMutateMe.test_mutate_me_mixed                                   .. ok!
+2) test_mutate_me.TestMutateMe.test_mutate_me_strings                                 .. ok!
+3) test_mutate_me.TestMutateMe.test_mutate_me_floats                                  .. ok!
+4) test_mutate_me.TestMutateMe.test_mutate_me_integers                                .. ok!
+5) test_mutate_me.TestMutateMe.test_mutate_me_booleans                                .. ok!
+
+

@@ -1,0 +1,41 @@
+Autotested Results for ex4 submitted by [REDACTED]
+Generated at 2016-10-22T06:38:30
+
+Summary of Results: 15 out of 15 tests successfully passed
+--
+
+Tests for test_insert.TestE4Insert (4/4 passed)
+--
+
+1) test_insert.TestE4Insert.test_insert_list_beginning                                .. ok!
+2) test_insert.TestE4Insert.test_insert_list_end                                      .. ok!
+3) test_insert.TestE4Insert.test_insert_list                                          .. ok!
+4) test_insert.TestE4Insert.test_insert_string                                        .. ok!
+
+
+Tests for test_cut_list.TestE4CutList (5/5 passed)
+--
+
+1) test_cut_list.TestE4CutList.test_cut_list_at_end                                   .. ok!
+2) test_cut_list.TestE4CutList.test_cut_list_1                                        .. ok!
+3) test_cut_list.TestE4CutList.test_cut_list_string                                   .. ok!
+4) test_cut_list.TestE4CutList.test_cut_list_at_beginning                             .. ok!
+5) test_cut_list.TestE4CutList.test_cut_list_2                                        .. ok!
+
+
+Tests for test_up_to_first.TestE4UpToFirst (5/5 passed)
+--
+
+1) test_up_to_first.TestE4UpToFirst.test_up_to_first_object_at_beginning              .. ok!
+2) test_up_to_first.TestE4UpToFirst.test_up_to_first_string                           .. ok!
+3) test_up_to_first.TestE4UpToFirst.test_up_to_first                                  .. ok!
+4) test_up_to_first.TestE4UpToFirst.test_up_to_first_object_not_in_list               .. ok!
+5) test_up_to_first.TestE4UpToFirst.test_up_to_first_multiple_occurrences             .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
+

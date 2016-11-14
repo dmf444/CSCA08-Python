@@ -1,0 +1,315 @@
+Autotested Results for A0 submitted by [REDACTED]
+Generated at 2016-11-06T21:33:14
+
+Summary of Results: 79 out of 84 tests successfully passed
+--
+
+Tests for test_pep8.TestA0Pep8 (0/1 passed)
+--
+
+1) test_pep8.TestA0Pep8.test_pep8                                                     .. failed
+.. because 19 != 0 : Found code style errors (and warnings):
+E501: line too long (82 > 80 characters) (18)
+E303: too many blank lines (3) (1) (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A0/test_pep8.py", line 19, in test_pep8
+        self.assertEqual(result.total_errors, 0, report_output)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 19 != 0 : Found code style errors (and warnings):
+    E501: line too long (82 > 80 characters) (18)
+    E303: too many blank lines (3) (1)
+
+
+
+Tests for test_a0.TestA0InExactlyOneDimension (12/12 passed)
+--
+
+1) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_08_square_puz
+zle_with_three_occurrences_in_different_dimensions                                    .. ok!
+2) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_04_square_puz
+zle_with_one_UD_occurrence                                                            .. ok!
+3) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_09_square_puz
+zle_with_four_occurrences_in_different_dimensions                                     .. ok!
+4) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_03_square_puz
+zle_with_one_RL_occurrence                                                            .. ok!
+5) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_11_rectangula
+r_puzzle_with_one_LR_occurrence                                                       .. ok!
+6) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_01_square_puz
+zle_with_no_occurrences                                                               .. ok!
+7) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_06_square_puz
+zle_with_one_DU_and_one_UD_occurrence                                                 .. ok!
+8) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_12_rectangula
+r_puzzle_with_three_occurrences_in_different_dimensions                               .. ok!
+9) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_05_square_puz
+zle_with_one_DU_occurrence                                                            .. ok!
+10) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_07_square_puz
+zle_with_two_LR_occurrences                                                           .. ok!
+11) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_10_rectangula
+r_puzzle_with_no_occurrences                                                          .. ok!
+12) test_a0.TestA0InExactlyOneDimension.test_in_exactly_one_dimension_02_square_puz
+zle_with_one_LR_occurrence                                                            .. ok!
+
+
+Tests for test_a0.TestA0InPuzzleVertical (12/12 passed)
+--
+
+1) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_02_square_puzzle_with_on
+e_LR_occurrence                                                                       .. ok!
+2) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_01_square_puzzle_with_no
+_occurrences                                                                          .. ok!
+3) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_06_square_puzzle_with_on
+e_DU_and_one_UD_occurrence                                                            .. ok!
+4) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_12_rectangular_puzzle_wi
+th_three_occurrences_in_different_dimensions                                          .. ok!
+5) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_08_square_puzzle_with_th
+ree_occurrences_in_different_dimensions                                               .. ok!
+6) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_07_square_puzzle_with_tw
+o_LR_occurrences                                                                      .. ok!
+7) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_04_square_puzzle_with_on
+e_UD_occurrence                                                                       .. ok!
+8) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_10_rectangular_puzzle_wi
+th_no_occurrences                                                                     .. ok!
+9) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_11_rectangular_puzzle_wi
+th_one_LR_occurrence                                                                  .. ok!
+10) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_03_square_puzzle_with_on
+e_RL_occurrence                                                                       .. ok!
+11) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_05_square_puzzle_with_on
+e_DU_occurrence                                                                       .. ok!
+12) test_a0.TestA0InPuzzleVertical.test_in_puzzle_vertical_09_square_puzzle_with_fo
+ur_occurrences_in_different_dimensions                                                .. ok!
+
+
+Tests for test_a0.TestA0AllHorizontal (12/12 passed)
+--
+
+1) test_a0.TestA0AllHorizontal.test_all_horizontal_11_rectangular_puzzle_with_one_
+LR_occurrence                                                                         .. ok!
+2) test_a0.TestA0AllHorizontal.test_all_horizontal_10_rectangular_puzzle_with_no_o
+ccurrences                                                                            .. ok!
+3) test_a0.TestA0AllHorizontal.test_all_horizontal_08_square_puzzle_with_three_occ
+urrences_in_different_dimensions                                                      .. ok!
+4) test_a0.TestA0AllHorizontal.test_all_horizontal_02_square_puzzle_with_one_LR_oc
+currence                                                                              .. ok!
+5) test_a0.TestA0AllHorizontal.test_all_horizontal_03_square_puzzle_with_one_RL_oc
+currence                                                                              .. ok!
+6) test_a0.TestA0AllHorizontal.test_all_horizontal_04_square_puzzle_with_one_UD_oc
+currence                                                                              .. ok!
+7) test_a0.TestA0AllHorizontal.test_all_horizontal_05_square_puzzle_with_one_DU_oc
+currence                                                                              .. ok!
+8) test_a0.TestA0AllHorizontal.test_all_horizontal_01_square_puzzle_with_no_occurr
+ences                                                                                 .. ok!
+9) test_a0.TestA0AllHorizontal.test_all_horizontal_06_square_puzzle_with_one_DU_an
+d_one_UD_occurrence                                                                   .. ok!
+10) test_a0.TestA0AllHorizontal.test_all_horizontal_12_rectangular_puzzle_with_thre
+e_occurrences_in_different_dimensions                                                 .. ok!
+11) test_a0.TestA0AllHorizontal.test_all_horizontal_07_square_puzzle_with_two_LR_oc
+currences                                                                             .. ok!
+12) test_a0.TestA0AllHorizontal.test_all_horizontal_09_square_puzzle_with_four_occu
+rrences_in_different_dimensions                                                       .. ok!
+
+
+Tests for test_a0.TestA0TotalOccurrences (11/11 passed)
+--
+
+1) test_a0.TestA0TotalOccurrences.test_total_occurrences_07_square_puzzle_with_thr
+ee_occurrences_in_different_dimensions                                                .. ok!
+2) test_a0.TestA0TotalOccurrences.test_total_occurrences_08_square_puzzle_with_fou
+r_occurrences_in_different_dimensions                                                 .. ok!
+3) test_a0.TestA0TotalOccurrences.test_total_occurrences_04_square_puzzle_with_one
+_UD_occurrence                                                                        .. ok!
+4) test_a0.TestA0TotalOccurrences.test_total_occurrences_02_square_puzzle_with_one
+_LR_occurrence                                                                        .. ok!
+5) test_a0.TestA0TotalOccurrences.test_total_occurrences_01_square_puzzle_with_no_
+occurrences                                                                           .. ok!
+6) test_a0.TestA0TotalOccurrences.test_total_occurrences_10_rectangular_puzzle_wit
+h_one_LR_occurrence                                                                   .. ok!
+7) test_a0.TestA0TotalOccurrences.test_total_occurrences_06_square_puzzle_with_two
+_occurrences                                                                          .. ok!
+8) test_a0.TestA0TotalOccurrences.test_total_occurrences_11_rectangular_puzzle_wit
+h_three_occurrences_in_different_dimensions                                           .. ok!
+9) test_a0.TestA0TotalOccurrences.test_total_occurrences_05_square_puzzle_with_one
+_DU_occurrence                                                                        .. ok!
+10) test_a0.TestA0TotalOccurrences.test_total_occurrences_03_square_puzzle_with_one
+_RL_occurrence                                                                        .. ok!
+11) test_a0.TestA0TotalOccurrences.test_total_occurrences_09_rectangular_puzzle_wit
+h_no_occurrences                                                                      .. ok!
+
+
+Tests for test_a0.TestA0InPuzzleHorizontal (12/12 passed)
+--
+
+1) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_04_square_puzzle_wit
+h_one_UD_occurrence                                                                   .. ok!
+2) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_12_rectangular_puzzl
+e_with_three_occurrences_in_different_dimensions                                      .. ok!
+3) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_01_square_puzzle_wit
+h_no_occurrences                                                                      .. ok!
+4) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_03_square_puzzle_wit
+h_one_RL_occurrence                                                                   .. ok!
+5) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_10_rectangular_puzzl
+e_with_no_occurrences                                                                 .. ok!
+6) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_05_square_puzzle_wit
+h_one_DU_occurrence                                                                   .. ok!
+7) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_06_square_puzzle_wit
+h_one_DU_and_one_UD_occurrence                                                        .. ok!
+8) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_02_square_puzzle_wit
+h_one_LR_occurrence                                                                   .. ok!
+9) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_11_rectangular_puzzl
+e_with_one_LR_occurrence                                                              .. ok!
+10) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_09_square_puzzle_wit
+h_four_occurrences_in_different_dimensions                                            .. ok!
+11) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_07_square_puzzle_wit
+h_two_LR_occurrences                                                                  .. ok!
+12) test_a0.TestA0InPuzzleHorizontal.test_in_puzzle_horizontal_08_square_puzzle_wit
+h_three_occurrences_in_different_dimensions                                           .. ok!
+
+
+Tests for test_a0.TestA0InPuzzle (12/12 passed)
+--
+
+1) test_a0.TestA0InPuzzle.test_in_puzzle_01_square_puzzle_with_no_occurrences         .. ok!
+2) test_a0.TestA0InPuzzle.test_in_puzzle_12_rectangular_puzzle_with_three_occurren
+ces_in_different_dimensions                                                           .. ok!
+3) test_a0.TestA0InPuzzle.test_in_puzzle_02_square_puzzle_with_one_LR_occurrence      .. ok!
+4) test_a0.TestA0InPuzzle.test_in_puzzle_10_rectangular_puzzle_with_no_occurrences    .. ok!
+5) test_a0.TestA0InPuzzle.test_in_puzzle_09_square_puzzle_with_four_occurrences_in
+_different_dimensions                                                                 .. ok!
+6) test_a0.TestA0InPuzzle.test_in_puzzle_06_square_puzzle_with_one_DU_and_one_UD_o
+ccurrence                                                                             .. ok!
+7) test_a0.TestA0InPuzzle.test_in_puzzle_08_square_puzzle_with_three_occurrences_i
+n_different_dimensions                                                                .. ok!
+8) test_a0.TestA0InPuzzle.test_in_puzzle_07_square_puzzle_with_two_LR_occurrences     .. ok!
+9) test_a0.TestA0InPuzzle.test_in_puzzle_03_square_puzzle_with_one_RL_occurrence      .. ok!
+10) test_a0.TestA0InPuzzle.test_in_puzzle_04_square_puzzle_with_one_UD_occurrence      .. ok!
+11) test_a0.TestA0InPuzzle.test_in_puzzle_05_square_puzzle_with_one_DU_occurrence      .. ok!
+12) test_a0.TestA0InPuzzle.test_in_puzzle_11_rectangular_puzzle_with_one_LR_occurre
+nce                                                                                   .. ok!
+
+
+Tests for test_a0.TestA0AtMostOneVertical (8/12 passed)
+--
+
+1) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_12_rectangular_puzzle
+_with_three_occurrences_in_different_dimensions                                       .. ok!
+2) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_09_square_puzzle_with
+_four_occurrences_in_different_dimensions                                             .. ok!
+3) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_03_square_puzzle_with
+_one_RL_occurrence                                                                    .. ok!
+4) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_11_rectangular_puzzle
+_with_one_LR_occurrence                                                               .. ok!
+5) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_08_square_puzzle_with
+_three_occurrences_in_different_dimensions                                            .. ok!
+6) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_02_square_puzzle_with
+_one_LR_occurrence                                                                    .. ok!
+7) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_07_square_puzzle_with
+_two_LR_occurrences                                                                   .. ok!
+8) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_06_square_puzzle_with
+_one_DU_and_one_UD_occurrence                                                         .. ok!
+9) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_01_square_puzzle_with
+_no_occurrences                                                                       .. failed
+.. because False != True : square puzzle with no occurrences (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A0/test_a0.py", line 889, in test_at_most_one_vertical_01_square_puzzle_with_no_occurrences
+        self.assertEqual(a1.at_most_one_vertical(p1, p2), r, "square puzzle with no occurrences")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: False != True : square puzzle with no occurrences
+
+10) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_04_square_puzzle_with
+_one_UD_occurrence                                                                    .. failed
+.. because False != True : square puzzle with one UD occurrence (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A0/test_a0.py", line 925, in test_at_most_one_vertical_04_square_puzzle_with_one_UD_occurrence
+        self.assertEqual(a1.at_most_one_vertical(p1, p2), r, "square puzzle with one UD occurrence")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: False != True : square puzzle with one UD occurrence
+
+11) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_05_square_puzzle_with
+_one_DU_occurrence                                                                    .. failed
+.. because False != True : square puzzle with one DU occurrence (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A0/test_a0.py", line 937, in test_at_most_one_vertical_05_square_puzzle_with_one_DU_occurrence
+        self.assertEqual(a1.at_most_one_vertical(p1, p2), r, "square puzzle with one DU occurrence")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: False != True : square puzzle with one DU occurrence
+
+12) test_a0.TestA0AtMostOneVertical.test_at_most_one_vertical_10_rectangular_puzzle
+_with_no_occurrences                                                                  .. failed
+.. because False != True : rectangular puzzle with no occurrences (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A0/test_a0.py", line 997, in test_at_most_one_vertical_10_rectangular_puzzle_with_no_occurrences
+        self.assertEqual(a1.at_most_one_vertical(p1, p2), r, "rectangular puzzle with no occurrences")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: False != True : rectangular puzzle with no occurrences
+
+
+

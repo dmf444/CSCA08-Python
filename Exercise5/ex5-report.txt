@@ -1,0 +1,68 @@
+Autotested Results for ex5 submitted by [REDACTED]
+Generated at 2016-11-06T21:44:18
+
+Summary of Results: 10 out of 12 tests successfully passed
+--
+
+Tests for test_2_justified.Test (6/6 passed)
+--
+
+1) test_2_justified.Test.test_justified_multiple_fail                                 .. ok!
+2) test_2_justified.Test.test_justified_blank_lines_fail                              .. ok!
+3) test_2_justified.Test.test_justified_multiple_pass                                 .. ok!
+4) test_2_justified.Test.test_justified_single_pass                                   .. ok!
+5) test_2_justified.Test.test_justified_single_fail                                   .. ok!
+6) test_2_justified.Test.test_justified_blank_lines_pass                              .. ok!
+
+
+Tests for test_1_function_names.Test (3/3 passed)
+--
+
+1) test_1_function_names.Test.test_function_names_multiple                            .. ok!
+2) test_1_function_names.Test.test_function_names_single                              .. ok!
+3) test_1_function_names.Test.test_function_names_none                                .. ok!
+
+
+Tests for test_pep8.Test (1/1 passed)
+--
+
+1) test_pep8.Test.test_pep8                                                           .. ok!
+
+
+Tests for test_3_section_average.Test (0/2 passed)
+--
+
+1) test_3_section_average.Test.test_section_average_each_lecture                      .. error
+.. because 'module' object has no attribute 'section_average' (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex5/test_3_section_average.py", line 14, in test_section_average_each_lecture
+        actual_output = ex5.section_average(input_file, lecture)
+
+    AttributeError: 'module' object has no attribute 'section_average'
+
+2) test_3_section_average.Test.test_section_average_nonexistent_lecture               .. error
+.. because 'module' object has no attribute 'section_average' (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex5/test_3_section_average.py", line 22, in test_section_average_nonexistent_lecture
+        actual_output = ex5.section_average(input_file, 'LEC05')
+
+    AttributeError: 'module' object has no attribute 'section_average'
+
+
+

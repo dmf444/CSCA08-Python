@@ -1,0 +1,11 @@
+Autotested Results for ex0 submitted by [REDACTED]
+Generated at 2016-09-26T16:33:17
+
+Summary of Results: 1 out of 1 tests successfully passed
+--
+
+Tests for test_ex0.TestEx0 (1/1 passed)
+--
+
+1) test_ex0.TestEx0.test_import                                                       .. ok!
+

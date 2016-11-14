@@ -1,0 +1,28 @@
+Autotested Results for ex2 submitted by [REDACTED]
+Generated at 2016-10-05T17:56:21
+
+Summary of Results: 9 out of 9 tests successfully passed
+--
+
+Tests for test_ex2.TestE2 (9/9 passed)
+--
+
+1) Testing term_work_mark() with original weights and max marks, using the grades
+from the first example..                                                              .. ok!
+2) Testing is_pass() with original weights and max marks, using grades from the
+second example..                                                                      .. ok!
+3) Testing final_mark() with modified weights, using the grades from the second
+example..                                                                             .. ok!
+4) Testing is_pass() with original weights and max marks, using grades from the
+first example..                                                                       .. ok!
+5) Testing final_mark() with modified max marks, using the grades from the second
+example..                                                                             .. ok!
+6) Testing term_work_mark() with modified max marks, using the grades from the
+first example..                                                                       .. ok!
+7) Testing final_mark() with original weights and max marks, using the grades from
+the second example..                                                                  .. ok!
+8) Testing is_pass() with original weights and max marks, using grades from the
+third example..                                                                       .. ok!
+9) Testing term_work_mark() with modified weights, using the grades from the first
+example..                                                                             .. ok!
+
