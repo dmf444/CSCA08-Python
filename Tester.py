@@ -57,3 +57,37 @@ if(__name__ == "__main__"):
         else:
             greeting += "Mr."
         print(greeting + next_person.get_name())
+
+def func1(l1):
+    l1[0] = "X"
+    print(l1)
+def func2(l1, l2):
+    l1[0] = l2[0]
+    l3 = l1[0:3]
+    l3[0] = "Y"
+    l2[0] = l3[0]
+    print(l1, l2, l3)
+def func3(l1, l2):
+    l3 = l1[:]
+    l1[0] = l2
+    l1[0][0] = "Z"
+    l2[1] = "W"
+    print(l1, l2, l3)
+l1 = [1, 2, 3]
+l2 = [7, 8, 9]
+func1(l1)
+func2(l1,l2)
+l1 = [1, 2, 3]
+l2 = [7, 8, 9]
+func3(l1, l2)
+l1 = [[1, 2], 3]
+l2 = [[7], [8, [9]]]
+func3(l1, l2)
+
+def funci(x1, x2):
+    (x1, x2) = (x2, x1)
+    return x1
+
+(x1, x2) = (1, 2)
+print(funci(x1, x2))
+print((x1, x2))

@@ -1,0 +1,251 @@
+Autotested Results for A1 submitted by David Fernandes (ferna844)
+Generated at 2016-11-21T02:46:42
+
+Summary of Results: 120 out of 120 tests successfully passed
+--
+
+Tests for test_01_clean_message.TestCleanMessage (10/10 passed)
+--
+
+1) test_01_clean_message.TestCleanMessage.test_07_clean_message_punctuation_and_nu
+mber                                                                                  .. ok!
+2) test_01_clean_message.TestCleanMessage.test_04_clean_message_mixed_case_string     .. ok!
+3) test_01_clean_message.TestCleanMessage.test_01_clean_message_empty_string          .. ok!
+4) test_01_clean_message.TestCleanMessage.test_10_clean_message_all_nonletters        .. ok!
+5) test_01_clean_message.TestCleanMessage.test_06_clean_message_punctuation_in_mid
+dle                                                                                   .. ok!
+6) test_01_clean_message.TestCleanMessage.test_09_clean_message_lots_of_lowercase_
+and_nonletters                                                                        .. ok!
+7) test_01_clean_message.TestCleanMessage.test_03_clean_message_all_uppercase_stri
+ng                                                                                    .. ok!
+8) test_01_clean_message.TestCleanMessage.test_08_clean_message_multiple_sequentia
+l_nonletters                                                                          .. ok!
+9) test_01_clean_message.TestCleanMessage.test_02_clean_message_all_lowercase_stri
+ng                                                                                    .. ok!
+10) test_01_clean_message.TestCleanMessage.test_05_clean_message_number_and_upperca
+se_string                                                                             .. ok!
+
+
+Tests for test_08_move_joker_2.TestMoveJoker2 (10/10 passed)
+--
+
+1) test_08_move_joker_2.TestMoveJoker2.test_01_move_joker_2_middle                    .. ok!
+2) test_08_move_joker_2.TestMoveJoker2.test_04_move_joker_2_close_beginning           .. ok!
+3) test_08_move_joker_2.TestMoveJoker2.test_07_move_joker_2_small_end                 .. ok!
+4) test_08_move_joker_2.TestMoveJoker2.test_08_move_joker_2_small_middle_cards        .. ok!
+5) test_08_move_joker_2.TestMoveJoker2.test_06_move_joker_2_small_middle_cards        .. ok!
+6) test_08_move_joker_2.TestMoveJoker2.test_03_move_joker_2_end                       .. ok!
+7) test_08_move_joker_2.TestMoveJoker2.test_02_move_joker_2_beginning                 .. ok!
+8) test_08_move_joker_2.TestMoveJoker2.test_09_move_joker_2_small_end                 .. ok!
+9) test_08_move_joker_2.TestMoveJoker2.test_10_move_joker_2_constant                  .. ok!
+10) test_08_move_joker_2.TestMoveJoker2.test_05_move_joker_2_close_end                 .. ok!
+
+
+Tests for test_09_triple_cut.TestTripleCut (16/16 passed)
+--
+
+1) test_09_triple_cut.TestTripleCut.test_05_triple_cut_close_beginning1               .. ok!
+2) test_09_triple_cut.TestTripleCut.test_10_triple_cut_close_end2                     .. ok!
+3) test_09_triple_cut.TestTripleCut.test_02_triple_cut_middle2                        .. ok!
+4) test_09_triple_cut.TestTripleCut.test_03_triple_cut_beginning1                     .. ok!
+5) test_09_triple_cut.TestTripleCut.test_09_triple_cut_close_end1                     .. ok!
+6) test_09_triple_cut.TestTripleCut.test_16_triple_cut_constant                       .. ok!
+7) test_09_triple_cut.TestTripleCut.test_01_triple_cut_middle1                        .. ok!
+8) test_09_triple_cut.TestTripleCut.test_14_triple_cut_small_middle                   .. ok!
+9) test_09_triple_cut.TestTripleCut.test_06_triple_cut_close_beginning2               .. ok!
+10) test_09_triple_cut.TestTripleCut.test_15_triple_cut_small_beginning                .. ok!
+11) test_09_triple_cut.TestTripleCut.test_13_triple_cut_together_middle                .. ok!
+12) test_09_triple_cut.TestTripleCut.test_11_triple_cut_together_beginning             .. ok!
+13) test_09_triple_cut.TestTripleCut.test_04_triple_cut_beginning2                     .. ok!
+14) test_09_triple_cut.TestTripleCut.test_12_triple_cut_together_end                   .. ok!
+15) test_09_triple_cut.TestTripleCut.test_07_triple_cut_end1                           .. ok!
+16) test_09_triple_cut.TestTripleCut.test_08_triple_cut_end2                           .. ok!
+
+
+Tests for test_13_get_next_keystream_value.TestGetNextKeystreamValue (5/5 passed)
+--
+
+1) test_13_get_next_keystream_value.TestGetNextKeystreamValue.test_05_get_next_key
+stream_value_27                                                                       .. ok!
+2) test_13_get_next_keystream_value.TestGetNextKeystreamValue.test_04_get_next_key
+stream_value_28_twice                                                                 .. ok!
+3) test_13_get_next_keystream_value.TestGetNextKeystreamValue.test_02_get_next_key
+stream_value_perm                                                                     .. ok!
+4) test_13_get_next_keystream_value.TestGetNextKeystreamValue.test_01_get_next_key
+stream_value_handout                                                                  .. ok!
+5) test_13_get_next_keystream_value.TestGetNextKeystreamValue.test_03_get_next_key
+stream_value_28                                                                       .. ok!
+
+
+Tests for test_16_main.TestMain (8/8 passed)
+--
+
+1) test_16_main.TestMain.test_03_main_encrypt3                                        .. ok!
+2) test_16_main.TestMain.test_04_main_encrypt4                                        .. ok!
+3) test_16_main.TestMain.test_02_main_encrypt2                                        .. ok!
+4) test_16_main.TestMain.test_08_main_decrypt4                                        .. ok!
+5) test_16_main.TestMain.test_07_main_decrypt3                                        .. ok!
+6) test_16_main.TestMain.test_01_main_encrypt1                                        .. ok!
+7) test_16_main.TestMain.test_05_main_decrypt1                                        .. ok!
+8) test_16_main.TestMain.test_06_main_decrypt2                                        .. ok!
+
+
+Tests for test_12_get_next_value.TestGetNextValue (4/4 passed)
+--
+
+1) test_12_get_next_value.TestGetNextValue.test_01_get_next_value_handout             .. ok!
+2) test_12_get_next_value.TestGetNextValue.test_04_get_next_value_27                  .. ok!
+3) test_12_get_next_value.TestGetNextValue.test_03_get_next_value_28                  .. ok!
+4) test_12_get_next_value.TestGetNextValue.test_02_get_next_value_perm                .. ok!
+
+
+Tests for test_05_read_deck.TestReadDeck (4/4 passed)
+--
+
+1) test_05_read_deck.TestReadDeck.test_03_read_deck_small_one_line                    .. ok!
+2) test_05_read_deck.TestReadDeck.test_01_read_deck_handout                           .. ok!
+3) test_05_read_deck.TestReadDeck.test_02_read_deck_one_line                          .. ok!
+4) test_05_read_deck.TestReadDeck.test_04_read_deck_small_multiple_lines              .. ok!
+
+
+Tests for test_03_decrypt_letter.TestDecryptLetter (5/5 passed)
+--
+
+1) test_03_decrypt_letter.TestDecryptLetter.test_01_decrypt_letter_decrypting_E_wi
+th_no_wrap                                                                            .. ok!
+2) test_03_decrypt_letter.TestDecryptLetter.test_03_decrypt_letter_decrypting_F_wi
+th_wrap                                                                               .. ok!
+3) test_03_decrypt_letter.TestDecryptLetter.test_04_decrypt_letter_decrypting_E_wi
+th_wrap                                                                               .. ok!
+4) test_03_decrypt_letter.TestDecryptLetter.test_05_decrypt_letter_decrypting_A_wi
+th_wrap                                                                               .. ok!
+5) test_03_decrypt_letter.TestDecryptLetter.test_02_decrypt_letter_decrypting_H_wi
+th_no_wrap                                                                            .. ok!
+
+
+Tests for test_02_encrypt_letter.TestEncryptLetter (5/5 passed)
+--
+
+1) test_02_encrypt_letter.TestEncryptLetter.test_04_encrypt_letter_encrypting_Z_wi
+th_wrap                                                                               .. ok!
+2) test_02_encrypt_letter.TestEncryptLetter.test_03_encrypt_letter_encrypting_V_wi
+th_wrap                                                                               .. ok!
+3) test_02_encrypt_letter.TestEncryptLetter.test_02_encrypt_letter_encrypting_G_wi
+th_no_wrap                                                                            .. ok!
+4) test_02_encrypt_letter.TestEncryptLetter.test_01_encrypt_letter_encrypting_A_wi
+th_no_wrap                                                                            .. ok!
+5) test_02_encrypt_letter.TestEncryptLetter.test_05_encrypt_letter_encrypting_A_wi
+th_wrap                                                                               .. ok!
+
+
+Tests for test_14_process_message.TestProcessMessage (9/9 passed)
+--
+
+1) test_14_process_message.TestProcessMessage.test_06_process_message_nonuppercase    .. ok!
+2) test_14_process_message.TestProcessMessage.test_04_process_message_multiple_upp
+ercase                                                                                .. ok!
+3) test_14_process_message.TestProcessMessage.test_03_process_message_single_upper
+case_decrypt                                                                          .. ok!
+4) test_14_process_message.TestProcessMessage.test_08_process_message_nonletter       .. ok!
+5) test_14_process_message.TestProcessMessage.test_09_process_message_nonletter_de
+crypt                                                                                 .. ok!
+6) test_14_process_message.TestProcessMessage.test_07_process_message_nonuppercase
+_decrypt                                                                              .. ok!
+7) test_14_process_message.TestProcessMessage.test_02_process_message_single_upper
+case                                                                                  .. ok!
+8) test_14_process_message.TestProcessMessage.test_01_process_message_empty           .. ok!
+9) test_14_process_message.TestProcessMessage.test_05_process_message_multiple_upp
+ercase_decrypt                                                                        .. ok!
+
+
+Tests for test_06_swap_cards.TestSwapCards (7/7 passed)
+--
+
+1) test_06_swap_cards.TestSwapCards.test_01_swap_cards_middle_cards                   .. ok!
+2) test_06_swap_cards.TestSwapCards.test_06_swap_cards_small_middle_cards             .. ok!
+3) test_06_swap_cards.TestSwapCards.test_05_swap_cards_close_end                      .. ok!
+4) test_06_swap_cards.TestSwapCards.test_04_swap_cards_close_beginning                .. ok!
+5) test_06_swap_cards.TestSwapCards.test_03_swap_cards_end                            .. ok!
+6) test_06_swap_cards.TestSwapCards.test_02_swap_cards_beginning                      .. ok!
+7) test_06_swap_cards.TestSwapCards.test_07_swap_cards_small_end                      .. ok!
+
+
+Tests for test_15_process_messages.TestProcessMessages (8/8 passed)
+--
+
+1) test_15_process_messages.TestProcessMessages.test_04_process_messages_multiple     .. ok!
+2) test_15_process_messages.TestProcessMessages.test_01_process_messages_empty        .. ok!
+3) test_15_process_messages.TestProcessMessages.test_03_process_messages_one_decry
+pt                                                                                    .. ok!
+4) test_15_process_messages.TestProcessMessages.test_07_process_messages_munonlett
+er                                                                                    .. ok!
+5) test_15_process_messages.TestProcessMessages.test_08_process_messages_lots         .. ok!
+6) test_15_process_messages.TestProcessMessages.test_06_process_messages_munonuppe
+rcase                                                                                 .. ok!
+7) test_15_process_messages.TestProcessMessages.test_05_process_messages_multiple_
+decrypt                                                                               .. ok!
+8) test_15_process_messages.TestProcessMessages.test_02_process_messages_one          .. ok!
+
+
+Tests for test_10_insert_top_to_bottom.TestInsertTop (8/8 passed)
+--
+
+1) test_10_insert_top_to_bottom.TestInsertTop.test_04_insert_top_to_bottom_28         .. ok!
+2) test_10_insert_top_to_bottom.TestInsertTop.test_03_insert_top_to_bottom_27         .. ok!
+3) test_10_insert_top_to_bottom.TestInsertTop.test_05_insert_top_to_bottom_2          .. ok!
+4) test_10_insert_top_to_bottom.TestInsertTop.test_02_insert_top_to_bottom_1          .. ok!
+5) test_10_insert_top_to_bottom.TestInsertTop.test_01_insert_top_to_bottom_26         .. ok!
+6) test_10_insert_top_to_bottom.TestInsertTop.test_07_insert_top_to_bottom_small_4    .. ok!
+7) test_10_insert_top_to_bottom.TestInsertTop.test_06_insert_top_to_bottom_small_2    .. ok!
+8) test_10_insert_top_to_bottom.TestInsertTop.test_08_insert_top_to_bottom_constan
+t                                                                                     .. ok!
+
+
+Tests for test_11_get_card_at_top_index.TestGetCardAtTop (7/7 passed)
+--
+
+1) test_11_get_card_at_top_index.TestGetCardAtTop.test_01_get_card_at_top_index_1     .. ok!
+2) test_11_get_card_at_top_index.TestGetCardAtTop.test_05_get_card_at_top_index_sm
+all_1                                                                                 .. ok!
+3) test_11_get_card_at_top_index.TestGetCardAtTop.test_06_get_card_at_top_index_sm
+all_4                                                                                 .. ok!
+4) test_11_get_card_at_top_index.TestGetCardAtTop.test_03_get_card_at_top_index_27    .. ok!
+5) test_11_get_card_at_top_index.TestGetCardAtTop.test_04_get_card_at_top_index_28    .. ok!
+6) test_11_get_card_at_top_index.TestGetCardAtTop.test_02_get_card_at_top_index_4     .. ok!
+7) test_11_get_card_at_top_index.TestGetCardAtTop.test_07_get_card_at_top_index_co
+nstant                                                                                .. ok!
+
+
+Tests for test_04_read_messages.TestReadMessages (5/5 passed)
+--
+
+1) test_04_read_messages.TestReadMessages.test_02_read_messages_message_file_with_
+one_line_of_lowercase                                                                 .. ok!
+2) test_04_read_messages.TestReadMessages.test_04_read_messages_message_file_with_
+upper_lower_and_symbols                                                               .. ok!
+3) test_04_read_messages.TestReadMessages.test_01_read_messages_message_file_with_
+one_line_of_uppercase                                                                 .. ok!
+4) test_04_read_messages.TestReadMessages.test_05_read_messages_empty_message_file    .. ok!
+5) test_04_read_messages.TestReadMessages.test_03_read_messages_message_file_with_
+two_lines_of_uppercase                                                                .. ok!
+
+
+Tests for test_07_move_joker_1.TestMoveJoker (8/8 passed)
+--
+
+1) test_07_move_joker_1.TestMoveJoker.test_02_move_joker_1_beginning                  .. ok!
+2) test_07_move_joker_1.TestMoveJoker.test_05_move_joker_1_close_end                  .. ok!
+3) test_07_move_joker_1.TestMoveJoker.test_01_move_joker_1_middle                     .. ok!
+4) test_07_move_joker_1.TestMoveJoker.test_08_move_joker_1_constant                   .. ok!
+5) test_07_move_joker_1.TestMoveJoker.test_03_move_joker_1_end                        .. ok!
+6) test_07_move_joker_1.TestMoveJoker.test_07_move_joker_1_small_end                  .. ok!
+7) test_07_move_joker_1.TestMoveJoker.test_06_move_joker_1_small_middle_cards         .. ok!
+8) test_07_move_joker_1.TestMoveJoker.test_04_move_joker_1_close_beginning            .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
+
