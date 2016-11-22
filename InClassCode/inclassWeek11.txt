@@ -1,0 +1,22 @@
+unit test -> allows for arbitrary code to be run
+
+looks like this:
+
+import unittest
+import example_function as  func
+
+class TestCommonChar(unittest.TestCase):
+    def test_identical_single_char(self):  #METHOD MUST START WITH TEST.
+        self.assertEqual(
+            func.common_chars('a', 'a'),
+            (1,1),
+            "identical single char"
+        )
+        #also avialiable
+        # assertTrue
+        # assertFalse
+        # assertAlmostEqual
+
+unittest.main(exit = False)
+(False means when errored, keep going, eg. continue next test if crashed on i-1th test
+

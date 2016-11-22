@@ -1,4 +1,4 @@
-Autotested Results for A1 submitted by David Fernandes (ferna844)
+Autotested Results for A1 submitted by [Redacted]
 Generated at 2016-11-21T02:46:42
 
 Summary of Results: 120 out of 120 tests successfully passed
