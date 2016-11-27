@@ -103,3 +103,10 @@ class Database():
         REQ: table must be an instance of database.Table
         """
         self._database[table_name] = table
+
+    def get_table(self, table_name):
+        """ (Database, str) -> Table
+        Takes in a table_name and returns a stored table.
+        REQ: table_name must be in the table.
+        """
+        return self._database[table_name]
