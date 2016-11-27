@@ -57,7 +57,7 @@ assert is_database(d), \
        'Creating an empty database is working incorrectly.'
 
 # typecheck the reading.py functions
-result = reading.read_table('books.csv')
+result = reading.read_table('csv_files/books.csv')
 assert is_table(result), \
     'read_table should return a table; please check the handout \
     for the definition of a table.'

@@ -9,4 +9,5 @@ from database import *
 
 
 if(__name__ == "__main__"):
+    database = read_database()
     query = input("Enter a SQuEaL query, or a blank line to exit:")
