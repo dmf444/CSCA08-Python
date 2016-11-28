@@ -7,7 +7,7 @@ from database import *
 # YOU DON'T NEED TO KEEP THE FOLLOWING CODE IN YOUR OWN SUBMISSION
 # IT IS JUST HERE TO DEMONSTRATE HOW THE glob CLASS WORKS. IN FACT
 # YOU SHOULD DELETE THE PRINT STATEMENT BEFORE SUBMITTING
-FILE_LIST = glob.glob('csv_files/*.csv')
+FILE_LIST = glob.glob('*.csv')
 
 
 # Write the read_table and read_database functions below
@@ -24,30 +24,28 @@ def read_table(file_name):
     open_file = open(file_name, 'r')
     all_lines = open_file.readlines()
     open_file.close()
-    # Create an empty dictionary to hold the values
-    holding_dictionary = dict()
+
+    # Initialize a table
+    table = Table()
     # Get the key values, add them to the dictionary
     key_line = all_lines.pop(0)
     key_line = key_line.replace("\n", "")
     keys = key_line.split(",")
-    # Loop through keys, add them to dictionary
-    for key in keys:
-        holding_dictionary[key] = []
-    # Add values to the dictionary
+    table.add_column_titles_to_table(keys)
+    # Loop through all text lines
     for line in all_lines:
-        line = line.replace("\n", "")
-        values = line.split(",")
-        for count in range(0, len(values)):
-            # Get dictionary key
-            dict_key = keys[count]
-            # Get holding array
-            val_list = holding_dictionary[dict_key]
-            # Append new value to list
-            val_list.append(values[count])
-    # Initialize a table with an empty dict
-    table = Table()
-    # Add the builtin dictionary to the table
-    table.add_dict(holding_dictionary)
+        # Check if the line is blank
+        if(not(line == "")):
+            # Remove any newline charaters
+            line = line.replace("\n", "")
+            # Split at the commas
+            values = line.split(",")
+            clean_values = []
+            for value in values:
+                value = value.lstrip()
+                clean_values.append(value)
+            # Add the builtin dictionary to the table
+            table.add_row_to_table(keys, clean_values)
     return table
 
 

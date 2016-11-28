@@ -7,17 +7,53 @@ class Table():
         dictionary.
         '''
         self._table_dict = dict()
+        self._key_list = []
 
-    def add_dict(self, new_dict):
-        """ (Table, dict of {str: list of str}) -> NoneType
-        Makes a copy of the dictionary and adds it to the internally stored
-        dictionary
+    # DEPRECIATED
+    def add_column_titles_to_table(self, key_list):
+        for key in key_list:
+            self._table_dict[key] = []
+        self._key_list = key_list
 
-        """
-        keys = new_dict.keys()
-        for key in keys:
-            dict_value = new_dict[key]
-            self._table_dict[key] = dict_value
+    # TODO: Change this to add_column(self, title, values)
+    def add_row_to_table(self, key_list, value_list):
+        for count in range(len(key_list)):
+            col_name = key_list[count]
+            current_dict_values = self._table_dict[col_name]
+            current_dict_values.append(value_list[count])
+
+    def get_column(self, column_name):
+        column = self._table_dict[column_name]
+        return column
+
+    def add_column(self, title, value_list):
+        self._table_dict[title] = value_list
+
+    def num_rows(self):
+        keys = self.get_keys_as_list()
+        if(len(keys) > 0):
+            first_key = keys[0]
+            list = self._table_dict[first_key]
+            row_num = len(list)
+        else:
+            row_num = 0
+        return row_num
+
+    def get_row_at_index(self, index):
+        '''(Table, index) -> list [str]
+        Function takes in an index, finds the row required and returns an array
+        with the data of that row.
+        REQ: 0 < index < self.num_rows()
+        '''
+        columns = self.get_keys_as_list()
+        col = []
+        for column in columns:
+            col.append(self._table_dict[column][index])
+        return col
+
+    def get_keys_as_list(self):
+        key_list = list(self._table_dict.keys())
+        return key_list
 
     def set_dict(self, new_dict):
         '''(Table, dict of {str: list of str}) -> NoneType
@@ -36,13 +72,6 @@ class Table():
         for that column.
         '''
         return self._table_dict
-
-    def num_rows(self):
-        if(len(list(self._table_dict.items())) > 0):
-            row_num = len(list(self._table_dict.items())[0])
-        else:
-            row_num = 0
-        return row_num
 
     def print_csv(self):
         '''(Table) -> NoneType
