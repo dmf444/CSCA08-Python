@@ -1,5 +1,5 @@
-from reading import *
-from database import *
+from Assignment2.reading import *
+from Assignment2.database import *
 
 # Below, write:
 # *The cartesian_product function
@@ -28,6 +28,8 @@ def run_query(database, query):
 
 
 def select_columns(table, commands):
+    """ (Table, list [str]) -> Table
+    """
     if(commands == "*"):
         ret_table = table
     else:
@@ -44,7 +46,96 @@ def select_columns(table, commands):
 
 
 def filter_table(table, filter_commands):
-    pass
+    if(filter_commands.find(",") > 0):
+        commands = filter_commands.split(",")
+        ret_table = table
+        while(len(commands) > 0):
+            command = commands.pop()
+            ret_table = process_command(ret_table, command)
+    else:
+        ret_table = process_command(table, filter_commands)
+    return ret_table
+
+
+def process_command(table, command):
+    """ (Table, str) -> Table
+    """
+    # If command is equality
+    if(command.find("=") > 0):
+        cmds = command.split("=")
+        column_name = cmds[0]
+        value = cmds[1]
+        if(command.find("'") > 0):
+            clean_val = value.replace("'", "")
+            ret_table = hardcoded_processor(table, column_name, clean_val, "E")
+        else:
+            ret_table = column_processor(table, column_name, value, "E")
+    else:
+        # Else assume command is greater than
+        cmds = command.split(">")
+        column_name = cmds[0]
+        value = cmds[1]
+        if(command.find("'") > 0):
+            clean_val = value.replace("'", "")
+            ret_table = hardcoded_processor(table, column_name, clean_val, "G")
+        else:
+            ret_table = column_processor(table, column_name, value, "G")
+    return ret_table
+
+
+def hardcoded_processor(table, column_name, value, mode):
+    """ (Table, str, str, str) -> Table
+
+    REQ: mode must be 'G' or 'E'
+    """
+    column = table.get_column(column_name)
+    index = 0
+    new_table = Table()
+    old_table_keys = table.get_keys_as_list()
+    new_table.add_column_titles_to_table(old_table_keys)
+    while(index < len(column)):
+        field = column[index]
+        # This is horribly inefficient, but i don't want multiple trys
+        comp_val = value
+        try:
+            field = int(field)
+            comp_val = int(comp_val)
+        except:
+            pass
+        if((field == comp_val and mode == 'E') or (field > comp_val and
+                                                   mode == 'G')):
+            row = table.get_row_at_index(index)
+            new_table.add_row_to_table(old_table_keys, row)
+        index += 1
+    return new_table
+
+
+def column_processor(table, column1_name, column2_name, mode):
+    """ (Table, str, str, str) -> Table
+
+    REQ: mode must be 'G' or 'E'
+    """
+    column_1 = table.get_column(column1_name)
+    column_2 = table.get_column(column2_name)
+    index = 0
+    new_table = Table()
+    old_table_keys = table.get_keys_as_list()
+    new_table.add_column_titles_to_table(old_table_keys)
+    while(index < len(column_1)):
+        field_1 = column_1[index]
+        field_2 = column_2[index]
+        try:
+            field_1 = int(field_1)
+            field_2 = int(field_2)
+        except:
+            pass
+        if((field_1 == field_2 and mode == 'E') or (field_1 > field_2 and
+                                                    mode == 'G')):
+            row = table.get_row_at_index(index)
+            new_table.add_row_to_table(old_table_keys, row)
+        index += 1
+    return new_table
+
 
 
 def cartesian_product(table_1, table_2):
