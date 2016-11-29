@@ -91,3 +91,5 @@ def funci(x1, x2):
 (x1, x2) = (1, 2)
 print(funci(x1, x2))
 print((x1, x2))
+
+help(dict)

@@ -18,34 +18,70 @@ def run_query(database, query):
     REQ: query must be a properly formatted query.
     REQ: database must be a non-empty database with the requested tables.
     """
+    # Split the query on spaces
     commands = query.split(" ")
+    # ASSUME: proper format for query
+    # Create a table with all of the required tables cartesian planed
     query_table = create_new_tables(database, commands[TABLE_COMMAND_LOCATION])
+    # If there is a "where" command
     if(len(commands) > 4):
-        query_table = filter_table(query_table,
-                                   commands[CONTENT_COMMAND_LOCATION])
+        # Create a new table, following the WHERE parameters
+        if(len(commands) > 5):
+            command = commands[CONTENT_COMMAND_LOCATION]
+            for i in range(6, len(commands)):
+                command += " " + commands[i]
+        else:
+            command = commands[CONTENT_COMMAND_LOCATION]
+        query_table = filter_table(query_table, command)
+    # Create a new table with the requested columns
     new_table = select_columns(query_table, commands[COLUMN_COMMAND_LOCATION])
+    # Return the tables
     return new_table
 
 
 def select_columns(table, commands):
     """ (Table, list [str]) -> Table
+    Function takes a table and a comma separated string of column names and
+    returns a new table containing only those select columns. commands can also
+    be '*' if user wants all columns.
+    REQ: table must not be empty
+    REQ: commands != ''
     """
+    # If user wants all tables
     if(commands == "*"):
+        # Return the input table
         ret_table = table
     else:
+        # If the commands are not *, assume they are csv
+        # Create a blank returning table
         ret_table = Table()
+        # If there are more than one columns
         if(commands.find(",") > 0):
+            # Split the column names into a list
             column_names = commands.split(",")
+            # Loop through all column names
             for column_name in column_names:
+                # Get the column from the original table
                 column = table.get_column(column_name)
+                # Add it to the new returning table
                 ret_table.add_column(column_name, column)
+        # There is only one column to select
         else:
+            # Get the column from the given table, add it to the new table
             column = table.get_column(commands)
             ret_table.add_column(commands, column)
+    # Return the new table
     return ret_table
 
 
 def filter_table(table, filter_commands):
+    """ (Table, str) -> Table
+    Function takes a table and a string of comma separated where clauses.
+    Function processes' all the where clauses and returns a valid table that
+    satisfies the where clauses.
+    REQ: filter_commands != ''
+    REQ: table cannot be empty
+    """
     if(filter_commands.find(",") > 0):
         commands = filter_commands.split(",")
         ret_table = table
@@ -97,11 +133,9 @@ def hardcoded_processor(table, column_name, value, mode):
         field = column[index]
         # This is horribly inefficient, but i don't want multiple trys
         comp_val = value
-        try:
-            field = int(field)
-            comp_val = int(comp_val)
-        except:
-            pass
+        if(comp_val.isdecimal() and field.isdecimal()):
+            field = float(field)
+            comp_val = float(comp_val)
         if((field == comp_val and mode == 'E') or (field > comp_val and
                                                    mode == 'G')):
             row = table.get_row_at_index(index)
@@ -124,18 +158,15 @@ def column_processor(table, column1_name, column2_name, mode):
     while(index < len(column_1)):
         field_1 = column_1[index]
         field_2 = column_2[index]
-        try:
-            field_1 = int(field_1)
-            field_2 = int(field_2)
-        except:
-            pass
+        if (field_1.isdecimal() and field_2.isdecimal()):
+            field_1 = float(field_1)
+            field_2 = float(field_2)
         if((field_1 == field_2 and mode == 'E') or (field_1 > field_2 and
                                                     mode == 'G')):
             row = table.get_row_at_index(index)
             new_table.add_row_to_table(old_table_keys, row)
         index += 1
     return new_table
-
 
 
 def cartesian_product(table_1, table_2):
@@ -224,7 +255,4 @@ if(__name__ == "__main__"):
             table.print_csv()
         else:
             entered_space = True
-    #tablet = create_new_tables(database, "movies,oscars,whammies")
-    #tablet.print_csv()
-    #print(tablet.num_rows())
 
