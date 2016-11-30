@@ -2,6 +2,8 @@ import unittest
 import squeal
 from database import Table
 
+#ONE EMPTY TABLE
+#Tables with diff len
 
 class TestCartesianProduct(unittest.TestCase):
 
