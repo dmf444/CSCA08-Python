@@ -7,26 +7,49 @@ class Table():
         dictionary.
         '''
         self._table_dict = dict()
-        self._key_list = []
 
-    # DEPRECIATED
     def add_column_titles_to_table(self, key_list):
+        """ (Table, list [str]) -> NoneType
+        Function adds a key_list of strings as colunm names to the table.
+        Returns none.
+        REQ: key_list must only contain strings and not be empty
+        REQ: strings in key_list must be unique
+        """
+        # Loop through the keys
         for key in key_list:
+            # Add key with blank list to dictionary
             self._table_dict[key] = []
-        self._key_list = key_list
 
-    # TODO: Change this to add_column(self, title, values)
-    def add_row_to_table(self, key_list, value_list):
+    def add_row(self, key_list, value_list):
+        """ (Table, list [str], list [str]) -> NoneType
+        Function takes in a key_list with positions corresponding in value_list
+        and adds each value to the key in the table. Returns none.
+        REQ: key_list and value_list must have the same length
+        REQ: The values in value_list must correspond to the key at the same
+             index in key_list
+        """
+        # Loop through the length of key_list
         for count in range(len(key_list)):
+            # Get the key
             col_name = key_list[count]
+            # Get the current value of the key
             current_dict_values = self._table_dict[col_name]
+            # Append the new value (from value_list) to the key
             current_dict_values.append(value_list[count])
 
     def get_column(self, column_name):
+        """(Table, str) -> List [str]
+        Function takes a column name and returns a list containing all items in
+        that colunm.
+        REQ: column_name must be a valid column in the table
+        """
+        # Get the column stored in the dictionary
         column = self._table_dict[column_name]
         return column
 
     def add_column(self, title, value_list):
+        """(Table, str, list[str]) -> NoneType
+        """
         self._table_dict[title] = value_list
 
     def num_rows(self):

@@ -139,7 +139,7 @@ def hardcoded_processor(table, column_name, value, mode):
         if((field == comp_val and mode == 'E') or (field > comp_val and
                                                    mode == 'G')):
             row = table.get_row_at_index(index)
-            new_table.add_row_to_table(old_table_keys, row)
+            new_table.add_row(old_table_keys, row)
         index += 1
     return new_table
 
@@ -164,7 +164,7 @@ def column_processor(table, column1_name, column2_name, mode):
         if((field_1 == field_2 and mode == 'E') or (field_1 > field_2 and
                                                     mode == 'G')):
             row = table.get_row_at_index(index)
-            new_table.add_row_to_table(old_table_keys, row)
+            new_table.add_row(old_table_keys, row)
         index += 1
     return new_table
 
@@ -192,7 +192,7 @@ def cartesian_product(table_1, table_2):
             # Add table1's and table2's current stored row
             new_row = row_1 + row_2
             # Add these values to the new table
-            crossed_table.add_row_to_table(crossed_table_keys, new_row)
+            crossed_table.add_row(crossed_table_keys, new_row)
     return crossed_table
 
 

@@ -41,11 +41,14 @@ def read_table(file_name):
             # Split at the commas
             values = line.split(",")
             clean_values = []
+            # Iterate through all the values from the split line
             for value in values:
+                # Clear out any white spaces (to the left)
                 value = value.lstrip()
+                # Add value to a new list
                 clean_values.append(value)
             # Add the builtin dictionary to the table
-            table.add_row_to_table(keys, clean_values)
+            table.add_row(keys, clean_values)
     return table
 
 
@@ -54,6 +57,7 @@ def read_database():
     Reads all .csv files in the same directory and creates a database. Returns
     a database of the .csv files.
     REQ: all files in the directory must be valid .csv files.
+    REQ: .csv files must follow the proper formatting
     """
     # Create an empty database
     database = Database()
