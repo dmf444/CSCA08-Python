@@ -2,8 +2,6 @@ import unittest
 import squeal
 from database import Table
 
-#ONE EMPTY TABLE
-#Tables with diff len
 
 class TestCartesianProduct(unittest.TestCase):
 
@@ -105,6 +103,51 @@ class TestCartesianProduct(unittest.TestCase):
         self.assertEqual(result_dict, expected, "Product of two tables with "
                                                 "empty columns should be an "
                                                 "empty row")
+
+    def test_07_one_table_empty(self):
+        dict1 = {"o.movies": ['pizza'], "o.scifi": ['pasata']}
+        dict2 = {}
+        t1 = Table()
+        t2 = Table()
+        t1.set_dict(dict1)
+        t2.set_dict(dict2)
+        result = squeal.cartesian_product(t1, t2)
+        result_dict = result.get_dict()
+        expected = {"o.movies": [], "o.scifi": []}
+        self.assertEqual(result_dict, expected, "Product of two tables with "
+                                                "one table empty should be "
+                                                "an empty table")
+
+    def test_08_table_one_longer(self):
+        dict1 = {"o.movies": ['pizza', 'Star'], "o.scifi": ['pasata', 'gun']}
+        dict2 = {"o.year": ['123'], "o.nut": ["pine"]}
+        t1 = Table()
+        t2 = Table()
+        t1.set_dict(dict1)
+        t2.set_dict(dict2)
+        result = squeal.cartesian_product(t1, t2)
+        result_dict = result.get_dict()
+        expected = {'o.movies': ['pizza', 'Star'], 'o.nut': ['pine', 'pine'],
+                    'o.scifi': ['pasata', 'gun'], 'o.year': ['123', '123']}
+        self.assertEqual(result_dict, expected, "Product of two tables with "
+                                                "one table longer should be "
+                                                "an equal table")
+
+    def test_09_table_two_longer(self):
+        dict1 = {"o.movies": ['Star'], "o.scifi": ['gun']}
+        dict2 = {"o.year": ['123', '1123'], "o.nut": ["pine", "acorn"]}
+        t1 = Table()
+        t2 = Table()
+        t1.set_dict(dict1)
+        t2.set_dict(dict2)
+        result = squeal.cartesian_product(t1, t2)
+        result_dict = result.get_dict()
+        expected = {"o.movies": ['Star', 'Star'], "o.scifi": ['gun', 'gun'],
+                    "o.year": ['123', '1123'], "o.nut": ["pine", "acorn"]}
+        self.assertEqual(result_dict, expected, "Product of two tables with "
+                                                "the second table longer "
+                                                "should be a table of equal "
+                                                "length")
 
 if(__name__ == "__main__"):
     unittest.main(exit=False)
