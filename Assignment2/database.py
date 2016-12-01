@@ -2,7 +2,7 @@ class Table():
     '''A class to represent a SQuEaL table'''
 
     def __init__(self):
-        '''
+        ''' (Table) -> NoneType
         Initialization parameters of only self, used to create an empty
         dictionary.
         '''
@@ -14,6 +14,10 @@ class Table():
         Returns none.
         REQ: key_list must only contain strings and not be empty
         REQ: strings in key_list must be unique
+        >>> t = Table()
+        >>> t.add_column_titles_to_table(['one', 'two', 'three'])
+        >>> t.print_csv()
+        one,two,three
         """
         # Loop through the keys
         for key in key_list:
@@ -25,8 +29,15 @@ class Table():
         Function takes in a key_list with positions corresponding in value_list
         and adds each value to the key in the table. Returns none.
         REQ: key_list and value_list must have the same length
+        REQ: All keys in key_list must already be in the dictionary
         REQ: The values in value_list must correspond to the key at the same
              index in key_list
+        >>> t = Table()
+        >>> t.add_column_titles_to_table(['one', 'two', 'three'])
+        >>> t.add_row(['one', 'two', 'three'], ['a', 'b', 'c'])
+        >>> t.print_csv()
+        one,two,three
+        a,b,c
         """
         # Loop through the length of key_list
         for count in range(len(key_list)):
@@ -42,6 +53,11 @@ class Table():
         Function takes a column name and returns a list containing all items in
         that colunm.
         REQ: column_name must be a valid column in the table
+        >>> t = Table()
+        >>> t.set_dict({'one':['a'], 'two':['b'], 'three':'c'})
+        >>> column = t.get_column('one')
+        >>> print(column)
+        ['a']
         """
         # Get the column stored in the dictionary
         column = self._table_dict[column_name]
@@ -53,6 +69,12 @@ class Table():
         title and the values to value_list. Returns None.
         REQ: title != '' and title must not be in the dictionary
         REQ: value_list must be a list of length 0 or greater
+        >>> t = Table()
+        >>> t.add_column("bread", ['good', 'bad'])
+        >>> t.print_csv()
+        bread
+        good
+        bad
         """
         # Add list to dictionary with key = title
         self._table_dict[title] = value_list
@@ -61,7 +83,16 @@ class Table():
         """(Table) -> int
         Returns the number of rows in a the table. Returns 0 if there are no
         columns in the given table.
-
+        >>> t = Table()
+        >>> t.set_dict({'column': ['a','b','c','d']})
+        >>> l = t.num_rows()
+        >>> print(l)
+        4
+        >>> t = Table()
+        >>> t.set_dict({})
+        >>> l = t.num_rows()
+        >>> print(l)
+        0
         """
         # Get the keys from the dictionary
         keys = self.get_keys_as_list()
@@ -83,6 +114,11 @@ class Table():
         Function takes in an index, finds the row required and returns an array
         with the data of that row.
         REQ: 0 < index < self.num_rows()
+        >>> t = Table()
+        >>> t.set_dict({'col1': ['a','b','c','d'], 'col2': ['d','c','b','a']})
+        >>> l = t.get_row_at_index(3)
+        >>> print(l)
+        ['d', 'a']
         '''
         # Get a list of keys from the dictionary
         columns = self.get_keys_as_list()
@@ -184,6 +220,12 @@ class Database():
         over-wright any other tables in the database.
         REQ: table_name must not be empty
         REQ: table must be an instance of database.Table
+        >>> db = Database()
+        >>> table = Table()
+        >>> db.add_table_to_database("pizza", table)
+        >>> print(db)
+        Database contains:
+        pizza
         """
         self._database[table_name] = table
 
@@ -191,5 +233,15 @@ class Database():
         """ (Database, str) -> Table
         Takes in a table_name and returns a stored table.
         REQ: table_name must be in the table.
+        >>> db = Database()
+        >>> t = Table()
+        >>> t.set_dict({'a': [1,2,3], 'b': [3,2,1]})
+        >>> db.set_dict({"d": t, "e": Table()})
+        >>> table = db.get_table('d')
+        >>> table.print_csv()
+        a,b
+        1,3
+        2,2
+        3,1
         """
         return self._database[table_name]

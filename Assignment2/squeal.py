@@ -56,6 +56,27 @@ def select_columns(table, commands):
     be '*' if user wants all columns.
     REQ: table must not be empty
     REQ: commands != '', commands must be separated by commas
+    >>> d = {"pizza": ['pasta'], "soup": ['salami']}
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> l = select_columns(t, 'pizza')
+    >>> l.print_csv()
+    pizza
+    pasta
+    >>> d = {"pizza": ['pasta'], "soup": ['salami']}
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> l = select_columns(t, 'pizza,soup')
+    >>> l.print_csv()
+    pizza,soup
+    pasta,salami
+    >>> d = {"pizza": ['pasta'], "soup": ['salami']}
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> l = select_columns(t, '*')
+    >>> l.print_csv()
+    pizza,soup
+    pasta,salami
     """
     # If user wants all tables
     if(commands == "*"):
