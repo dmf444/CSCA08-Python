@@ -186,11 +186,9 @@ def hardcoded_processor(table, column_name, value, mode):
         field = column[index]
         # Get the comparative value, given from function
         comp_val = value
-        # Try to convert to a float, iff they both are numbers
-        if(comp_val.isdecimal() and field.isdecimal()):
-            # Convert to float
-            field = float(field)
-            comp_val = float(comp_val)
+        # Try to convert both values to a float
+        field = attempt_to_make_float(field)
+        comp_val = attempt_to_make_float(comp_val)
         # Assuming that the fields are equal AND the mode is an equality
         # check OR the first is greater than the second AND its a greater
         # than check
@@ -206,10 +204,35 @@ def hardcoded_processor(table, column_name, value, mode):
     return new_table
 
 
+def attempt_to_make_float(value):
+    """ (str) -> str/float
+    Takes in a value and attempts convert it to a float. If the value cannot be
+    converted, return the original string value.
+    REQ: value must not be ''
+    >>> attempt_to_make_float('4.3')
+    4.3
+    >>> attempt_to_make_float('BIGNINGN')
+    'BIGNINGN'
+    >>> attempt_to_make_float('4545454545')
+    4545454545
+    >>> attempt_to_make_float('hello334')
+    'hello334'
+    """
+    try:
+        new_value = float(value)
+    except:
+        new_value = value
+    return new_value
+
+
 def column_processor(table, column1_name, column2_name, mode):
     """ (Table, str, str, str) -> Table
-
-    REQ: mode must be 'G' or 'E'
+    Function takes in a valid table, column_name and column2_name,
+    and will process the where command for a column value. Returns a
+    table with all valid rows after the where command is completed.
+    REQ: column_name must be in the table, cannot be ''.
+    REQ: column2_name must be a in the table, cannot be ''.
+    REQ: mode must be 'G' or 'E'.
     """
     # Get the values for the first two columns
     column_1 = table.get_column(column1_name)
@@ -227,10 +250,8 @@ def column_processor(table, column1_name, column2_name, mode):
         field_1 = column_1[index]
         field_2 = column_2[index]
         # Try and convert them to floats for more accurate comparisons
-        if (field_1.isdecimal() and field_2.isdecimal()):
-            # Convert is possible
-            field_1 = float(field_1)
-            field_2 = float(field_2)
+        field_1 = attempt_to_make_float(field_1)
+        field_2 = attempt_to_make_float(field_2)
         # Assuming that the fields are equal AND the mode is an equality
         # check OR the first is greater than the second AND its a greater
         # than check
