@@ -49,16 +49,32 @@ class Table():
 
     def add_column(self, title, value_list):
         """(Table, str, list[str]) -> NoneType
+        Adds an entire column to the database. Sets the colunm title to
+        title and the values to value_list. Returns None.
+        REQ: title != '' and title must not be in the dictionary
+        REQ: value_list must be a list of length 0 or greater
         """
+        # Add list to dictionary with key = title
         self._table_dict[title] = value_list
 
     def num_rows(self):
+        """(Table) -> int
+        Returns the number of rows in a the table. Returns 0 if there are no
+        columns in the given table.
+
+        """
+        # Get the keys from the dictionary
         keys = self.get_keys_as_list()
+        # So long as there is more than one key
         if(len(keys) > 0):
+            # Get the first key
             first_key = keys[0]
+            # Get the first key's list
             list = self._table_dict[first_key]
+            # Get the length of the first key's list
             row_num = len(list)
         else:
+            # There are no keys in this dictionary, return 0
             row_num = 0
         return row_num
 
@@ -68,14 +84,29 @@ class Table():
         with the data of that row.
         REQ: 0 < index < self.num_rows()
         '''
+        # Get a list of keys from the dictionary
         columns = self.get_keys_as_list()
+        # empty return column creation
         col = []
+        # Loop through all columns in the dictionary
         for column in columns:
+            # Find the column's value at index, save it to the return list
             col.append(self._table_dict[column][index])
+        # Return the list of data
         return col
 
     def get_keys_as_list(self):
+        """(Table) -> list[str]
+        Fuction returns a list of all the table keys in the dictionary.
+        >>> d = {"hi": 2, "bye": 4, "pizza": 7}
+        >>> table = Table()
+        >>> table.set_dict(d)
+        >>> print(table.get_keys_as_list())
+        ["hi", "bye", "pizza"]
+        """
+        # Get the dictionary keys and cast it as a list
         key_list = list(self._table_dict.keys())
+        # Return said list
         return key_list
 
     def set_dict(self, new_dict):

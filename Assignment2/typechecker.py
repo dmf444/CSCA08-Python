@@ -15,6 +15,8 @@ situations. Be sure to test your code before submitting.
 import reading
 from database import *
 
+from Assignment2.database import Table, Database
+
 
 def is_table(t):
     if not isinstance(t, Table):

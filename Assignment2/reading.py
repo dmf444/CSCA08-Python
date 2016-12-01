@@ -72,10 +72,3 @@ def read_database():
         # Add the table to the database
         database.add_table_to_database(table_name, table)
     return database
-
-
-if(__name__ == "__main__"):
-    table = read_table("csv_files/books.csv")
-    table.print_csv()
-    base = read_database()
-    print(base)
