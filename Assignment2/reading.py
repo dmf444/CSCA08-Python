@@ -1,7 +1,7 @@
 # Functions for reading tables and databases
 
 import glob
-from Assignment2.database import *
+from database import *
 
 
 # YOU DON'T NEED TO KEEP THE FOLLOWING CODE IN YOUR OWN SUBMISSION

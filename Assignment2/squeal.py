@@ -1,5 +1,5 @@
-from Assignment2.reading import *
-from Assignment2.database import *
+from reading import *
+from database import *
 
 # Below, write:
 # *The cartesian_product function
