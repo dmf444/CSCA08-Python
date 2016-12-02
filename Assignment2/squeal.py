@@ -110,8 +110,33 @@ def filter_table(table, filter_commands):
     Function takes a table and a string of comma separated where clauses.
     Function processes' all the where clauses and returns a valid table that
     satisfies the where clauses.
-    REQ: filter_commands != ''
-    REQ: table cannot be empty
+    REQ: filter_commands != '' and must follow column_name >/= value, ...
+    REQ: table cannot be empty.
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = filter_table(t, "o.name='david'")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    david,3,45
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = filter_table(t, "o.grade>'5'")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    daniel,6,3
+    toni,7,9
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = filter_table(t, "o.age>'5',o.name='toni'")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    toni,7,9
     """
     # If there are commas in the given command
     if(filter_commands.find(",") > 0):
@@ -141,6 +166,38 @@ def process_command(table, command):
     REQ: command must be a str with: column_name (> or =) (value or 'value')
     REQ: Table must be a valid table containing the column specified by
          column name in the command
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = process_command(t, "o.name='david'")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    david,3,45
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = process_command(t, "o.grade>'5'")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    daniel,6,3
+    toni,7,9
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [3,45, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = process_command(t, "o.grade=o.age")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    david,3,3
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [3,45, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = process_command(t, "o.grade>o.age")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
     """
     # If command is equality
     if(command.find("=") > 0):
@@ -191,6 +248,23 @@ def hardcoded_processor(table, column_name, value, mode):
     REQ: column_name must be in the table, cannot be ''.
     REQ: value must be a string or an int
     REQ: mode must be 'G' or 'E'
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = hardcoded_processor(t, "o.name", 'david', "E")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    david,3,45
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = hardcoded_processor(t, "o.grade", '5', "G")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    daniel,6,3
+    toni,7,9
     """
     # From the table, get the column, given by column_name
     column = table.get_column(column_name)
@@ -254,6 +328,21 @@ def column_processor(table, column1_name, column2_name, mode):
     REQ: column_name must be in the table, cannot be ''.
     REQ: column2_name must be a in the table, cannot be ''.
     REQ: mode must be 'G' or 'E'.
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [3,45, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = column_processor(t, "o.name", 'o.age', "E")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
+    david,3,3
+    >>> d = {"o.name": ['david', 'daniel', 'toni'], "o.grade": [3,6,7]}
+    >>> d["o.age"] = [45,3, 9]
+    >>> t = Table()
+    >>> t.set_dict(d)
+    >>> new_t = column_processor(t, "o.grade", "o.age", "G")
+    >>> new_t.print_csv()
+    o.name,o.grade,o.age
     """
     # Get the values for the first two columns
     column_1 = table.get_column(column1_name)
@@ -297,6 +386,119 @@ def cartesian_product(table_1, table_2):
     will return a table with the amalgamation of all the rows.
     REQ: table_1 be a valid, non-empty table
     REQ: table_2 be a valid, non-empty table
+
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ["Titanic"]}
+    >>> dict2 = {"m.awards": ["None"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": ["Titanic"], "m.awards": ["None"]}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ["Titanic", "Star Wars", "Star Trek"]}
+    >>> dict2 = {"m.awards": ["None", "BEST FILM EVER", "Greatest Sci-fi"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": ["Titanic", "Titanic", "Titanic",
+                                 "Star Wars", "Star Wars", "Star Wars",
+                                 "Star Trek", "Star Trek", "Star Trek"],
+                    "m.awards": ["None", "BEST FILM EVER", "Greatest Sci-fi",
+                                 "None", "BEST FILM EVER", "Greatest Sci-fi",
+                                 "None", "BEST FILM EVER", "Greatest Sci-fi"]}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ["Star Trek"], "o.scifi": ["Star Wars"]}
+    >>> dict2 = {"m.awards": ["Greatest Sci-fi"], "m.funny": ["No"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": ["Star Trek"], "o.scifi": ["Star Wars"],
+                    "m.awards": ["Greatest Sci-fi"], "m.funny": ["No"]}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ["Star Trek", "Star Wars"],
+                 "o.scifi": ["BattleStar Galactica", "Firefly"]}
+    >>> dict2 = {"m.awards": ["Greatest Sci-fi", "worst Sci-fi"],
+                 "m.funny": ["No", "yes"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": ["Star Trek", "Star Trek", "Star Wars",
+                                 "Star Wars"],
+                    "o.scifi": ["BattleStar Galactica", "BattleStar Galactica",
+                                "Firefly", "Firefly"],
+                    "m.awards": ["Greatest Sci-fi", "worst Sci-fi",
+                                 "Greatest Sci-fi", "worst Sci-fi"],
+                    "m.funny": ["No", "yes", "No", "yes"]}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": [], "o.scifi": []}
+    >>> dict2 = {"m.awards": [], "m.funny": []}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": [], "o.scifi": [], "m.awards": [],
+        "m.funny": []}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ['pizza'], "o.scifi": ['pasata']}
+    >>> dict2 = {}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": [], "o.scifi": []}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ['pizza', 'Star'], "o.scifi": ['pasata', 'gun']}
+    >>> dict2 = {"o.year": ['123'], "o.nut": ["pine"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {'o.movies': ['pizza', 'Star'], 'o.nut': ['pine', 'pine'],
+                    'o.scifi': ['pasata', 'gun'], 'o.year': ['123', '123']}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ['Star'], "o.scifi": ['gun']}
+    >>> dict2 = {"o.year": ['123', '1123'], "o.nut": ["pine", "acorn"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> result = cartesian_product(t1, t2)
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": ['Star', 'Star'], "o.scifi": ['gun', 'gun'],
+                    "o.year": ['123', '1123'], "o.nut": ["pine", "acorn"]}
+    >>> print(result_dict == expected)
+    True
     """
     # Create an empty table to return
     crossed_table = Table()
@@ -329,6 +531,33 @@ def create_new_tables(database, tables):
     and returns the table of tables.
     REQ: table must be a comma separated string of valid tables
     REQ: database must be a valid, non-empty database.
+    >>> dict1 = {"o.movies": ["Titanic"]}
+    >>> dict2 = {"m.awards": ["None"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> dict3 = {'pizza': t1, 'pasta':t2}
+    >>> db = Database()
+    >>> db.set_dict(dict3)
+    >>> result = create_new_tables(db, "pizza,pasta")
+    >>> result_dict = result.get_dict()
+    >>> expected = {"o.movies": ["Titanic"], "m.awards": ["None"]}
+    >>> print(result_dict == expected)
+    True
+    >>> dict1 = {"o.movies": ["Titanic"]}
+    >>> dict2 = {"m.awards": ["None"]}
+    >>> t1 = Table()
+    >>> t2 = Table()
+    >>> t1.set_dict(dict1)
+    >>> t2.set_dict(dict2)
+    >>> dict3 = {'pizza': t1, 'pasta':t2}
+    >>> db = Database()
+    >>> db.set_dict(dict3)
+    >>> result = create_new_tables(db, "pizza")
+    >>> result.print_csv()
+    o.movies
+    Titanic
     """
     # Check if there is more than one table listed in the string
     if(tables.find(",") > 0):
@@ -362,6 +591,24 @@ def create_array_of_tables(database, list_of_table_names):
     REQ: list_of_table_names must contain valid table names AND != []
     REQ: database must be a non-empty database containing all tables in
          list_of_table_names
+    >>> table_1 = Table()
+    >>> table_2 = Table()
+    >>> table_3 = Table()
+    >>> d = {"cats": table_1, "dogs": table_2, "andMickeyMouse": table_3}
+    >>> db = Database()
+    >>> db.set_dict(d)
+    >>> tables = create_array_of_tables(db, ['cats', 'dogs', 'andMickeyMouse'])
+    >>> print(tables)
+    [table_1, table_2, table_3]
+    >>> table_1 = Table()
+    >>> table_2 = Table()
+    >>> table_3 = Table()
+    >>> d = {"cats": table_1, "dogs": table_2, "andMickeyMouse": table_3}
+    >>> db = Database()
+    >>> db.set_dict(d)
+    >>> tables = create_array_of_tables(db, [])
+    >>> print(tables)
+    []
     """
     # Create an empty return list
     tabels = []
