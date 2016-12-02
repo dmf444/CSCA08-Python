@@ -1,0 +1,79 @@
+Autotested Results for ex9 submitted by [REDACTED]
+Generated at 2016-12-01T04:17:14
+
+Summary of Results: 15 out of 17 tests successfully passed
+--
+
+Tests for test_inheritance.TestInheritance (3/4 passed)
+--
+
+1) test_inheritance.TestInheritance.test_rhombus                                      .. ok!
+2) test_inheritance.TestInheritance.test_parallelogram                                .. ok!
+3) test_inheritance.TestInheritance.test_square                                       .. ok!
+4) test_inheritance.TestInheritance.test_rectangle                                    .. failed
+.. because False is not true : Rectangle does not have the correct parent class (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex9/test_inheritance.py", line 14, in test_rectangle
+        self.assertTrue( issubclass(ex3.Rectangle, ex3.Parallelogram), "Rectangle does not have the correct parent class")
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+
+    AssertionError: False is not true : Rectangle does not have the correct parent class
+
+
+
+Tests for test_methods.TestShapes (12/12 passed)
+--
+
+1) test_methods.TestShapes.test_bst_square                                            .. ok!
+2) test_methods.TestShapes.test_print_parallelogram                                   .. ok!
+3) test_methods.TestShapes.test_bst_rhombus                                           .. ok!
+4) test_methods.TestShapes.test_bst_parallelogram                                     .. ok!
+5) test_methods.TestShapes.test_area_rectangle                                        .. ok!
+6) test_methods.TestShapes.test_print_rectangle                                       .. ok!
+7) test_methods.TestShapes.test_print_square                                          .. ok!
+8) test_methods.TestShapes.test_area_rhombus                                          .. ok!
+9) test_methods.TestShapes.test_area_parallelogram                                    .. ok!
+10) test_methods.TestShapes.test_bst_rectangle                                         .. ok!
+11) test_methods.TestShapes.test_print_rhombus                                         .. ok!
+12) test_methods.TestShapes.test_area_square                                           .. ok!
+
+
+Tests for test_pep8.TestPEP8 (0/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. failed
+.. because 3 != 0 : Found code style errors (and warnings):
+E501: line too long (110 > 80 characters) (3) (details below):
+
+    Traceback (most recent call last):
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex9/test_pep8.py", line 19, in test_pep8
+        self.assertEqual(result.total_errors, 0, report_output)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/usr/local/cms/Python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 3 != 0 : Found code style errors (and warnings):
+    E501: line too long (110 > 80 characters) (3)
+
+
+

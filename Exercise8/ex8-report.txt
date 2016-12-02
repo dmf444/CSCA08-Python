@@ -1,0 +1,35 @@
+Autotested Results for ex8 submitted by [REDACTED]
+Generated at 2016-12-01T03:52:13
+
+Summary of Results: 11 out of 11 tests successfully passed
+--
+
+Tests for test_3_inheritance.TestInheritance (2/2 passed)
+--
+
+1) test_3_inheritance.TestInheritance.test_switch_board                               .. ok!
+2) test_3_inheritance.TestInheritance.test_light_switch                               .. ok!
+
+
+Tests for test_2_switch_board.TestSwitchBoard (4/4 passed)
+--
+
+1) test_2_switch_board.TestSwitchBoard.test_flip_every                                .. ok!
+2) test_2_switch_board.TestSwitchBoard.test_print                                     .. ok!
+3) test_2_switch_board.TestSwitchBoard.test_reset                                     .. ok!
+4) test_2_switch_board.TestSwitchBoard.test_which_switch                              .. ok!
+
+
+Tests for test_1_switch.TestSwitch (4/4 passed)
+--
+
+1) test_1_switch.TestSwitch.test_turn_on                                              .. ok!
+2) test_1_switch.TestSwitch.test_flip                                                 .. ok!
+3) test_1_switch.TestSwitch.test_init                                                 .. ok!
+4) test_1_switch.TestSwitch.test_turn_off                                             .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
