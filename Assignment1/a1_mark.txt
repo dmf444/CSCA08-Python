@@ -1,0 +1,57 @@
+Title, Weight, Mark, Grade
+
+auto-mark:clean_message 1.0 4.0 4.0 / 4.0
+auto-mark:encrypt_letter 1.0 4.0 4.0 / 4.0
+auto-mark:decrypt_letter 1.0 4.0 4.0 / 4.0
+auto-mark:read_messages 1.0 4.0 4.0 / 4.0
+auto-mark:read_deck 2.0 4.0 8.0 / 8.0
+auto-mark:swap_cards 2.0 4.0 8.0 / 8.0
+auto-mark:move_joker_1 1.0 4.0 4.0 / 4.0
+auto-mark:move_joker_2 1.0 4.0 4.0 / 4.0
+auto-mark:triple_cut 2.0 4.0 8.0 / 8.0
+auto-mark:insert_top_to_bottom 2.0 4.0 8.0 / 8.0
+auto-mark:get_card_at_top_index 2.0 4.0 8.0 / 8.0
+auto-mark:get_next_(keystream)_value 1.0 4.0 4.0 / 4.0
+auto-mark:process_message(s) 2.0 4.0 8.0 / 8.0
+auto-mark:PEP-8 1.0 4.0 4.0 / 4.0
+Documentation: Type-Contracts 1.0 4.0 4.0 / 4.0
+Documentation: Descriptions 4.0 3.0 12.0 / 16.0
+Documentation: Examples 4.0 4.0 16.0 / 16.0
+Documentation: Internal Commenting 4.0 4.0 16.0 / 16.0
+Documentation: REQs 1.0 2.0 2.0 / 4.0
+Style: Efficiency 4.0 0.0 0.0 / 16.0
+Style: Magic Numbers 1.0 4.0 4.0 / 4.0
+Style: Variable names 1.0 4.0 4.0 / 4.0
+
+Total:  138.0 / 160.0
+Your mark: 86.25% (Class Average: 73.62%)
+
+ISSUES:
+
+#1 - A1/cipher_functions.py: Line 47 to 47
+Missing REQ information for encrypt/decrypt letter. The letter must be valid.
+
+#2 - A1/cipher_functions.py: Line 77 to 77
+Missing REQ information for encrypt/decrypt letter. The letter must be valid.
+
+#3 - A1/cipher_functions.py: Line 270 to 270
+Didn't describe the special case
+
+#4 - A1/cipher_functions.py: Line 437 to 441
+Missing internal comments.
+
+#5 - A1/cipher_functions.py: Line 9 to 13
+Should be using ord() and chr() for efficiency.
+
+#6 - A1/cipher_functions.py: Line 55 to 67
+Should be using ord() and chr() for efficiency.
+
+#7 - A1/cipher_functions.py: Line 85 to 99
+Should be using ord() and chr() for efficiency.
+
+#8 - A1/cipher_functions.py: Line 163 to 163
+Use the list.index() function.
+
+#9 - A1/cipher_functions.py: Line 204 to 204
+Use the list.index() function.
+

@@ -1,0 +1,70 @@
+Autotested Results for a2 submitted by [REDACTED]
+Generated at 2016-12-13T01:54:24
+
+Summary of Results: 33 out of 33 tests successfully passed
+--
+
+Tests for test_03_run_query.TestRunQuery (15/15 passed)
+--
+
+1) test_03_run_query.TestRunQuery.test_02_single_column_repeats                       .. ok!
+2) test_03_run_query.TestRunQuery.test_11_col_gt_col                                  .. ok!
+3) test_03_run_query.TestRunQuery.test_08_col_eq_val                                  .. ok!
+4) test_03_run_query.TestRunQuery.test_03_multiple_column                             .. ok!
+5) test_03_run_query.TestRunQuery.test_13_join_col_gt_col                             .. ok!
+6) test_03_run_query.TestRunQuery.test_01_single_column_unique                        .. ok!
+7) test_03_run_query.TestRunQuery.test_09_col_gt_val                                  .. ok!
+8) test_03_run_query.TestRunQuery.test_12_join_col_eq_col                             .. ok!
+9) test_03_run_query.TestRunQuery.test_06_two_tables_two_cols                         .. ok!
+10) test_03_run_query.TestRunQuery.test_15_join_multi_tables_with_selection            .. ok!
+11) test_03_run_query.TestRunQuery.test_07_two_tables_all_cols                         .. ok!
+12) test_03_run_query.TestRunQuery.test_10_col_eq_col                                  .. ok!
+13) test_03_run_query.TestRunQuery.test_14_join_multi_tables                           .. ok!
+14) test_03_run_query.TestRunQuery.test_05_two_tables_one_col                          .. ok!
+15) test_03_run_query.TestRunQuery.test_04_star_column                                 .. ok!
+
+
+Tests for test_02_cartesian_product.TestCartesianProduct (10/10 passed)
+--
+
+1) test_02_cartesian_product.TestCartesianProduct.test_08_cartesian_product_zero_r
+ows                                                                                   .. ok!
+2) test_02_cartesian_product.TestCartesianProduct.test_05_cartesian_product_two_co
+l_two_three_row                                                                       .. ok!
+3) test_02_cartesian_product.TestCartesianProduct.test_04_cartesian_product_two_co
+l_two_row                                                                             .. ok!
+4) test_02_cartesian_product.TestCartesianProduct.test_06_cartesian_product_two_co
+l_three_three_row                                                                     .. ok!
+5) test_02_cartesian_product.TestCartesianProduct.test_03_cartesian_product_two_co
+l2_one_row                                                                            .. ok!
+6) test_02_cartesian_product.TestCartesianProduct.test_02_cartesian_product_two_co
+l_one_row                                                                             .. ok!
+7) test_02_cartesian_product.TestCartesianProduct.test_09_cartesian_product_zero_o
+ne_rows                                                                               .. ok!
+8) test_02_cartesian_product.TestCartesianProduct.test_99_cartesian_product_mutabl
+e                                                                                     .. ok!
+9) test_02_cartesian_product.TestCartesianProduct.test_01_cartesian_product_one_co
+l_one_row                                                                             .. ok!
+10) test_02_cartesian_product.TestCartesianProduct.test_07_cartesian_product_one_co
+l_three_six_row                                                                       .. ok!
+
+
+Tests for test_01_read_table.TestReadTable (7/7 passed)
+--
+
+1) test_01_read_table.TestReadTable.test_01_read_table_single_col_single_row          .. ok!
+2) test_01_read_table.TestReadTable.test_07_read_table_multi_col_multi_rows_diff_c
+ol_names                                                                              .. ok!
+3) test_01_read_table.TestReadTable.test_03_read_table_multi_col_single_row           .. ok!
+4) test_01_read_table.TestReadTable.test_05_read_table_single_col_no_rows             .. ok!
+5) test_01_read_table.TestReadTable.test_06_read_table_multi_col_no_rows              .. ok!
+6) test_01_read_table.TestReadTable.test_02_read_table_single_col_multi_row           .. ok!
+7) test_01_read_table.TestReadTable.test_04_read_table_multi_col_multi_row            .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
+

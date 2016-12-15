@@ -1,0 +1,22 @@
+Title, Weight, Mark, Grade
+
+auto-mark: read_table/database 5.0 4.0 20.0 / 20.0
+auto-mark: cartesian_product 10.0 4.0 40.0 / 40.0
+auto-mark: run_query 15.0 4.0 60.0 / 60.0
+auto-mark:PEP-8 1.0 4.0 4.0 / 4.0
+documentation: type contracts 1.0 4.0 4.0 / 4.0
+documentation: examples 3.0 4.0 12.0 / 12.0
+documentation: descriptions 3.0 3.0 9.0 / 12.0
+documentation: internal commenting 3.0 4.0 12.0 / 12.0
+design: Use of OOP 15.0 4.0 60.0 / 60.0
+design: global code 1.0 4.0 4.0 / 4.0
+design: database 2.0 4.0 8.0 / 8.0
+design: variable names 1.0 4.0 4.0 / 4.0
+
+Total:  237.0 / 240.0
+Your mark: 98.75% (Class Average: 50.68%)
+
+ISSUE:
+
+#1 - a2/squeal.py: Line 382 to 385
+Unhelpful description, please describe what the functions/methods do.

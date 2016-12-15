@@ -1,0 +1,38 @@
+Title, Weight, Mark, Grade
+
+auto-mark: all_horizontal 5.0 4.0 20.0 / 20.0
+auto-mark: at_most_one_vertical 5.0 2.0 10.0 / 20.0
+auto-mark: in_exactly_one_dimension 5.0 4.0 20.0 / 20.0
+auto-mark: in_puzzle 5.0 4.0 20.0 / 20.0
+auto-mark: in_puzzle_horizontal 5.0 4.0 20.0 / 20.0
+auto-mark: in_puzzle_vertical 5.0 4.0 20.0 / 20.0
+auto-mark: total_occurrences 5.0 4.0 20.0 / 20.0
+auto-mark: PEP-8 1.0 0.0 0.0 / 4.0
+output: manual run 4.0 4.0 16.0 / 16.0
+documentation: type contracts 2.0 4.0 8.0 / 8.0
+documentation: REQ statements 1.0 4.0 4.0 / 4.0
+documentation: descriptions 5.0 4.0 20.0 / 20.0
+documentation: examples 5.0 4.0 20.0 / 20.0
+documentation: internal comments 5.0 4.0 20.0 / 20.0
+documentation: header information 1.0 4.0 4.0 / 4.0
+style: variable names 1.0 1.0 1.0 / 4.0
+style: code re-use 5.0 2.0 10.0 / 20.0
+style: efficiency of code 5.0 2.0 10.0 / 20.0
+
+Total:  243.0 / 280.0
+Your mark: 86.79% (Class Average: 77.51%)
+
+ISSUES:
+
+#1 - A0/a0.py: Line 119 to 122
+this will process the puzzle more times than necessary
+
+#2 - A0/a0.py: Line 191 to 194
+[Code Reuse] A single call to total_occurrences will suffice.
+
+#3 - A0/a0.py: Line 218 to 218
+[Variable Names] Avoid putting everything into a big return statement; should not be returning a boolean expression, but a boolean variable
+
+#4 - A0/a0.py: Line 242 to 247
+all_horizontal could be done just by one call to in_puzzle_vertical.
+
