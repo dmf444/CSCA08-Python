@@ -1,0 +1,11 @@
+1
+impossible
+2
+stack
+stack put(B) move(A) put(N) move(A) put(N) move(A) get(N) get(N) getB)
+3
+stack bucket queue
+stack move(B) put(A) move(N) get(A) move(A) put(N) move(A) get(N)
+bucket move(B) put(A) move(N) get(A) move(A) put(N) move(A) get(N)
+queue move(B) put(A) move(N) get(A) move(A) put(N) move(A) get(N)
+4
