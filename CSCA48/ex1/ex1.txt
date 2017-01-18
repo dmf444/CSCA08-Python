@@ -9,3 +9,22 @@ stack move(B) put(A) move(N) get(A) move(A) put(N) move(A) get(N)
 bucket move(B) put(A) move(N) get(A) move(A) put(N) move(A) get(N)
 queue move(B) put(A) move(N) get(A) move(A) put(N) move(A) get(N)
 4
+queue
+queue put(B) put(A) move(N) get(B) put(A) move(N) move(A) get(A) get(A)
+5
+stack
+stack put(B) put(A) move(N) put(A) move(N) move(A) get(A) get(A) get(B)
+6
+queue
+queue put(B) put(A) move(N) put(A) move(N) get(B) move(A) get(A) get(A)
+7
+stack bucket queue
+stack put(B) move(A) move(N) move(A) move(N) move(A) get(B)
+bucket put(B) move(A) move(N) move(A) move(N) move(A) get(B)
+queue put(B) move(A) move(N) move(A) move(N) move(A) get(B)
+8
+stack queue
+stack put(B) put(A) move(N) get(A) get(B) move(A) move(N) move(A)
+queue put(B) put(A) move(N) move(A) get(B) get(A) move(N) move(A)
+9
+impossible

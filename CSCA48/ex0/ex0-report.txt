@@ -1,0 +1,33 @@
+Autotested Results for ex0 submitted by [REDACTED]
+Generated at 2017-01-16T22:16:51
+
+Summary of Results: 8 out of 8 tests successfully passed
+--
+
+Tests for test_2_mutute_list.TestMutateList (5/5 passed)
+--
+
+1) test_2_mutute_list.TestMutateList.test_mutate_list_booleans                        .. ok!
+2) test_2_mutute_list.TestMutateList.test_mutate_list_mixed                           .. ok!
+3) test_2_mutute_list.TestMutateList.test_mutate_list_strings                         .. ok!
+4) test_2_mutute_list.TestMutateList.test_mutate_list_integers                        .. ok!
+5) test_2_mutute_list.TestMutateList.test_mutate_list_return                          .. ok!
+
+
+Tests for test_3_merge_dicts.TestMergeDicts (1/1 passed)
+--
+
+1) test_3_merge_dicts.TestMergeDicts.test_handout_example_1                           .. ok!
+
+
+Tests for test_1_greeting.TestGreeting (1/1 passed)
+--
+
+1) test_1_greeting.TestGreeting.test_greeting                                         .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
