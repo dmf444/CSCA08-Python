@@ -1,0 +1,19 @@
+Autotested Results for ex1 submitted by [REDACTED]
+Generated at 2017-01-29T00:03:34
+
+Summary of Results: 9 out of 9 tests successfully passed
+--
+
+Tests for test_banana.Test (9/9 passed)
+--
+
+1) test_banana.Test.test_6_NNBAAA                                                     .. ok!
+2) test_banana.Test.test_4_NBNAAA                                                     .. ok!
+3) test_banana.Test.test_8_NABANA                                                     .. ok!
+4) test_banana.Test.test_5_NNAAAB                                                     .. ok!
+5) test_banana.Test.test_2_AAANNB                                                     .. ok!
+6) test_banana.Test.test_3_BNAAAN                                                     .. ok!
+7) test_banana.Test.test_9_NANANANABATMAN                                             .. ok!
+8) test_banana.Test.test_7_ANANAB                                                     .. ok!
+9) test_banana.Test.test_1_AAABBN                                                     .. ok!
+
