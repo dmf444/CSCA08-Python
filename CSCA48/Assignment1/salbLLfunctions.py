@@ -71,19 +71,58 @@ def salb2salbLL(salb: 'dict') -> SALBnode:
     return head
 
 
-def get_node_at_index(head: 'SALBnode', number: 'int'):
-    if(not (head == None)):
-        curr = head
-        for count in range(number):
-            if(not(curr.next == None)):
-                curr = curr.next
-        if(curr.next == None):
-            ret_node = None
+def dualboard(head):
+    first = head
+    new_ll = SALBnode()
+    work_var = new_ll
+    if((head is not None) and (head.next is not None)):
+        head = head.next
+    kill_loop = False
+    while ((head is not None) and (head.next is not None) and not kill_loop):
+        if(head != first):
+            work_var.next = SALBnode()
+            work_var = work_var.next
+            head = head.next
         else:
-            ret_node = curr
-        return ret_node
+            work_var.next = new_ll
+            kill_loop = True
+    new_list = stack_and_track(first, new_ll)
+    return new_list
 
 
-salb3 = SALboard(6,  {2: 4, 5: 1})
-salb2salbLL(salb3)
-print(salb3)
+def stack_and_track(first, new_ll):
+    ######################################################
+    # Stack and Track
+    # Method:
+    # Loop through all places in given head START FROM HEAD
+    # On finding a snadder -> make new vars, sync to head and continue
+    # around loop until finding node, make copy, return to main loop
+    main_ll = first.next
+    first1 = first
+    new_ll1 = new_ll
+    backward_ll = new_ll.next
+    # Catch for first iteration only
+    # TODO
+    loop_escape = False
+    while(main_ll is not None and backward_ll is not None and not loop_escape):
+        if(first1 != main_ll):
+            if(main_ll.snadder is not None):
+                snadder_main = main_ll.snadder
+                point_to_snadder = backward_ll
+                backward_ll1 = backward_ll.next
+                main_ll1 = main_ll.next
+                while(main_ll1 != snadder_main):
+                    main_ll1 = main_ll1.next
+                    backward_ll1 = backward_ll1.next
+                backward_ll1.snadder = point_to_snadder
+            main_ll = main_ll.next
+            backward_ll = backward_ll.next
+        else:
+            loop_escape = True
+    return new_ll
+
+
+salb3 = SALboard(6,  {2: 4, 1: 5})
+e = salb2salbLL(salb3)
+f = dualboard(e)
+print(f)
