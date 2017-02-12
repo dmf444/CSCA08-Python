@@ -1,5 +1,5 @@
 """
-# Copyright Nick Cheng, 2016
+# Copyright Nick Cheng, 2016; David Fernandes, 2017
 # Distributed under the terms of the GNU General Public License.
 #
 # This file is part of Assignment 1, CSCA48, Winter 2017
@@ -48,11 +48,6 @@ def salb2salbLL(salb: 'dict') -> SALBnode:
     # Build the nodes, backwards, from size -1 to 0
     for node in range(size_of_board - 1, 0, -1):
         nodus = SALBnode(head)
-        ###############################################
-        ##################################
-        ############################
-        # ### I MUST BE DELETED!!!!
-        nodus.number = node
         # Check if the number is part of a snadder, if so, add it to dict
         if(node in important_nums):
             node_link_dict[node] = nodus
@@ -77,113 +72,257 @@ def salb2salbLL(salb: 'dict') -> SALBnode:
     return head
 
 
-def whowins(first, step1, step2):
+def whowins(first: 'SALBnode', step1: 'int', step2: 'int') -> 'int':
+    """ (SALBnode, int, int) -> int
+    This function takes in a board representing a game of snakes and ladders, a
+    player 1 step size and a player 2 step size then calculates which player
+    will win the game. Function returns 1 if player one wins and 2 if player 2
+    wins. If the stepsize for both players results with them getting into a
+    loop, player two is automatically declared the winner.
+    REQ: first is a pointer to the head of a circularly wrapped linked list.
+    REQ: step1 is a non-negative number, step1 != None
+    REQ: step2 is a non-negative number, step2 != None
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> whowins(board, 9, 10)
+    2
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> whowins(board, 13, 12)
+    2
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> whowins(board, 12, 3)
+    1
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> whowins(board, 9, 3)
+    2
+    """
+    # Check if either player will finish the board
     player_1 = willfinish(first, step1)
     player_2 = willfinish(first, step2)
+    # If player 1 finishes, and player 2 does not
     if(player_1 and (not player_2)):
+        # Set the winner to player 1
         winner = 1
+    # If player 2 finishes and player 1 does not
     elif(player_2 and (not player_1)):
+        # Set the winner to player 2
         winner = 2
+    # If neither player finishes the board
     elif((not player_1) and (not player_2)):
+        # Set player 2 as the winner
         winner = 2
+    # If both players complete the board
     else:
+        # Count the number of moves both players take
         player_1_count = player_step_count(first, step1)
         player_2_count = player_step_count(first, step2)
-        if(player_1_count < player_2_count):
+        # If player1 makes less moves
+        if(player_1_count <= player_2_count):
+            # Set player 1 as the winner
             winner = 1
         else:
+            # otherwise, set player 2 as the winner
             winner = 2
+    # Finally, return the winner
     return winner
 
 
-def player_step_count(first, stepsize):
+def player_step_count(first: 'SALBnode', stepsize: 'int') -> 'int':
+    """ (SALBnode, int) -> int
+    This function takes a node representing a game of snakes and ladders, and a
+    stepsize then calculates how many moves it will take the player to reach
+    the end of the board. This function returns an int representation of how
+    many moves the player made. If the player doesn't finish the board, this
+    function will return the length of the board+1.
+    REQ: first is a pointer to the head of a circularly linked list.
+    REQ: stepsize is a non-negative int, stepsize != None
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> (player_step_count(board, 12))
+    2
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> (player_step_count(board, 1))
+    25
+    """
+    # NOTE: this function is a carbon copy of willfinish. This was done b/c
+    # returning a tuple was counter the rules of this assignment.
+    # Get the final node in the linked list
     finish_piece = get_tail_node(first)
+    # Set the current node to the last element in the list
     current_node = finish_piece
+    # Count the total number of nodes in the list
     board_size = count_nodes(first)
+    # Create a counter for the while loop, also make a loop exit variable
     counter = 0
     landed_on_finish = False
+    # Continue to loop through the board, so long as moves count is under board
+    # count. (if not in a loop, player should visit every square only once)
     while(counter <= board_size and not landed_on_finish):
+        # Move the player
         current_node = move_player(current_node, stepsize)
+        # Check if this is the final node
         if(current_node == finish_piece):
+            # IF this is, exit the loop
             landed_on_finish = True
+        # This isn't, check if there is a snadder
         elif(current_node.snadder is not None):
+            # Follow the snadder
             current_node = current_node.snadder
+        # Increment the counter
         counter += 1
+    # Return steps a player made
     return counter
 
 
-def willfinish(first, stepsize):
-    # operates on principal of passing the head.
-    # if player passes head, he is not in loop
-    # otherwise, he has to be in a loop
+def willfinish(first: 'SALBnode', stepsize: 'int') -> 'bool':
+    """ (SALBnode, int) -> bool
+    This function takes a node representing a game of snakes and ladders, and a
+    stepsize then calculates whether the player will ever complete the board by
+    hitting the last node in the linked list. Return True if the player does
+    complete the board and False otherwise.
+    REQ: first is a pointer to the head of a circularly linked list.
+    REQ: stepsize is a non-negative int.
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> (willfinish(board, 9))
+    False
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> (willfinish(board, 10))
+    True
+    >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+    >>> (willfinish(board, 25))
+    False
+    """
+    # Get the final node in the linked list
     finish_piece = get_tail_node(first)
+    # Set the current node to the last element in the list
     current_node = finish_piece
+    # Count the total number of nodes in the list
     board_size = count_nodes(first)
+    # Create a counter for the while loop, also make a loop exit variable
     counter = 0
     landed_on_finish = False
+    # Continue to loop through the board, so long as moves count is under board
+    # count. (if not in a loop, player should visit every square only once)
     while(counter <= board_size and not landed_on_finish):
+        # Move the player
         current_node = move_player(current_node, stepsize)
+        # Check if this is the final node
         if(current_node == finish_piece):
+            # IF this is, exit the loop
             landed_on_finish = True
+        # This isn't, check if there is a snadder
         elif(current_node.snadder is not None):
+            # Follow the snadder, if found
             current_node = current_node.snadder
+        # Increment loop counter
         counter += 1
+    # Return if the player finished
     return landed_on_finish
 
 
-def move_player(current_node, step):
+def move_player(current_node: 'SALBnode', step: 'int') -> 'SALBnode':
+    """ (SALBnode, int) -> SALBnode
+    Given a node and a step size, this function move the pointer from
+    current node to current_node + step size. Returns a pointer to the same
+    linked list, but pointing at a different node.
+    REQ: current_node is a pointer to the head of a circularly linked list.
+    REQ: step is a non-negative number.
+    """
+    # Create a counter variable
     count = 0
+    # Loop until the count is the step size
     while(count < step):
+        # Move one node forward and increment the counter
         current_node = current_node.next
         count += 1
+    # Return the list, with the pointer at the new head
     return current_node
 
 
-def dualboard(head):
+def dualboard(head: 'SALBnode') -> 'SALBnode':
+    """ (SALBnode) -> SALBNode
+    Given a head reference to a SALBnode representing a board of snakes and
+    ladders, this function will create a new board. The new board will have
+    the same amount of nodes as the original, however, any snadders in the
+    original board will point in reverse. I.E. if the original board has a
+    snadder from 4 => 9, the new board will have a snadder from 9 => 4. This
+    function will return the new linked list.
+    REQ: head must be the start of a linked list, the final node in head
+         must point back to head.
+
+    """
+    # Save a reference to the head node
     first = head
+    # Create the first node of the linked list
     new_ll = SALBnode()
+    # Create a var to represent the current location in the list
     work_var = new_ll
+    # Get the size of the board, to loop through
     size_of_board = count_nodes(head)
-    if((head is not None) and (head.next is not None)):
-        head = head.next
+    # Advance to second link
+    head = head.next
+    # Create default vars for the loop, loop exit and counter
     kill_loop = False
     count = 0
+    # Loop until the size of the board is filled and loop exit is not true
     while (count < size_of_board and not kill_loop):
+        # If this iteration is not the head node
         if(head != first):
+            # Create and link a new node to the linked list
             work_var.next = SALBnode()
             work_var = work_var.next
             head = head.next
         else:
+            # This is the head, link it back to the end
             work_var.next = new_ll
             kill_loop = True
+    # Call helper function to create snadder references
     new_list = find_and_link_snadders(first, new_ll)
+    # Return the completed list
     return new_list
 
 
-def find_and_link_snadders(main_head, new_head):
-    ######################################################
-    # Stack and Track
-    # Method:
-    # Loop through all places in given head START FROM HEAD
-    # On finding a snadder -> make new vars, sync to head and continue
-    # around loop until finding node, make copy, return to main loop
+def find_and_link_snadders(main_head: 'SALBnode', new_head: 'SALBnode'):
+    """ (SALBnode, SALBnode) -> SALBnode
+    This function takes two linked list, representing a game of snakes and
+    ladders, of equivalent length, and maps snadders from one to the other.
+    The snadders are placed in the second list in inverse order, I.E. if the
+    first board has snadder from 4 => 9, thesecond board will have a snadder
+    from 9 => 4. This function returns the second linked list, with snadders.
+    REQ: main_head and new_head must be equivalent in length.
+    REQ: main_head and new_head must be circular linked lists.
+    REQ: main_head and new_head must be the head of a circular linked lists.
+    """
+    # Create variables to reference as the current position in the loop
     main_board = main_head
     backwards_board = new_head
+    # Create a counter and get the size of the board
     count = 0
     board_size = count_nodes(main_head)
+    # Loop through the entire board
     while(count < board_size):
+        # If a snadder is found on the current SALBnode
         if(main_board.snadder is not None):
+            # Start a second loop - find the companion node
+            # Save found snadder location
             snadder_main = main_board.snadder
+            # Save the second board's location as the pointer for the new
+            # snadder.
             point_to_snadder = backwards_board
+            # make new vars to increment the new loop
             backwards_board_2 = backwards_board.next
             main_board_2 = main_board.next
+            # Coninue this loop until the snadder is found
             while(main_board_2 != snadder_main):
+                # Increment the two lists if not yet found
                 main_board_2 = main_board_2.next
                 backwards_board_2 = backwards_board_2.next
+            # Take the current second loop and point it to the saved pointer
+            #  node
             backwards_board_2.snadder = point_to_snadder
+        # Increment the board locations and the counter
         main_board = main_board.next
         backwards_board = backwards_board.next
         count += 1
+    # return the head of the second list
     return new_head
 
 
@@ -192,6 +331,12 @@ def count_nodes(head):
      This function is used to count the number of nodes in a SALBnode. This
      function will return an integer representing the number of nodes.
      REQ: SALBnode != None, SALBnode must be circularly linked
+     >>> board = salb2salbLL(SALboard(24, {3: 16, 21: 7}))
+     >>> (count_nodes(board))
+     24
+     >>> board = salb2salbLL(SALboard(298, {3: 16, 21: 7}))
+     >>> (count_nodes(board))
+     298
     """
     # Start with an empty count
     count = 0
@@ -210,155 +355,19 @@ def count_nodes(head):
     return count
 
 
-def get_tail_node(head):
-    """
+def get_tail_node(head: 'SALBnode') -> 'SALBnode':
+    """ (SALBnode) -> SALBnode
     This function takes in the head of a linked list, find the tail and
     returns it.
     REQ: head must be a linked list, with the tail referencing the head
     """
-
+    # Set the current node and the last node
     curr = head.next
     last = head
+    # Continue to loop through current until it's back at the head
     while(curr != head):
+        # Move the current and last positions
         last = curr
         curr = curr.next
+    # Return the end of the linked list - the last node
     return last
-
-
-salb3 = SALboard(24, {3: 16, 21: 7})
-e = salb2salbLL(salb3)
-f = dualboard(e)
-g = count_nodes(e)
-h = get_tail_node(e)
-i = willfinish(e, 24)
-print(i)
-
-
-
-
-
-
-def testing(__salb1__, size):
-    # first node is the output of the salb2salbLL function
-    __head__ = __salb1__
-    # get the max width by rounding down the square root of numSquares
-    __maxwidth__ = math.floor(math.sqrt(size))
-
-    try:
-        # copy the nodes into a list
-        __squares__ = []
-        # set node to be the head of the list
-        __node__ = __head__
-        # for every node
-        for o in range(0, size):
-            # append it to the list
-            __squares__.append(__node__)
-            # move one forward
-            if __node__.next is not None:
-                __node__ = __node__.next
-            else:
-                print("Null pointer at node.next\n One of your links is not",
-                      "pointing to the right place :O")
-        # empty start:end dict
-        __snadders__ = {}
-        # run through the list and copy the start:end pairs from the nodes
-        for p in range(0, len(__squares__)):
-            if __squares__[p].snadder is not None:
-                __snadders__[p + 1] = __squares__.index(
-                    __squares__[p].snadder) + 1
-        # keep records of the start and end of each snadder from the dict
-        __start__ = list(__snadders__.keys())
-        # __start__.sort()
-        __end__ = list(__snadders__.values())
-        # __end__.sort()
-
-    except (IndexError, TypeError) as ex:
-        print(
-            "Oh no! Something broke, double check your code!")
-    else:
-        if list(__snadders__.keys()) != __start__:
-            print("Your linked list snadders and your dictionary snadders",
-                  "don't match 0_0\n")
-
-    # counter to reference the current square's number
-    __counter__ = 1
-    try:
-        # for each row in the board
-        for k in range(0, int(math.ceil(size / __maxwidth__))):
-            # make a string to add the squares into
-            row = ""
-            # for each column in the board
-            for j in range(int(k * __maxwidth__), int((k + 1) * __maxwidth__)):
-                # if the square has a snadder
-                if __counter__ in __start__:
-                    # print a square with the number of the index in it
-                    row += ("[_" + str(__start__.index(__counter__)) + "S_]")
-                elif __counter__ in __end__:
-                    # print a square with the number of the index in it
-                    row += ("[_" + str(__end__.index(__counter__)) + "E_]")
-                elif __counter__ <= size:
-                    # print an empty square
-                    row += ("[____]")
-                # add one to the counter
-                __counter__ += 1
-                # move to the next node
-                __node__ = __node__.next
-            # print the row
-            print(row, "\n\n")
-    except IndexError:
-        print("Graph failed :(\nDouble check your code!")
-
-
-if __name__ == "__main__":
-    import math
-    import doctest
-
-    print("NORMAL BOARD")
-    board = salb2salbLL(SALboard(16, {1: 2, 6: 4, 5: 14}))
-    testing(board, 16)
-    print("\n")
-    print("DUAL BOARD")
-    testing(dualboard(board), 16)
-
-
-if __name__ == '__main__':
-
-    import time, random
-    size = 10000
-    nums = random.sample(range(1, size - 1), size - 2)
-    snad = {}
-
-    while len(nums) != 0:
-        snad[nums.pop()] = nums.pop()
-
-    start = time.time()
-    test = salb2salbLL(SALboard(size, snad))
-    mid = time.time()
-    test1 = dualboard(test)
-    end = time.time()
-
-    print('Total Runtime: %s seconds' % (end - start))
-    print('Dualboard Runtime: %s seconds' % (end - mid))
-    print('Board size: %s squares' % size)
-    print('Number of Links: %s snadders' % len(snad))
-
-
-    import time, random
-
-    # edit these three things
-    num_snadders = 2
-    tiles=24
-    step_size=2
-
-    snadders={}
-    for i in range(num_snadders):
-        source = random.randint(1,tiles-1)
-        destination = random.randint(1,tiles-1)
-        snadders[source] = destination
-
-    long_board = salb2salbLL(SALboard(tiles, snadders))
-    start=time.time()
-    can=willfinish(long_board, step_size)
-    print('User can finish: ' + str(can))
-    end=time.time()
-    print('Took {} seconds to check if a board with {} tiles and {} snadders is winnable'.format(end-start,tiles,len(snadders.keys())))
