@@ -46,7 +46,7 @@ def salb2salbLL(salb: 'dict') -> SALBnode:
     if(size_of_board in important_nums):
         node_link_dict[size_of_board] = head
     # Build the nodes, backwards, from size -1 to 0
-    for node in range(size_of_board-1, 0, -1):
+    for node in range(size_of_board - 1, 0, -1):
         nodus = SALBnode(head)
         ###############################################
         ##################################
@@ -77,10 +77,67 @@ def salb2salbLL(salb: 'dict') -> SALBnode:
     return head
 
 
+def whowins(first, step1, step2):
+    player_1 = willfinish(first, step1)
+    player_2 = willfinish(first, step2)
+    if(player_1 and (not player_2)):
+        winner = 1
+    elif(player_2 and (not player_1)):
+        winner = 2
+    elif((not player_1) and (not player_2)):
+        winner = 2
+    else:
+        player_1_count = player_step_count(first, step1)
+        player_2_count = player_step_count(first, step2)
+        if(player_1_count < player_2_count):
+            winner = 1
+        else:
+            winner = 2
+    return winner
+
+
+def player_step_count(first, stepsize):
+    finish_piece = get_tail_node(first)
+    current_node = finish_piece
+    board_size = count_nodes(first)
+    counter = 0
+    landed_on_finish = False
+    while(counter <= board_size and not landed_on_finish):
+        current_node = move_player(current_node, stepsize)
+        if(current_node == finish_piece):
+            landed_on_finish = True
+        elif(current_node.snadder is not None):
+            current_node = current_node.snadder
+        counter += 1
+    return counter
+
+
 def willfinish(first, stepsize):
     # operates on principal of passing the head.
     # if player passes head, he is not in loop
     # otherwise, he has to be in a loop
+    finish_piece = get_tail_node(first)
+    current_node = finish_piece
+    board_size = count_nodes(first)
+    counter = 0
+    landed_on_finish = False
+    while(counter <= board_size and not landed_on_finish):
+        current_node = move_player(current_node, stepsize)
+        if(current_node == finish_piece):
+            landed_on_finish = True
+        elif(current_node.snadder is not None):
+            current_node = current_node.snadder
+        counter += 1
+    return landed_on_finish
+
+
+def move_player(current_node, step):
+    count = 0
+    while(count < step):
+        current_node = current_node.next
+        count += 1
+    return current_node
+
 
 def dualboard(head):
     first = head
@@ -153,11 +210,28 @@ def count_nodes(head):
     return count
 
 
-salb3 = SALboard(6,  {2: 4, 1: 5})
+def get_tail_node(head):
+    """
+    This function takes in the head of a linked list, find the tail and
+    returns it.
+    REQ: head must be a linked list, with the tail referencing the head
+    """
+
+    curr = head.next
+    last = head
+    while(curr != head):
+        last = curr
+        curr = curr.next
+    return last
+
+
+salb3 = SALboard(24, {3: 16, 21: 7})
 e = salb2salbLL(salb3)
 f = dualboard(e)
 g = count_nodes(e)
-print(g)
+h = get_tail_node(e)
+i = willfinish(e, 24)
+print(i)
 
 
 
@@ -245,3 +319,46 @@ if __name__ == "__main__":
     print("\n")
     print("DUAL BOARD")
     testing(dualboard(board), 16)
+
+
+if __name__ == '__main__':
+
+    import time, random
+    size = 10000
+    nums = random.sample(range(1, size - 1), size - 2)
+    snad = {}
+
+    while len(nums) != 0:
+        snad[nums.pop()] = nums.pop()
+
+    start = time.time()
+    test = salb2salbLL(SALboard(size, snad))
+    mid = time.time()
+    test1 = dualboard(test)
+    end = time.time()
+
+    print('Total Runtime: %s seconds' % (end - start))
+    print('Dualboard Runtime: %s seconds' % (end - mid))
+    print('Board size: %s squares' % size)
+    print('Number of Links: %s snadders' % len(snad))
+
+
+    import time, random
+
+    # edit these three things
+    num_snadders = 2
+    tiles=24
+    step_size=2
+
+    snadders={}
+    for i in range(num_snadders):
+        source = random.randint(1,tiles-1)
+        destination = random.randint(1,tiles-1)
+        snadders[source] = destination
+
+    long_board = salb2salbLL(SALboard(tiles, snadders))
+    start=time.time()
+    can=willfinish(long_board, step_size)
+    print('User can finish: ' + str(can))
+    end=time.time()
+    print('Took {} seconds to check if a board with {} tiles and {} snadders is winnable'.format(end-start,tiles,len(snadders.keys())))
