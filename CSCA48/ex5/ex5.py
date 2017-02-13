@@ -8,14 +8,14 @@ def rsum(listr: 'list') -> 'int':
 
 def rmax(listr: 'list') -> 'int':
     if(len(listr) == 1):
-        max = listr[0]
+        max_num = listr[0]
     else:
         if(listr[0] > listr[1]):
             lisz = listr[0:1] + listr[2:]
-            max = rmax(lisz)
+            max_num = rmax(lisz)
         else:
-            max = rmax(listr[1:])
-    return max
+            max_num = rmax(listr[1:])
+    return max_num
 
 
 def second_smallest_helper(listr: 'list') -> 'int':
