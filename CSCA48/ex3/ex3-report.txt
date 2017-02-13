@@ -1,0 +1,11 @@
+Autotested Results for ex3 submitted by [REDACTED]
+Generated at 2017-02-10T21:32:03
+
+Summary of Results: 2 out of 2 tests successfully passed
+--
+
+Tests for test_e5.TestBstTraversal (2/2 passed)
+--
+
+1) test_e5.TestBstTraversal.test_part_1                                               .. ok!
+2) test_e5.TestBstTraversal.test_part_2
