@@ -1,8 +1,8 @@
 def rsum(listr: 'list') -> 'int':
-    if(len(listr) > 1):
+    if(len(listr) > 0):
         count = listr[0] + rsum(listr[1:])
     else:
-        count = listr[0]
+        count = 0
     return count
 
 
