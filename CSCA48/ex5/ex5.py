@@ -1,8 +1,8 @@
 def rsum(listr: 'list') -> 'int':
-    if(len(listr) > 0):
+    if(len(listr) > 1):
         count = listr[0] + rsum(listr[1:])
     else:
-        count = 0
+        count = listr[0]
     return count
 
 
@@ -19,10 +19,13 @@ def rmax(listr: 'list') -> 'int':
 
 
 def second_smallest_helper(listr: 'list') -> 'int':
-    if(len(listr) > 2):
-        smallest = (listr[0], listr[1])
-    else:
+    if(len(listr) == 2):
         if(listr[0] > listr[1]):
+            smallest = (listr[1], listr[0])
+        else:
+            smallest = (listr[0], listr[1])
+    else:
+        if(listr[0] < listr[1]):
             lisz = listr[0:1] + listr[2:]
             lisz.insert(0, listr[0])
             smallest = second_smallest_helper(lisz)
@@ -40,4 +43,3 @@ def sum_max_min(listr):
     largest = rmax(listr)
     (smallest, s_s) = second_smallest_helper(listr)
     return largest + smallest
-
