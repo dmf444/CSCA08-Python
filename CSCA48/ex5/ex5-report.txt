@@ -1,0 +1,82 @@
+Autotested Results for ex5 submitted by [REDACTED]
+Generated at 2017-02-21T16:35:12
+
+Summary of Results: 6 out of 9 tests successfully passed
+--
+
+Tests for test_ex7.TestE7 (5/8 passed)
+--
+
+1) test_ex7.TestE7.test_rsum                                                          .. ok!
+2) test_ex7.TestE7.test_rmax_efficiency                                               .. ok!
+3) test_ex7.TestE7.test_rmax                                                          .. ok!
+4) test_ex7.TestE7.test_rsum_efficiency                                               .. ok!
+5) test_ex7.TestE7.test_sum_max_min                                                   .. ok!
+6) test_ex7.TestE7.test_sum_max_min_efficiency                                        .. failed
+.. because False is not true : Code appears to be doing more work than is needed - are you accessing each element more than once? (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex5/test_ex7.py", line 224, in test_sum_max_min_efficiency
+        + 'accessing each element more than once?')
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 677, in assertTrue
+        raise self.failureException(msg)
+
+    AssertionError: False is not true : Code appears to be doing more work than is needed - are you accessing each element more than once?
+
+7) test_ex7.TestE7.test_second_smallest                                               .. failed
+.. because 4 != 0 : two_smallest() returns incorrectly when passed in [0, -4, 1, 4] (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex5/test_ex7.py", line 181, in test_second_smallest
+        + str(input_copy))
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 813, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 4 != 0 : two_smallest() returns incorrectly when passed in [0, -4, 1, 4]
+
+8) test_ex7.TestE7.test_second_smallest_efficiency                                    .. failed
+.. because False is not true : Code appears to be doing more work than is needed - are you accessing each element more than once? (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex5/test_ex7.py", line 197, in test_second_smallest_efficiency
+        + 'accessing each element more than once?')
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 677, in assertTrue
+        raise self.failureException(msg)
+
+    AssertionError: False is not true : Code appears to be doing more work than is needed - are you accessing each element more than once?
+
+
+
+Tests for test_pep8.Test (1/1 passed)
+--
+
+1) test_pep8.Test.test_pep8                                                           .. ok!
+
+

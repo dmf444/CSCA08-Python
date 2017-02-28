@@ -1,0 +1,15 @@
+Autotested Results for ex4 submitted by [REDACTED]
+Generated at 2017-02-21T15:50:56
+
+Summary of Results: 5 out of 5 tests successfully passed
+--
+
+Tests for test_e4.TestE4 (5/5 passed)
+--
+
+1) test_e4.TestE4.test_2_queue                                                        .. ok!
+2) test_e4.TestE4.test_4_neck_queue                                                   .. ok!
+3) test_e4.TestE4.test_5_steue                                                        .. ok!
+4) test_e4.TestE4.test_3_alt_queue                                                    .. ok!
+5) test_e4.TestE4.test_1_stack                                                        .. ok!
+
