@@ -37,10 +37,12 @@ def rmax(in_list: list) -> int:
         else:
             count = rmax([first] + in_list[2:])
     elif (len(in_list) == 0):
-        count = 0
+        count = float("-inf")
     else:
         count = in_list[0]
     return count
+
+
 
 print(rmax([1, 2, 3]))
 print(rmax([1, [2, 3]]))
