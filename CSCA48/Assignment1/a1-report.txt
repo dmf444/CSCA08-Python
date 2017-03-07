@@ -1,0 +1,78 @@
+Autotested Results for a1 submitted by [REDACTED]
+Generated at 2017-03-04T15:30:48
+
+Summary of Results: 25 out of 26 tests successfully passed
+--
+
+Tests for test_salb2salbll.TestSalb2SalbLL (5/5 passed)
+--
+
+1) test_salb2salbll.TestSalb2SalbLL.test_snadders                                     .. ok!
+2) test_salb2salbll.TestSalb2SalbLL.test_no_snadders_board                            .. ok!
+3) test_salb2salbll.TestSalb2SalbLL.test_minimum_board                                .. ok!
+4) test_salb2salbll.TestSalb2SalbLL.test_circular                                     .. ok!
+5) test_salb2salbll.TestSalb2SalbLL.test_abstraction_integrity                        .. ok!
+
+
+Tests for test_willfinish.TestWillFinish (8/8 passed)
+--
+
+1) test_willfinish.TestWillFinish.test_board_no_snadders                              .. ok!
+2) test_willfinish.TestWillFinish.test_large_board_snadders_false                     .. ok!
+3) test_willfinish.TestWillFinish.test_board_snadders_false                           .. ok!
+4) test_willfinish.TestWillFinish.test_board_snadders_true                            .. ok!
+5) test_willfinish.TestWillFinish.test_minimum_board                                  .. ok!
+6) test_willfinish.TestWillFinish.test_large_board_snadders_true                      .. ok!
+7) test_willfinish.TestWillFinish.test_snadder_to_snadder_false                       .. ok!
+8) test_willfinish.TestWillFinish.test_snadder_to_snadder_true                        .. ok!
+
+
+Tests for test_dualboard.TestDualBoard (5/5 passed)
+--
+
+1) test_dualboard.TestDualBoard.test_board_no_snadders                                .. ok!
+2) test_dualboard.TestDualBoard.test_minimum_snadders_board                           .. ok!
+3) test_dualboard.TestDualBoard.test_minimum_board                                    .. ok!
+4) test_dualboard.TestDualBoard.test_board_snadders                                   .. ok!
+5) test_dualboard.TestDualBoard.test_mutated_original_board                           .. ok!
+
+
+Tests for test_whowins.TestWhoWins (7/7 passed)
+--
+
+1) test_whowins.TestWhoWins.test_p2_winner                                            .. ok!
+2) test_whowins.TestWhoWins.test_unreachable_tie                                      .. ok!
+3) test_whowins.TestWhoWins.test_start_ladder_p1_win                                  .. ok!
+4) test_whowins.TestWhoWins.test_unreachable_tie_p1_faster                            .. ok!
+5) test_whowins.TestWhoWins.test_start_ladder_p2_win                                  .. ok!
+6) test_whowins.TestWhoWins.test_minimum_par                                          .. ok!
+7) test_whowins.TestWhoWins.test_snadder_to_self                                      .. ok!
+
+
+Tests for test_pep8.TestPEP8 (0/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. failed
+.. because 1 != 0 : Found code style errors (and warnings):
+E711: comparison to None should be 'if cond is None:' (1) (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/a1/test_pep8.py", line 19, in test_pep8
+        self.assertEqual(result.total_errors, 0, report_output)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 813, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 1 != 0 : Found code style errors (and warnings):
+    E711: comparison to None should be 'if cond is None:' (1)
+
