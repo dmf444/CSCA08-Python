@@ -35,8 +35,10 @@ def perms_helper(s: str, old_s: str, iteration=0) -> set:
     to find every combo of every word. Returns a set containing all the
     possible combinations of the letters.
     """
+    if(len(s) < 2):
+        count = set(s)
     # Check if we've narrowed it down to two letters
-    if(len(s) == 2):
+    elif(len(s) == 2):
         # Create the set, add in the original letters, plus both combos
         # of the last two letters
         count = set()
