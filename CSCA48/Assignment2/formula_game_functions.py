@@ -32,6 +32,48 @@ LPARENTHESES = "("
 RPARENTHESES = ")"
 
 
+def boolean_compute(symbol, var_loc_1, var_loc_2):
+    if(symbol == AND):
+        if(var_loc_1 == '0' or var_loc_2 == '0'):
+            ret_num = "0"
+        else:
+            ret_num = "1"
+    elif(symbol == OR):
+        if(var_loc_1 == '1' or var_loc_2 == '1'):
+            ret_num = "1"
+        else:
+            ret_num = "0"
+    elif(symbol == NOT):
+        if(var_loc_1 == "0"):
+            ret_num = "1"
+        else:
+            ret_num = "0"
+    return ret_num
+
+
+def evaluate(root: FormulaTree, variables: str, values: str) -> int:
+    if(isinstance(root, AndTree) or isinstance(root, OrTree)):
+        if(isinstance(root.children[0], Leaf)):
+            var1 = root.children[0]
+            var1 = values[variables.find(var1.symbol)]
+        else:
+            var1 = evaluate(root.children[0], variables, values)
+        if(isinstance(root.children[1], Leaf)):
+            var2 = root.children[1]
+            var2 = values[variables.find(var2.symbol)]
+        else:
+            var2 = evaluate(root.children[1], variables, values)
+        number = boolean_compute(root.symbol, var1, var2)
+    else:
+        if(isinstance(root.children[0], Leaf)):
+            not_var1 = root.children[0]
+            not_var1 = values[variables.find(not_var1.symbol)]
+        else:
+            not_var1 = evaluate(root.children[0], variables, values)
+        number = boolean_compute(root.symbol, not_var1, -1)
+    return number
+
+
 def build_tree(formula: str) -> FormulaTree:
     ''' (str) -> FormulaTree
     This function takes in a string, representing a boolean formula and
@@ -79,6 +121,32 @@ def build_tree(formula: str) -> FormulaTree:
 
 
 def tree_builder(formula: str) -> FormulaTree:
+    """ (str) -> FormulaTree
+    This function attempts to recursivly build a FormulaTree from a formula.
+    Returns either the Tree, if the formula is valid, or None, if the
+    formula has any errors. This function can also throw the IndexError if
+    the function is invalid. Valid formulas follow the same rules as in
+    build_tree.
+    REQ: Formula must be all lower case letters
+    REQ: len(formula) > 0
+    REQ: formula exclusively contains lowercase letters, *, +, -, (, ) only
+    RAISES: IndexError if the formula is invalid
+    >>> a = build_tree("x+y")
+    >>> print(a == None)
+    True
+    >>> b = build_tree("-(x)")
+    >>> print(b == None)
+    True
+    >>> d = build_tree("(x+(y)*z)")
+    >>> print(d == None)
+    True
+    >>> e = build_tree("(4+5)")
+    >>> print(e == None)
+    True
+    >>> f = build_tree("(a+d)")
+    >>> print(eval("OrTree(Leaf('a'), Leaf('d'))") == f)
+    True
+    """
     # Check if the formula starts with a not symbol
     if(formula[0] == NOT):
         # Recursively call the tree again.
@@ -161,3 +229,51 @@ if(__name__ == "__main__"):
 
     import doctest
     doctest.testmod()
+
+    invalid_formulas = [
+        '-(x)',
+        '(-x)',
+        '(x)',
+        'x+y',
+        '(-(x))',
+        '-',
+        'x+',
+        '*x',
+        'X',
+        '((x))',
+        '(x+y',
+        'x+y)',
+        'xx',
+        '()',
+        ')(',
+        '(xy)',
+        ')x+y(',
+        '123'
+        ]
+    for formula in invalid_formulas:
+        t = build_tree(formula)
+        print(t)
+    print("VALID FORMULAS")
+    valid_formulas = [
+        'x',
+        '-x',
+        '(x+y)',
+        '(x*y)',
+        '(-x+y)',
+        '(x+-y)',
+        '(-x+-y)',
+        '(-x*y)',
+        '(x*-y)',
+        '(-x*-y)',
+        '-(x+y)',
+        '-(x*y)',
+        '((x+y)*z)',
+        '-((x*y)+z)',
+        '-((y*(-y*y))*-x)',
+        '--x'
+    ]
+    for formula in valid_formulas:
+        t = build_tree(formula)
+        print(t)
+
+    print(evaluate(build_tree("--x"), "x", "1"))
