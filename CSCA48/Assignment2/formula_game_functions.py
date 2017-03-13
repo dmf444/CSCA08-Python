@@ -229,7 +229,7 @@ if(__name__ == "__main__"):
 
     import doctest
     doctest.testmod()
-
+    print("NOT VALID FORMULAS")
     invalid_formulas = [
         '-(x)',
         '(-x)',
@@ -248,7 +248,9 @@ if(__name__ == "__main__"):
         ')(',
         '(xy)',
         ')x+y(',
-        '123'
+        '123',
+        'abc',
+        '-(-x)'
         ]
     for formula in invalid_formulas:
         t = build_tree(formula)
