@@ -32,8 +32,37 @@ LPARENTHESES = "("
 RPARENTHESES = ")"
 
 
-def boolean_compute(symbol, var_loc_1, var_loc_2):
+def play2win(root: FormulaTree, turns: str, variables: str, values: str):
+    if(len(turns) - len(values) == 1):
+        check_var_0 = evaluate(root, variables, values + "0")
+        check_var_1 = evaluate(root, variables, values + "1")
+        if(check_var_0 == 1):
+            next_move = 0
+        else:
+            next_move = 1
+    else:
+        current_player = turns[-(len(turns) - len(values))]
+        if(current_player == "E"):
+            next_move = 1
+        else:
+            next_move = 0
+    return next_move
+
+
+
+def boolean_compute(symbol: str, var_loc_1: str, var_loc_2: str):
+    """ (str, str, str) -> str
+    This function takes in a symbol, and two variables of either 0 or 1 and
+    computes them as either not var1_loc_1 OR var_loc_1 and/or var_loc_2.
+    This function returns the string representation of the outcome of the
+    boolean formula, either '1' or '0'.
+    REQ: symbol must be '*', '-' or '+'
+    REQ: var_loc_1 must be '0' or '1'
+    REQ: var_loc_2 must be '0' or '1'
+    """
+    # If the given symbol is an AND
     if(symbol == AND):
+        #
         if(var_loc_1 == '0' or var_loc_2 == '0'):
             ret_num = "0"
         else:
@@ -52,24 +81,29 @@ def boolean_compute(symbol, var_loc_1, var_loc_2):
 
 
 def evaluate(root: FormulaTree, variables: str, values: str) -> int:
+    value = evaluate_helper(root, variables, values)
+    return int(value)
+
+
+def evaluate_helper(root: FormulaTree, variables: str, values: str) -> str:
     if(isinstance(root, AndTree) or isinstance(root, OrTree)):
         if(isinstance(root.children[0], Leaf)):
             var1 = root.children[0]
             var1 = values[variables.find(var1.symbol)]
         else:
-            var1 = evaluate(root.children[0], variables, values)
+            var1 = evaluate_helper(root.children[0], variables, values)
         if(isinstance(root.children[1], Leaf)):
             var2 = root.children[1]
             var2 = values[variables.find(var2.symbol)]
         else:
-            var2 = evaluate(root.children[1], variables, values)
+            var2 = evaluate_helper(root.children[1], variables, values)
         number = boolean_compute(root.symbol, var1, var2)
     else:
         if(isinstance(root.children[0], Leaf)):
             not_var1 = root.children[0]
             not_var1 = values[variables.find(not_var1.symbol)]
         else:
-            not_var1 = evaluate(root.children[0], variables, values)
+            not_var1 = evaluate_helper(root.children[0], variables, values)
         number = boolean_compute(root.symbol, not_var1, -1)
     return number
 
@@ -278,4 +312,10 @@ if(__name__ == "__main__"):
         t = build_tree(formula)
         print(t)
 
-    print(evaluate(build_tree("--x"), "x", "1"))
+    print(evaluate_helper(build_tree("--x"), "x", "1"))
+    print(play2win(build_tree("-((y*(-y*y))*-x)"), "EA", "xy", "1"))
+    print("ATTEMPT:")
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "01"))
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "00"))
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "11"))
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "10"))
