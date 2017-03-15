@@ -57,30 +57,69 @@ def boolean_compute(symbol: str, var_loc_1: str, var_loc_2: str):
     boolean formula, either '1' or '0'.
     REQ: symbol must be '*', '-' or '+'
     REQ: var_loc_1 must be '0' or '1'
-    REQ: var_loc_2 must be '0' or '1'
+    REQ: var_loc_2 must be '0' or '1' or ('-1' if symbol is '-')
+    >>> boolean_compute("*", "0", "1")
+    '0'
+    >>> boolean_compute("*", "1", "1")
+    '1'
+    >>> boolean_compute("+", "0", "1")
+    '1'
+    >>> boolean_compute("+", "0", "0")
+    '0'
+    >>> boolean_compute("-", "0", "-1")
+    '1'
+    >>> boolean_compute("-", "1", "-1")
+    '0'
     """
     # If the given symbol is an AND
     if(symbol == AND):
-        #
+        # Check if either variable is false, which means AND fails
         if(var_loc_1 == '0' or var_loc_2 == '0'):
+            # Return 0 (representing false)
             ret_num = "0"
         else:
+            # Otherwise, and passed, return 1 - True
             ret_num = "1"
+    # If our symbol is the OR symbol
     elif(symbol == OR):
+        # Check if either one of the variables is true, meaning OR passes
         if(var_loc_1 == '1' or var_loc_2 == '1'):
+            # Return true, because one was true
             ret_num = "1"
         else:
+            # Otherwise both were false, return 0 as such
             ret_num = "0"
+    # If the symbol is a NOT function
     elif(symbol == NOT):
+        # Return the opposite string to the current one.
         if(var_loc_1 == "0"):
+            # Return 1 if input was 0
             ret_num = "1"
         else:
+            # Return 0 if input was 1
             ret_num = "0"
     return ret_num
 
 
 def evaluate(root: FormulaTree, variables: str, values: str) -> int:
+    """ (FormulaTree, str, str) -> int
+    Funtion takes in a root, representing a root of a valid formula tree, a
+    string of variables, representing the lower case letters in the formula
+    and the string values, representing the values assigned to each letter.
+    This function will compute the result of the formula with the given
+    values assigned to the given variables. Returns either '0' or '1', if the
+    formula computes to false, true; respectivly.
+    REQ: len(variables) == len(values)
+    REQ: values must be a string containing only '0' and '1'
+    REQ: variables must contain all variables in the formula
+    REQ: root != None
+    REQ: root must be the root of a FormulaTree.
+    >>>
+
+    """
+    # Call the helper, do all the work there, returns a string, not an int
     value = evaluate_helper(root, variables, values)
+    # Cast to int, then return
     return int(value)
 
 
