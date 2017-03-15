@@ -56,37 +56,33 @@ class BTNode(object):
                 return_leaves.update(right_leaves)
         return (return_leaves, return_internal)
 
-    def get_height(self):
+    def get_height_and_sum(self):
         if(self.left is None and self.right is None):
             result = 1
             sums = self.value
-            print(self.value)
         else:
             left, right, left_sum, right_sum = 0, 0, 0, 0
             if(self.left is not None):
-                (left, left_sum) = self.left.get_height()
+                (left, left_sum) = self.left.get_height_and_sum()
             if(self.right is not None):
-                (left, right_sum) = self.right.get_height()
-            print(self.value, right_sum, left_sum)
-            if(left > right):
+                (right, right_sum) = self.right.get_height_and_sum()
+            if(left == right):
+                sums = self.value + left_sum + right_sum
+                result = left + 1
+            elif(left > right):
                 result = left + 1
                 sums = self.value + left_sum
             else:
                 result = right + 1
                 sums = self.value + right_sum
-                print("Sums", sums)
-        return (result - 1, sums)
+        return (result, sums)
 
-    def sum_to_deepest(self, level=0):
-        if(self.left is None and self.right is None):
-            return (self.value, level)
-        else:
-            pass
+    def sum_to_deepest(self):
+        (depth, sum_of_deepest) = self.get_height_and_sum()
+        return sum_of_deepest
 
 
 if(__name__ == "__main__"):
     # just a simple tree to practice on
     my_tree = BTNode(10, BTNode(3, BTNode(5), BTNode(2)),
-                     BTNode(7, BTNode(4, BTNode(9)), BTNode(6)))
-    print(my_tree)
-    print(my_tree.leaves_and_internals())
+                     BTNode(7, BTNode(4, BTNode(9), BTNode(10)), BTNode(6)))
