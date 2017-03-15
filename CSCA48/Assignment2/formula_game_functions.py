@@ -49,7 +49,6 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     return next_move
 
 
-
 def boolean_compute(symbol: str, var_loc_1: str, var_loc_2: str):
     """ (str, str, str) -> str
     This function takes in a symbol, and two variables of either 0 or 1 and

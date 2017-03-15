@@ -36,29 +36,52 @@ class BTNode(object):
         if(self.right):
             self.right.set_depth(given_depth + 1)
 
-    def leaves_and_internals(self):
+    def leaves_and_internals(self, is_root=False):
         if(self.left is None and self.right is None):
-            return ({self}, set())
+            return ({self.value}, set())
         else:
-            (return_leaves, return_internal) = (set(), {self})
+            a = set()
+            if is_root:
+                a = {self.value}
+            (return_leaves, return_internal) = (set(), a)
             if(self.left):
-                (left_leaves, left_internal) = self.left.leaves_and_internals()
+                (left_leaves, left_internal) = \
+                    self.left.leaves_and_internals(True)
                 return_leaves.update(left_leaves)
                 return_internal.update(left_internal)
             if(self.right):
-                (right_leaves, right_int) = self.right.leaves_and_internals()
+                (right_leaves, right_int) = self.right.leaves_and_internals(
+                    True)
                 return_internal.update(right_int)
                 return_leaves.update(right_leaves)
         return (return_leaves, return_internal)
 
-    def sum_to_deepest(self):
+    def get_height(self):
         if(self.left is None and self.right is None):
-            return self.value
+            result = 1
+            sums = self.value
+            print(self.value)
         else:
-            (left_sum, right_sum) = (0, 0)
-            if(self.right):
-                self.right.sum_to_deepest()
+            left, right, left_sum, right_sum = 0, 0, 0, 0
+            if(self.left is not None):
+                (left, left_sum) = self.left.get_height()
+            if(self.right is not None):
+                (left, right_sum) = self.right.get_height()
+            print(self.value, right_sum, left_sum)
+            if(left > right):
+                result = left + 1
+                sums = self.value + left_sum
+            else:
+                result = right + 1
+                sums = self.value + right_sum
+                print("Sums", sums)
+        return (result - 1, sums)
 
+    def sum_to_deepest(self, level=0):
+        if(self.left is None and self.right is None):
+            return (self.value, level)
+        else:
+            pass
 
 
 if(__name__ == "__main__"):
@@ -66,6 +89,4 @@ if(__name__ == "__main__"):
     my_tree = BTNode(10, BTNode(3, BTNode(5), BTNode(2)),
                      BTNode(7, BTNode(4, BTNode(9)), BTNode(6)))
     print(my_tree)
-    my_tree.set_depth(0)
-    (return_leaves, return_internal) = my_tree.leaves_and_internals()
-    print(return_leaves, return_internal)
+    print(my_tree.leaves_and_internals())

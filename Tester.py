@@ -92,4 +92,20 @@ def funci(x1, x2):
 print(funci(x1, x2))
 print((x1, x2))
 
-help(dict)
+#help(dict)
+
+
+def jumble(st):
+    if(len(st) < 2):
+        return st
+    else:
+        st = st[1:] + st[0]
+        midpt = len(st) // 2
+        t = jumble(st[midpt:])
+        u = jumble(st[:midpt])
+        return t + u
+
+print(jumble("PINEAPPLE"))
+print(jumble("ABCD"))
+print(jumble("ABCDE"))
+print(jumble("ABCDEF"))
