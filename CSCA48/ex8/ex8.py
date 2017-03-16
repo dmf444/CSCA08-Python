@@ -67,7 +67,7 @@ class BTNode(object):
             if(self.right is not None):
                 (right, right_sum) = self.right.get_height_and_sum()
             if(left == right):
-                sums = self.value + left_sum + right_sum
+                sums = self.value + max(left_sum, right_sum)
                 result = left + 1
             elif(left > right):
                 result = left + 1
