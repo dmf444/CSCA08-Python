@@ -49,27 +49,29 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     return next_move
 
 
-def draw_formula_tree(root: FormulaTree, lvl=0, left=True) -> str:
-    ret = ""
-    print(lvl, root.symbol)
-    if(isinstance(root, Leaf)):
-        if(left):
-            indent = ""
-        else:
-            indent = "\t" * lvl
-        return indent + str(root.symbol) + "\n"
-    elif(isinstance(root, NotTree)):
-        indent = "\t"
-        print(repr(indent))
-        return str("-") + draw_formula_tree(root.children[0], lvl + 1, False)
-    else:
-        ret += str(root.symbol) + "\t"
-        if (root.children[1] is not None):
-            ret += draw_formula_tree(root.children[1], lvl + 1)
-        if (root.children[0] is not None):
-            ret += draw_formula_tree(root.children[0], lvl + 1, False)
-    return ret
+def draw_formula_tree(root: FormulaTree) -> str:
+    formula = draw_formula_tree_helper(root)
+    formula = formula[:-1]
+    return formula
 
+
+def draw_formula_tree_helper(root: FormulaTree, lvl=0, left=True) -> str:
+    ret = ""
+    left_indent = ""
+    if(not left):
+        left_indent = "\t" * lvl
+    if(isinstance(root, Leaf)):
+        return left_indent + str(root.symbol) + "\n"
+    elif(isinstance(root, NotTree)):
+        return left_indent + str("-")+"\t" + draw_formula_tree_helper(
+            root.children[0], lvl + 1)
+    else:
+        ret += left_indent + str(root.symbol) + "\t"
+        if (root.children[1] is not None):
+            ret += draw_formula_tree_helper(root.children[1], lvl + 1)
+        if (root.children[0] is not None):
+            ret += draw_formula_tree_helper(root.children[0], lvl + 1, False)
+    return ret
 
 
 def boolean_compute(symbol: str, var_loc_1: str, var_loc_2: str):
