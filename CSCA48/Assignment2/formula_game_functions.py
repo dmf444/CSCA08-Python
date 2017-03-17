@@ -49,19 +49,25 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     return next_move
 
 
-def draw_formula_tree(root: FormulaTree, indent="") -> str:
+def draw_formula_tree(root: FormulaTree, lvl=0, left=True) -> str:
     ret = ""
+    print(lvl, root.symbol)
     if(isinstance(root, Leaf)):
-        return "\t" + str(root.symbol) + "\n"
+        if(left):
+            indent = ""
+        else:
+            indent = "\t" * lvl
+        return indent + str(root.symbol) + "\n"
     elif(isinstance(root, NotTree)):
-        return indent + str("-") + draw_formula_tree(root.children[0],
-                                                            indent)
+        indent = "\t"
+        print(repr(indent))
+        return str("-") + draw_formula_tree(root.children[0], lvl + 1, False)
     else:
-        ret += indent + str(root.symbol)
+        ret += str(root.symbol) + "\t"
         if (root.children[1] is not None):
-            ret += draw_formula_tree(root.children[1], indent + "\t")
+            ret += draw_formula_tree(root.children[1], lvl + 1)
         if (root.children[0] is not None):
-            ret += draw_formula_tree(root.children[0], indent + "\t\t")
+            ret += draw_formula_tree(root.children[0], lvl + 1, False)
     return ret
 
 
@@ -374,13 +380,14 @@ if(__name__ == "__main__"):
     print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "00"))
     print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "11"))
     print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "10"))
-    t = draw_formula_tree(build_tree("((-x+y)*-(-y+x))"))
+    print("Draw That Tree!")
+    t = draw_formula_tree(build_tree("((-a+b)*-(-c+d))"))
     print(t)
     print("MANUAL DRAWN:")
-    print('*\t-\t+\tx')
-    print("\t\t\t-\ty")
-    print("\t+\ty")
-    print("\t\t-\tx")
+    print('*\t-\t+\td')
+    print("\t\t\t-\tc")
+    print("\t+\tb")
+    print("\t\t-\ta")
     print("MANUAL DRAW 2:")
     print("*\t-\t+\tx\n\t\t\t-\ty\n\t+\ty\n\t\t-\tx")
     print("OTHER TREE:")
