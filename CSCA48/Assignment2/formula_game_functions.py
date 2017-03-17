@@ -49,6 +49,23 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     return next_move
 
 
+def draw_formula_tree(root: FormulaTree, indent="") -> str:
+    ret = ""
+    if(isinstance(root, Leaf)):
+        return "\t" + str(root.symbol) + "\n"
+    elif(isinstance(root, NotTree)):
+        return indent + str("-") + draw_formula_tree(root.children[0],
+                                                            indent)
+    else:
+        ret += indent + str(root.symbol)
+        if (root.children[1] is not None):
+            ret += draw_formula_tree(root.children[1], indent + "\t")
+        if (root.children[0] is not None):
+            ret += draw_formula_tree(root.children[0], indent + "\t\t")
+    return ret
+
+
+
 def boolean_compute(symbol: str, var_loc_1: str, var_loc_2: str):
     """ (str, str, str) -> str
     This function takes in a symbol, and two variables of either 0 or 1 and
@@ -357,3 +374,14 @@ if(__name__ == "__main__"):
     print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "00"))
     print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "11"))
     print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "10"))
+    t = draw_formula_tree(build_tree("((-x+y)*-(-y+x))"))
+    print(t)
+    print("MANUAL DRAWN:")
+    print('*\t-\t+\tx')
+    print("\t\t\t-\ty")
+    print("\t+\ty")
+    print("\t\t-\tx")
+    print("MANUAL DRAW 2:")
+    print("*\t-\t+\tx\n\t\t\t-\ty\n\t+\ty\n\t\t-\tx")
+    print("OTHER TREE:")
+    print(draw_formula_tree(o))
