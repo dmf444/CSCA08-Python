@@ -50,8 +50,23 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
 
 
 def draw_formula_tree(root: FormulaTree) -> str:
-    """ (FormulaTree) -> str
-    This function takes in the root of a tree node, and builds the
+    r""" (FormulaTree) -> str
+    This function takes in the root of a tree node, and builds the string to
+    represent a printed tree node.
+    REQ: root must not be None
+    REQ: root must be a valid FormulaTree
+    >>> a = draw_formula_tree(build_tree("(x+y)"))
+    >>> print(a == "+\ty\n\tx")
+    True
+    >>> b = draw_formula_tree(build_tree("(-x+y)"))
+    >>> print(b == "+\ty\n\t-\tx")
+    True
+    >>> c = draw_formula_tree(build_tree("(-x*y)"))
+    >>> print(c == "*\ty\n\t-\tx")
+    True
+    >>> d = draw_formula_tree(build_tree("((-x+y)*z)"))
+    >>> print(d == "*\tz\n\t+\ty\n\t\t-\tx")
+    True
     """
     # Call the build_formula_helper function
     formula = draw_formula_tree_helper(root)
@@ -62,21 +77,60 @@ def draw_formula_tree(root: FormulaTree) -> str:
 
 
 def draw_formula_tree_helper(root: FormulaTree, lvl=0, left=True) -> str:
+    r""" (FormulaTree, int, bool) -> str
+    This function takes in the root of a tree node, the current depth of the
+    node and whether it is a right branch, and builds the string to
+    represent a printed tree node.
+    REQ: root must not be None
+    REQ: root must be a valid FormulaTree
+    REQ: left must only be true when the last node is "left" of the current
+         node
+    REQ: level must represent the current depth of the node from the root.
+    >>> a = draw_formula_tree_helper(build_tree("(x+y)"))
+    >>> print(a == "+\ty\n\tx\n")
+    True
+    >>> b = draw_formula_tree_helper(build_tree("(-x+y)"))
+    >>> print(b == "+\ty\n\t-\tx\n")
+    True
+    >>> c = draw_formula_tree_helper(build_tree("(-x*y)"))
+    >>> print(c == "*\ty\n\t-\tx\n")
+    True
+    >>> d = draw_formula_tree_helper(build_tree("((-x+y)*z)"))
+    >>> print(d == "*\tz\n\t+\ty\n\t\t-\tx\n")
+    True
+    """
+    # Create the return string as an empty string
     ret = ""
+    # Create an empty left indent
     left_indent = ""
+    # IF the branch has moved right
     if(not left):
+        # Match the indent of the parent node + 1
         left_indent = "\t" * lvl
+    # If this is a leaf node
     if(isinstance(root, Leaf)):
-        return left_indent + str(root.symbol) + "\n"
+        # Check for indent, add the variable, and create a new line
+        ret = left_indent + str(root.symbol) + "\n"
+    # Otherwise, check if this is a notTreee node
     elif(isinstance(root, NotTree)):
-        return left_indent + str("-")+"\t" + draw_formula_tree_helper(
+        # Return the indent, the not symbol, a tab, and recurse throught the
+        #  children of the not node. Consider them left nodes, for drawing
+        ret = left_indent + str("-")+"\t" + draw_formula_tree_helper(
             root.children[0], lvl + 1)
+    # Otherwise, we have some form of a binary tree
     else:
+        # Add the indent and the symbol to the return string
         ret += left_indent + str(root.symbol) + "\t"
+        # Check for left children (which should exist)
         if (root.children[1] is not None):
+            # Recurse through the children in the node
             ret += draw_formula_tree_helper(root.children[1], lvl + 1)
+        # check for right children (which should exist)
         if (root.children[0] is not None):
+            # Recurse through the right children, setting the left boolean
+            # to false
             ret += draw_formula_tree_helper(root.children[0], lvl + 1, False)
+    # Return the fabricated string
     return ret
 
 
@@ -175,13 +229,13 @@ def evaluate_helper(root: FormulaTree, variables: str, values: str) -> str:
     REQ: root != None
     REQ: root must be the root of a FormulaTree.
     >>> f = build_tree("(x*y)")
-    >>> evaluate(f, "xy", "11")
+    >>> evaluate_helper(f, "xy", "11")
     '1'
-    >>> evaluate(f, "yx", "00")
+    >>> evaluate_helper(f, "yx", "00")
     '0'
-    >>> evaluate(f, "yx", "01")
+    >>> evaluate_helper(f, "yx", "01")
     '0'
-    >>> evaluate(build_tree("-(x*y)"), "xy", "11")
+    >>> evaluate_helper(build_tree("-(x*y)"), "xy", "11")
     '0'
     """
     # If this is a binary tree node
@@ -451,4 +505,4 @@ if(__name__ == "__main__"):
     print("OTHER TREE:")
     print(draw_formula_tree(o))
     print("")
-    print(draw_formula_tree(build_tree("((-x+y)*-(-y+x))")))
+    print(draw_formula_tree(build_tree("(-y+x)")))
