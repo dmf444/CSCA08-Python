@@ -128,19 +128,26 @@ def boolean_compute(symbol: str, var_loc_1: str, var_loc_2: str):
 
 def evaluate(root: FormulaTree, variables: str, values: str) -> int:
     """ (FormulaTree, str, str) -> int
-    Funtion takes in a root, representing a root of a valid formula tree, a
+    Function takes in a root, representing a root of a valid formula tree, a
     string of variables, representing the lower case letters in the formula
     and the string values, representing the values assigned to each letter.
     This function will compute the result of the formula with the given
-    values assigned to the given variables. Returns either '0' or '1', if the
+    values assigned to the given variables. Returns either 0 or 1, if the
     formula computes to false, true; respectivly.
     REQ: len(variables) == len(values)
     REQ: values must be a string containing only '0' and '1'
     REQ: variables must contain all variables in the formula
     REQ: root != None
     REQ: root must be the root of a FormulaTree.
-    >>>
-
+    >>> f = build_tree("(x*y)")
+    >>> evaluate(f, "xy", "11")
+    1
+    >>> evaluate(f, "yx", "00")
+    0
+    >>> evaluate(f, "yx", "01")
+    0
+    >>> evaluate(build_tree("-(x*y)"), "xy", "11")
+    0
     """
     # Call the helper, do all the work there, returns a string, not an int
     value = evaluate_helper(root, variables, values)
@@ -149,25 +156,60 @@ def evaluate(root: FormulaTree, variables: str, values: str) -> int:
 
 
 def evaluate_helper(root: FormulaTree, variables: str, values: str) -> str:
+    """ (Formula Tree, str, str) -> str
+    Function takes in a root, representing a root of a valid formula tree,
+    a string of variables, representing the lowercase letters in the formula
+    and the string values, representing the values assigned to each letter.
+    The function will compute the result of the formula with the given
+    values assigned to the given variables. Returns either, '0' or '1',
+    if the formula computes to false/true.
+    REQ: len(variables) == len(values)
+    REQ: values must be a string containing only '0' and '1'
+    REQ: variables must contain all variables in the formula
+    REQ: root != None
+    REQ: root must be the root of a FormulaTree.
+    >>>
+    """
+    # If this is a binary tree node
     if(isinstance(root, AndTree) or isinstance(root, OrTree)):
+        # Check if the left child is a leaf
         if(isinstance(root.children[0], Leaf)):
+            # Save the variable and find the corresponding 1 or 0 in the
+            # given list
             var1 = root.children[0]
             var1 = values[variables.find(var1.symbol)]
+        # Otherwise, assume that there are more nodes to recurse through
         else:
+            # Recurse through the rest of the children
             var1 = evaluate_helper(root.children[0], variables, values)
+        # Check if the right child is a leaf node
         if(isinstance(root.children[1], Leaf)):
+            # Save the variable and find the corresponding 1 or 0 in the
+            # given list of values
             var2 = root.children[1]
             var2 = values[variables.find(var2.symbol)]
+        # Else there are more nodes to check through
         else:
+            # Recurse through the rest of the Tree's right node
             var2 = evaluate_helper(root.children[1], variables, values)
+        # Given the left and right boolean values, compute the new boolean
+        # value with the current +/* symbol
         number = boolean_compute(root.symbol, var1, var2)
+    # Otherwise, this is a unary tree or a leaf tree
     else:
+        # If the child is a leaf node
         if(isinstance(root.children[0], Leaf)):
+            # Get the child variable
             not_var1 = root.children[0]
+            # find the number corresponding to the given variable
             not_var1 = values[variables.find(not_var1.symbol)]
         else:
+            # This is not a leaf node, recursivly call through the rest of
+            # the node
             not_var1 = evaluate_helper(root.children[0], variables, values)
+        # Evaluate the not answer, by calling boolean compute
         number = boolean_compute(root.symbol, not_var1, -1)
+    # Return the final number
     return number
 
 
@@ -394,3 +436,5 @@ if(__name__ == "__main__"):
     print("*\t-\t+\tx\n\t\t\t-\ty\n\t+\ty\n\t\t-\tx")
     print("OTHER TREE:")
     print(draw_formula_tree(o))
+    print("")
+    print(draw_formula_tree(build_tree("((-x+y)*-(-y+x))")))
