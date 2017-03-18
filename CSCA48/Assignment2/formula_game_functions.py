@@ -50,8 +50,14 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
 
 
 def draw_formula_tree(root: FormulaTree) -> str:
+    """ (FormulaTree) -> str
+    This function takes in the root of a tree node, and builds the
+    """
+    # Call the build_formula_helper function
     formula = draw_formula_tree_helper(root)
+    # Remove the final \n added during the helper function
     formula = formula[:-1]
+    # Return the built formula
     return formula
 
 
@@ -168,7 +174,15 @@ def evaluate_helper(root: FormulaTree, variables: str, values: str) -> str:
     REQ: variables must contain all variables in the formula
     REQ: root != None
     REQ: root must be the root of a FormulaTree.
-    >>>
+    >>> f = build_tree("(x*y)")
+    >>> evaluate(f, "xy", "11")
+    '1'
+    >>> evaluate(f, "yx", "00")
+    '0'
+    >>> evaluate(f, "yx", "01")
+    '0'
+    >>> evaluate(build_tree("-(x*y)"), "xy", "11")
+    '0'
     """
     # If this is a binary tree node
     if(isinstance(root, AndTree) or isinstance(root, OrTree)):
