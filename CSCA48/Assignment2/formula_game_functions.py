@@ -33,19 +33,63 @@ RPARENTHESES = ")"
 
 
 def play2win(root: FormulaTree, turns: str, variables: str, values: str):
+    """ (FormulaTree, str, str, str) -> int
+    This function takes in the root of a FormulaTree, the turn order of E/A as
+    a string, the variables in the formula as a string and the values of the
+    variables then returns the best move for the current player to make. If
+    choosing 0 is a winning move and 1 isn't, function will return 0. If
+    choosing 1 is a winning move and 0 isn't, function will return 1. For all
+    other cases, function will return the default values for A and E being
+    0 and 1, respectively.
+    REQ: len(turns) > len(values)
+    REQ: root must be a valid formula tree
+    REQ: variables must contain all lowercase variables in the root
+    REQ: values must only contain '1's and '0's
+    REQ: turns must only contain 'E's and 'A's
+    >>> a = build_tree("x")
+    >>> b = build_tree("-y")
+    >>> print(play2win(a, 'E', 'x', ''))
+    1
+    >>> print(play2win(b, 'E', 'y', ''))
+    0
+    """
+    # Get the current player
+    current_player = turns[-(len(turns) - len(values))]
+    # If there is only one move left to make
     if(len(turns) - len(values) == 1):
+        # Evaluate the game with both a zero and a one
         check_var_0 = evaluate(root, variables, values + "0")
         check_var_1 = evaluate(root, variables, values + "1")
-        if(check_var_0 == 1):
-            next_move = 0
-        else:
-            next_move = 1
-    else:
-        current_player = turns[-(len(turns) - len(values))]
+        # If the current player is E
         if(current_player == "E"):
-            next_move = 1
+            # If 0 is a winning move and 1 is not
+            if(check_var_0 == 1 and check_var_1 == 0):
+                # Return 0
+                next_move = 0
+            # Else if 1 is a winning move and 0 is not
+            elif(check_var_1 == 1 and check_var_0 == 0):
+                # Return 1
+                next_move = 1
+            # Otherwise, return E's default move: 1
+            else:
+                next_move = 1
+        # Otherwise the current player is A
         else:
-            next_move = 0
+            # If 0 is a winning move and 1 is not
+            if(check_var_0 == 0 and check_var_1 == 1):
+                # Return 0
+                next_move = 0
+            # Else if 1 is a winning move and 0 is not
+            elif(check_var_1 == 0 and check_var_0 == 1):
+                # Return 1
+                next_move = 1
+            # Otherwise, return A's default move: 0
+            else:
+                next_move = 0
+    # Else there are several move to make still
+    else:
+        next_move = -1
+        pass
     return next_move
 
 
@@ -115,7 +159,7 @@ def draw_formula_tree_helper(root: FormulaTree, lvl=0, left=True) -> str:
     elif(isinstance(root, NotTree)):
         # Return the indent, the not symbol, a tab, and recurse throught the
         #  children of the not node. Consider them left nodes, for drawing
-        ret = left_indent + str("-")+"\t" + draw_formula_tree_helper(
+        ret = left_indent + str("-") + "\t" + draw_formula_tree_helper(
             root.children[0], lvl + 1)
     # Otherwise, we have some form of a binary tree
     else:
@@ -263,7 +307,9 @@ def evaluate_helper(root: FormulaTree, variables: str, values: str) -> str:
         # Given the left and right boolean values, compute the new boolean
         # value with the current +/* symbol
         number = boolean_compute(root.symbol, var1, var2)
-    # Otherwise, this is a unary tree or a leaf tree
+    elif(isinstance(root, Leaf)):
+        number = values[variables.find(root.symbol)]
+    # Otherwise, this is a unary tree
     else:
         # If the child is a leaf node
         if(isinstance(root.children[0], Leaf)):
@@ -458,7 +504,7 @@ if(__name__ == "__main__"):
         '123',
         'abc',
         '-(-x)'
-        ]
+    ]
     for formula in invalid_formulas:
         t = build_tree(formula)
         print(t)
@@ -506,3 +552,62 @@ if(__name__ == "__main__"):
     print(draw_formula_tree(o))
     print("")
     print(draw_formula_tree(build_tree("(-y+x)")))
+
+    a = 'x'
+    b = '-y'
+    c = '(x+y)'
+    d = '(-x*y)'
+    e = '((x+y)+(y+x))'
+    f = '(((x+y)*(x+y))+((a+b)*(a+b)))'
+
+    aa = build_tree(a)
+    bb = build_tree(b)
+    cc = build_tree(c)
+    dd = build_tree(d)
+    ee = build_tree(e)
+    ff = build_tree(f)
+
+    A1 = play2win(aa, 'E', 'x', '')
+    A2 = play2win(aa, 'A', 'x', '')
+    A3 = play2win(bb, 'E', 'y', '')
+    A4 = play2win(bb, 'A', 'y', '')
+    # 1001
+    A5 = play2win(cc, 'AA', 'xy', '')
+    A6 = play2win(cc, 'EE', 'xy', '')
+    A7 = play2win(cc, 'AE', 'xy', '0')
+    A8 = play2win(cc, 'EA', 'xy', '0')
+    A9 = play2win(cc, 'AE', 'xy', '1')
+    A10 = play2win(cc, 'EA', 'xy', '1')
+    A11 = play2win(dd, 'AA', 'xy', '')
+    A12 = play2win(dd, 'EE', 'xy', '')
+    A13 = play2win(dd, 'AE', 'xy', '0')
+    A14 = play2win(dd, 'EA', 'xy', '0')
+    A15 = play2win(dd, 'AE', 'xy', '1')
+    A16 = play2win(dd, 'EA', 'xy', '1')
+    A17 = play2win(ee, 'AA', 'xy', '')
+    A18 = play2win(ee, 'AA', 'xy', '1')
+    A19 = play2win(ee, 'EE', 'xy', '')
+    A20 = play2win(ee, 'EE', 'xy', '0')
+    A21 = play2win(ee, 'AE', 'xy', '')
+    A22 = play2win(ee, 'AE', 'xy', '0')
+    A23 = play2win(ee, 'EA', 'xy', '')
+    A24 = play2win(ee, 'EA', 'xy', '1')
+    # 0110100010100011011
+    A25 = play2win(ff, 'EEEE', 'xyab', '101')
+    A26 = play2win(ff, 'EEEE', 'xyab', '10')
+    A27 = play2win(ff, 'EEEE', 'xyab', '1')
+    A28 = play2win(ff, 'EEEE', 'xyab', '')
+    A29 = play2win(ff, 'AAAA', 'xyab', '101')
+    A30 = play2win(ff, 'AAAA', 'xyab', '10')
+    A31 = play2win(ff, 'AAAA', 'xyab', '1')
+    A32 = play2win(ff, 'AAAA', 'xyab', '')
+    A33 = play2win(ff, 'AEAE', 'xyab', '101')
+    A34 = play2win(ff, 'AEAE', 'xyab', '10')
+    A35 = play2win(ff, 'AEAE', 'xyab', '1')
+    A36 = play2win(ff, 'AEAE', 'xyab', '')
+    # 011110001010
+    B = str(A1)+str(A2)+str(A3)+str(A4)+str(A5)+str(A6)+str(A7)+str(A8)+str(A9)+str(A10)+str(A11)+str(A12)+str(A13)+str(A14)+str(A15)+str(A16)+str(A17)+str(A18)+str(A19)+str(A20)+str(A21)+str(A22)+str(A23)+str(A24)+str(A25)+str(A26)+str(A27)+str(A28)+str(A29)+str(A30)+str(A32)+str(A33)+str(A34)+str(A35)+str(A36)
+    if(B == '10010110100010100011011011110001010'):
+        print(True)
+    else:
+        print("Damn Fool!")
