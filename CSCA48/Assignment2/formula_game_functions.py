@@ -55,44 +55,82 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     """
     # Get the current player
     current_player = turns[-(len(turns) - len(values))]
-    # If there is only one move left to make
-    if(len(turns) - len(values) == 1):
-        # Evaluate the game with both a zero and a one
-        check_var_0 = evaluate(root, variables, values + "0")
-        check_var_1 = evaluate(root, variables, values + "1")
-        # If the current player is E
+    # Generate all possible permutations of valid combinations
+    possible_permutations = permutation_generator(len(variables), values)
+    # Cast the possible permutations to a list
+    pos_perms_list = list(possible_permutations)
+    # Create a list to store moves that will win the game
+    winning_moves = []
+    # Loop through the permutation list
+    for value in pos_perms_list:
+        # Evaluate the possible combination
+        result = evaluate(root, variables, value)
+        # If the player is we are checking for is E and the result was 1
+        if(current_player == "E" and result == 1):
+            # This is a winning strategy, let's save it
+            # Also, strip the default, given values for the save
+            winning_moves.append(value[len(values):])
+        # Otherwise, if the current player is a and the evaluation was 0
+        elif(current_player == "A" and result == 0):
+            # This is a winning strategy for A, save it
+            # Also, strip the default, given values for the save
+            winning_moves.append(value[len(values):])
+    # If there is no default strategy for the player
+    if(len(winning_moves) == 0):
+        # Return default player's number
         if(current_player == "E"):
-            # If 0 is a winning move and 1 is not
-            if(check_var_0 == 1 and check_var_1 == 0):
-                # Return 0
-                next_move = 0
-            # Else if 1 is a winning move and 0 is not
-            elif(check_var_1 == 1 and check_var_0 == 0):
-                # Return 1
-                next_move = 1
-            # Otherwise, return E's default move: 1
-            else:
-                next_move = 1
-        # Otherwise the current player is A
+            # E's default is 1
+            next_move = 1
         else:
-            # If 0 is a winning move and 1 is not
-            if(check_var_0 == 0 and check_var_1 == 1):
-                # Return 0
-                next_move = 0
-            # Else if 1 is a winning move and 0 is not
-            elif(check_var_1 == 0 and check_var_0 == 1):
-                # Return 1
-                next_move = 1
-            # Otherwise, return A's default move: 0
-            else:
-                next_move = 0
-        print(values + "0", values + "1", current_player, next_move)
-    # Else there are several move to make still
+            # A's default is 0
+            next_move = 0
+    # Otherwise, there are some amount of valid moves the player can make
     else:
-        check_var_0 = play2win(root, turns, variables, values + "0")
-        check_var_1 = play2win(root, turns, variables, values + "1")
-        next_move = 0
+        # Create two boolean variable to check if there are both 0's and 1's
+        # in the winning combination list
+        zero_found = False
+        one_found = False
+        # Loop through all valid winning moves
+        for win in winning_moves:
+            # If the winning move starts with "0"
+            if(win[0] == "0"):
+                # Switch the boolean, there is a zero
+                zero_found = True
+            # If the winning move starts with a "1"
+            elif(win[0] == "1"):
+                # Switch the boolean, there is a one
+                one_found = True
+        # If there is a 0 and a 1 in the winning set
+        if(zero_found and one_found):
+            # No clear win path, return player's default move
+            if(current_player == "E"):
+                # 1 for player E
+                next_move = 1
+            else:
+                # 0 for player A
+                next_move = 0
+        # If there are only zeros in the winning moves set
+        elif(zero_found):
+            # Zero is part of a winning strategy, return that
+            next_move = 0
+        # Otherwise, only ones were found
+        else:
+            # One is part of a winning strategy, return that
+            next_move = 1
     return next_move
+
+
+def permutation_generator(max_size, values):
+    if(len(values) + 1 == max_size):
+        ret_set = set()
+        ret_set.add(values + "0")
+        ret_set.add(values + "1")
+    else:
+        first = permutation_generator(max_size, values + "0")
+        second = permutation_generator(max_size, values + "1")
+        first.update(second)
+        ret_set = first
+    return ret_set
 
 
 def draw_formula_tree(root: FormulaTree) -> str:
@@ -467,3 +505,150 @@ def tree_builder(formula: str) -> FormulaTree:
             # Return a FormulaTree with the leaf of the variable
             formula_tree = Leaf(formula)
     return formula_tree
+
+if(__name__ == "__main__"):
+    t = build_tree("((((x+y)+y)+y)*((r*(r+u))*s))")
+    print(t)
+    t = build_tree("-((f+(-e*f))*-(e*-c))")
+    print(t)
+    t = build_tree("(((x+y)*(y+z))*(-y+-z))")
+    print(t)
+    o = build_tree("(a+(b+(c+(d+(e+(f+(g+(h+(i+(j+(k+(l+(m+(n+(o+(p+(q+(r+(s+(t+(u+(v+(w+(x+(y+z)))))))))))))))))))))))))")
+    l = eval("OrTree(Leaf('a'), OrTree(Leaf('b'), OrTree(Leaf('c'), OrTree(Leaf('d'), OrTree(Leaf('e'), OrTree(Leaf('f'), OrTree(Leaf('g'), OrTree(Leaf('h'), OrTree(Leaf('i'), OrTree(Leaf('j'), OrTree(Leaf('k'), OrTree(Leaf('l'), OrTree(Leaf('m'), OrTree(Leaf('n'), OrTree(Leaf('o'), OrTree(Leaf('p'), OrTree(Leaf('q'), OrTree(Leaf('r'), OrTree(Leaf('s'), OrTree(Leaf('t'), OrTree(Leaf('u'), OrTree(Leaf('v'), OrTree(Leaf('w'), OrTree(Leaf('x'), OrTree(Leaf('y'), Leaf('z'))))))))))))))))))))))))))")
+    print(o == l)
+    t = build_tree("(a+d)")
+    print(t)
+
+    import doctest
+    doctest.testmod()
+    print("NOT VALID FORMULAS")
+    invalid_formulas = [
+        '-(x)',
+        '(-x)',
+        '(x)',
+        'x+y',
+        '(-(x))',
+        '-',
+        'x+',
+        '*x',
+        'X',
+        '((x))',
+        '(x+y',
+        'x+y)',
+        'xx',
+        '()',
+        ')(',
+        '(xy)',
+        ')x+y(',
+        '123',
+        'abc',
+        '-(-x)'
+    ]
+    for formula in invalid_formulas:
+        t = build_tree(formula)
+        print(t)
+    print("VALID FORMULAS")
+    valid_formulas = [
+        'x',
+        '-x',
+        '(x+y)',
+        '(x*y)',
+        '(-x+y)',
+        '(x+-y)',
+        '(-x+-y)',
+        '(-x*y)',
+        '(x*-y)',
+        '(-x*-y)',
+        '-(x+y)',
+        '-(x*y)',
+        '((x+y)*z)',
+        '-((x*y)+z)',
+        '-((y*(-y*y))*-x)',
+        '--x'
+    ]
+    for formula in valid_formulas:
+        t = build_tree(formula)
+        print(t)
+
+    print(evaluate_helper(build_tree("--x"), "x", "1"))
+    print(play2win(build_tree("-((y*(-y*y))*-x)"), "EA", "xy", "1"))
+    print("ATTEMPT:")
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "01"))
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "00"))
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "11"))
+    print(evaluate(build_tree("-((y*(-y*y))*-x)"), "yx", "10"))
+    print("Draw That Tree!")
+    t = draw_formula_tree(build_tree("((-a+b)*-(-c+d))"))
+    print(t)
+    print("MANUAL DRAWN:")
+    print('*\t-\t+\td')
+    print("\t\t\t-\tc")
+    print("\t+\tb")
+    print("\t\t-\ta")
+    print("MANUAL DRAW 2:")
+    print("*\t-\t+\tx\n\t\t\t-\ty\n\t+\ty\n\t\t-\tx")
+    print("OTHER TREE:")
+    print(draw_formula_tree(o))
+    print("")
+    print(draw_formula_tree(build_tree("(-y+x)")))
+
+    a = 'x'
+    b = '-y'
+    c = '(x+y)'
+    d = '(-x*y)'
+    e = '((x+y)+(y+x))'
+    f = '(((x+y)*(x+y))+((a+b)*(a+b)))'
+
+    aa = build_tree(a)
+    bb = build_tree(b)
+    cc = build_tree(c)
+    dd = build_tree(d)
+    ee = build_tree(e)
+    ff = build_tree(f)
+
+    A1 = play2win(aa, 'E', 'x', '')
+    A2 = play2win(aa, 'A', 'x', '')
+    A3 = play2win(bb, 'E', 'y', '')
+    A4 = play2win(bb, 'A', 'y', '')
+    # 1001
+    A5 = play2win(cc, 'AA', 'xy', '')
+    A6 = play2win(cc, 'EE', 'xy', '')
+    A7 = play2win(cc, 'AE', 'xy', '0')
+    A8 = play2win(cc, 'EA', 'xy', '0')
+    A9 = play2win(cc, 'AE', 'xy', '1')
+    A10 = play2win(cc, 'EA', 'xy', '1')
+    A11 = play2win(dd, 'AA', 'xy', '')
+    A12 = play2win(dd, 'EE', 'xy', '')
+    A13 = play2win(dd, 'AE', 'xy', '0')
+    A14 = play2win(dd, 'EA', 'xy', '0')
+    A15 = play2win(dd, 'AE', 'xy', '1')
+    A16 = play2win(dd, 'EA', 'xy', '1')
+    A17 = play2win(ee, 'AA', 'xy', '')
+    A18 = play2win(ee, 'AA', 'xy', '1')
+    A19 = play2win(ee, 'EE', 'xy', '')
+    A20 = play2win(ee, 'EE', 'xy', '0')
+    A21 = play2win(ee, 'AE', 'xy', '')
+    A22 = play2win(ee, 'AE', 'xy', '0')
+    A23 = play2win(ee, 'EA', 'xy', '')
+    A24 = play2win(ee, 'EA', 'xy', '1')
+    # 0110100010100011011
+    A25 = play2win(ff, 'EEEE', 'xyab', '101')
+    A26 = play2win(ff, 'EEEE', 'xyab', '10')
+    A27 = play2win(ff, 'EEEE', 'xyab', '1')
+    A28 = play2win(ff, 'EEEE', 'xyab', '')
+    A29 = play2win(ff, 'AAAA', 'xyab', '101')
+    A30 = play2win(ff, 'AAAA', 'xyab', '10')
+    # A31 = play2win(ff, 'AAAA', 'xyab', '1')
+    A32 = play2win(ff, 'AAAA', 'xyab', '')
+    A33 = play2win(ff, 'AEAE', 'xyab', '101')
+    A34 = play2win(ff, 'AEAE', 'xyab', '10')
+    A35 = play2win(ff, 'AEAE', 'xyab', '1')
+    A36 = play2win(ff, 'AEAE', 'xyab', '')
+    # 011110001010
+    B = str(A1)+str(A2)+str(A3)+str(A4)+str(A5)+str(A6)+str(A7)+str(A8)+str(A9)+str(A10)+str(A11)+str(A12)+str(A13)+str(A14)+str(A15)+str(A16)+str(A17)+str(A18)+str(A19)+str(A20)+str(A21)+str(A22)+str(A23)+str(A24)+str(A25)+str(A26)+str(A27)+str(A28)+str(A29)+str(A30)+str(A32)+str(A33)+str(A34)+str(A35)+str(A36)
+    print(B)
+    print("10010110100010100011011011110001010")
+    if(B == '10010110100010100011011011110001010'):
+        print("WIINNING")
+    else:
+        print("Damn Fool!")
