@@ -52,6 +52,12 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     1
     >>> print(play2win(b, 'E', 'y', ''))
     0
+    >>> c = build_tree('((x+y)+(y+x))')
+    >>> print(play2win(c, 'EE', 'xy', '0'))
+    1
+    >>> d = build_tree("(((w+x)*(w+x))+((y+z)*(y+z)))")
+    >>> print(play2win(d, 'AEAE', 'wxyz', ''))
+    0
     """
     # Get the current player
     current_player = turns[-(len(turns) - len(values))]
@@ -120,16 +126,42 @@ def play2win(root: FormulaTree, turns: str, variables: str, values: str):
     return next_move
 
 
-def permutation_generator(max_size, values):
+def permutation_generator(max_size: int, values: str) -> set:
+    """ (int, str) -> set
+    Function take in a max_size of string to generate, a string of values and
+    returns a set of all possible combinations of 1s and 0s up to the maximum
+    size.
+    REQ: max_size > len(values)
+    REQ: values must be a string of 1s and 0s
+    >>> print(permutation_generator(2, "") == {"00", "01", "10", "11"})
+    True
+    >>> print(permutation_generator(1, "") == {"0", "1"})
+    True
+    >>> print(permutation_generator(2, "0") == {"01", "00"})
+    True
+    >>> t = {"0100", "0101", "0110", "0111"}
+    >>> print(permutation_generator(4, "01") == t)
+    True
+    """
+    # Check if the values just needs one more number
     if(len(values) + 1 == max_size):
+        # If it does, create a set
         ret_set = set()
+        # Add the current values plus a 0 to the new set
         ret_set.add(values + "0")
+        # Add the current values plus a 1 to the new set
         ret_set.add(values + "1")
+    # Otherwise, there needs to be more permutations
     else:
+        # Recurse through the generator, with 0 appended to the value list
         first = permutation_generator(max_size, values + "0")
+        # Recurse through the generator with a 1 appended to the value list
         second = permutation_generator(max_size, values + "1")
+        # Make the first set the union of the first and second set
         first.update(second)
+        # Return the first set
         ret_set = first
+    # Return the set
     return ret_set
 
 
