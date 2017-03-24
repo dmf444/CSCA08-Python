@@ -1,0 +1,45 @@
+Autotested Results for ex6 submitted by [REDACTED]
+Generated at 2017-03-21T20:11:19
+
+Summary of Results: 8 out of 9 tests successfully passed
+--
+
+Tests for test_ex8.TestE8 (7/8 passed)
+--
+
+1) test_ex8.TestE8.test_sum_max_min                                                   .. ok!
+2) test_ex8.TestE8.test_rmax                                                          .. ok!
+3) test_ex8.TestE8.test_sum_max_min_efficiency                                        .. ok!
+4) test_ex8.TestE8.test_rmax_efficiency                                               .. ok!
+5) test_ex8.TestE8.test_second_smallest_efficiency                                    .. ok!
+6) test_ex8.TestE8.test_rsum_efficiency                                               .. ok!
+7) test_ex8.TestE8.test_rsum                                                          .. ok!
+8) test_ex8.TestE8.test_second_smallest                                               .. failed
+.. because 0 != -5 : second_smallest() returns incorrectly when passed in [-5, 1, 0, -5, 1, 4] (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex6/test_ex8.py", line 231, in test_second_smallest
+        + str(input_copy))
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 813, in _baseAssertEqual
+        raise self.failureException(msg)
+
+    AssertionError: 0 != -5 : second_smallest() returns incorrectly when passed in [-5, 1, 0, -5, 1, 4]
+
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+

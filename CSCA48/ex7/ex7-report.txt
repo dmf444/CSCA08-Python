@@ -1,0 +1,57 @@
+Autotested Results for ex7 submitted by [REDACTED]
+Generated at 2017-03-21T20:25:14
+
+Summary of Results: 14 out of 15 tests successfully passed
+--
+
+Tests for test_perms.TestPerms (4/4 passed)
+--
+
+1) test_perms.TestPerms.test_perms_3                                                  .. ok!
+2) test_perms.TestPerms.test_perms_2                                                  .. ok!
+3) test_perms.TestPerms.test_perms_1                                                  .. ok!
+4) test_perms.TestPerms.test_perms_4                                                  .. ok!
+
+
+Tests for test_subsequence.TestSubsequence (4/5 passed)
+--
+
+1) test_subsequence.TestSubsequence.test_subsequence_1                                .. ok!
+2) test_subsequence.TestSubsequence.test_subsequence_3                                .. ok!
+3) test_subsequence.TestSubsequence.test_subsequence_2                                .. ok!
+4) test_subsequence.TestSubsequence.test_subsequence_4                                .. ok!
+5) test_subsequence.TestSubsequence.test_subsequence_5                                .. failed
+.. because True is not false : Testing subsequence with multiple identical letters. (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/ex7/test_subsequence.py", line 162, in test_subsequence_5
+        self.assertFalse(ex5.subsequence(s1, s2), "Testing subsequence with multiple identical letters.")
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 671, in assertFalse
+        raise self.failureException(msg)
+
+    AssertionError: True is not false : Testing subsequence with multiple identical letters.
+
+
+
+Tests for test_edit_distance.TestEditDistance (5/5 passed)
+--
+
+1) test_edit_distance.TestEditDistance.test_edit_distance_2                           .. ok!
+2) test_edit_distance.TestEditDistance.test_edit_distance_3                           .. ok!
+3) test_edit_distance.TestEditDistance.test_edit_distance_1                           .. ok!
+4) test_edit_distance.TestEditDistance.test_edit_distance_4                           .. ok!
+5) test_edit_distance.TestEditDistance.test_edit_distance_5                           .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!

@@ -1,0 +1,24 @@
+Autotested Results for ex8 submitted by [REDACTED]
+Generated at 2017-03-21T20:50:55
+
+Summary of Results: 9 out of 9 tests successfully passed
+--
+
+Tests for test_ex10.TestE8 (8/8 passed)
+--
+
+1) test_ex10.TestE8.test_sum_to_deepest_2                                             .. ok!
+2) test_ex10.TestE8.test_sum_to_deepest_1                                             .. ok!
+3) test_ex10.TestE8.test_set_depth_1                                                  .. ok!
+4) test_ex10.TestE8.test_set_depth_2                                                  .. ok!
+5) test_ex10.TestE8.test_leaves_and_internals_4                                       .. ok!
+6) test_ex10.TestE8.test_leaves_and_internals_1                                       .. ok!
+7) test_ex10.TestE8.test_leaves_and_internals_3                                       .. ok!
+8) test_ex10.TestE8.test_leaves_and_internals_2                                       .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
