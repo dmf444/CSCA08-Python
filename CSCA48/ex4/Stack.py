@@ -22,3 +22,14 @@ class Stack():
 
     def is_empty(self):
         return len(self._contents) == 0
+
+    def peek(self):
+        try:
+            return self._contents[0]
+        except:
+            raise ContainerEmptyException
+
+    def copy(self):
+        newer = Stack()
+        newer._contents = self._contents[:]
+        return newer

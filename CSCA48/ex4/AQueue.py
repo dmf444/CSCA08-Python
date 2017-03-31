@@ -32,3 +32,9 @@ class AQueue():
 
     def is_empty(self):
         return (len(self._contents) == 0)
+
+    def copy(self):
+        newer = AQueue()
+        newer._contents = self._contents[:]
+        newer._on_left = self._on_left
+        return newer

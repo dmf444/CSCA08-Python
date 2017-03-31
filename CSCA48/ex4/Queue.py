@@ -22,3 +22,9 @@ class Queue():
 
     def is_empty(self):
         return len(self._contents) == 0
+
+    def copy(self):
+        newer = Queue()
+        newer._contents = self._contents[:]
+        return newer
+
