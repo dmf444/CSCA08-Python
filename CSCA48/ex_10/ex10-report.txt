@@ -1,0 +1,45 @@
+Autotested Results for ex10 submitted by [REDACTED]
+Generated at 2017-04-02T19:07:15
+
+Summary of Results: 30 out of 30 tests successfully passed
+--
+
+Tests for test_banana_game.TestE11 (29/29 passed)
+--
+
+1) test_banana_game.TestE11.test_6_stack                                              .. ok!
+2) test_banana_game.TestE11.test_7_queue                                              .. ok!
+3) test_banana_game.TestE11.test_5_bucket                                             .. ok!
+4) Cycling through E1's handout examples with a Bucket.                               .. ok!
+5) test_banana_game.TestE11.test_4_stack                                              .. ok!
+6) Using the "Middle Out" algorithm as a container. :-)                               .. ok!
+7) test_banana_game.TestE11.test_9_bucket                                             .. ok!
+8) test_banana_game.TestE11.test_8_bucket                                             .. ok!
+9) test_banana_game.TestE11.test_3_bucket                                             .. ok!
+10) test_banana_game.TestE11.test_4_queue                                              .. ok!
+11) test_banana_game.TestE11.test_8_queue                                              .. ok!
+12) test_banana_game.TestE11.test_6_queue                                              .. ok!
+13) Cycling through E1's handout examples with a Stack.                                .. ok!
+14) test_banana_game.TestE11.test_8_stack                                              .. ok!
+15) test_banana_game.TestE11.test_7_stack                                              .. ok!
+16) test_banana_game.TestE11.test_4_bucket                                             .. ok!
+17) test_banana_game.TestE11.test_2_bucket                                             .. ok!
+18) test_banana_game.TestE11.test_9_stack                                              .. ok!
+19) Cycling through E1's handout examples with a Queue.                                .. ok!
+20) test_banana_game.TestE11.test_2_queue                                              .. ok!
+21) Cycling through E1's handout examples with a Black Hole!!!1 All tests should
+fail (except the last), because it's a Black Hole!1                                   .. ok!
+22) test_banana_game.TestE11.test_2_stack                                              .. ok!
+23) test_banana_game.TestE11.test_7_bucket                                             .. ok!
+24) test_banana_game.TestE11.test_3_stack                                              .. ok!
+25) test_banana_game.TestE11.test_9_queue                                              .. ok!
+26) test_banana_game.TestE11.test_3_queue                                              .. ok!
+27) test_banana_game.TestE11.test_5_stack                                              .. ok!
+28) test_banana_game.TestE11.test_5_queue                                              .. ok!
+29) test_banana_game.TestE11.test_6_bucket                                             .. ok!
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
