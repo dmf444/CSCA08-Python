@@ -1,0 +1,208 @@
+Autotested Results for A2 submitted by [REDACTED]
+Generated at 2017-04-10T02:18:46
+
+Summary of Results: 23 out of 27 tests successfully passed
+--
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
+
+Tests for test_a2.TestBuildTree (9/9 passed)
+--
+
+1) test_a2.TestBuildTree.test_negation                                                .. ok!
+2) test_a2.TestBuildTree.test_single_variable                                         .. ok!
+3) test_a2.TestBuildTree.test_mixed                                                   .. ok!
+4) test_a2.TestBuildTree.test_disjunction                                             .. ok!
+5) test_a2.TestBuildTree.test_single_variable_invalid                                 .. ok!
+6) test_a2.TestBuildTree.test_missing_bracket_invalid                                 .. ok!
+7) test_a2.TestBuildTree.test_conjunction                                             .. ok!
+8) test_a2.TestBuildTree.test_no_variable_negation                                    .. ok!
+9) test_a2.TestBuildTree.test_negation_invalid                                        .. ok!
+
+
+Tests for test_a2.TestPlay2Win (6/6 passed)
+--
+
+1) test_a2.TestPlay2Win.test_immediate_win                                            .. ok!
+2) test_a2.TestPlay2Win.test_large_1                                                  .. ok!
+3) test_a2.TestPlay2Win.test_large_2                                                  .. ok!
+4) test_a2.TestPlay2Win.test_large_3                                                  .. ok!
+5) test_a2.TestPlay2Win.test_unwinnable                                               .. ok!
+6) test_a2.TestPlay2Win.test_winnable                                                 .. ok!
+
+
+Tests for test_a2.TestDrawFormulaTree (1/5 passed)
+--
+
+1) test_a2.TestDrawFormulaTree.test_single_variable                                   .. ok!
+2) test_a2.TestDrawFormulaTree.test_conjunction                                       .. failed
+.. because '*\ty\n\t*\ty\n\t\tx' != '* y\n  * y\n    x'
+- *	y
+?  ^
++ * y
+?  ^
+- 	*	y
+- 		x+   * y
++     x : The FormulaTree "((x*y)*y)" was incorrectly rendered (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 56, in test_conjunction
+        self.compare('((x*y)*y)')
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 46, in compare
+        'The FormulaTree "%s" was incorrectly rendered' % formula
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 1193, in assertMultiLineEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 665, in fail
+        raise self.failureException(msg)
+
+    AssertionError: '*\ty\n\t*\ty\n\t\tx' != '* y\n  * y\n    x'
+    - *	y
+    ?  ^
+    + * y
+    ?  ^
+    - 	*	y
+    - 		x+   * y
+    +     x : The FormulaTree "((x*y)*y)" was incorrectly rendered
+
+3) test_a2.TestDrawFormulaTree.test_mixed                                             .. failed
+.. because '*\t-\t-\t-\t-\t+\t*\t-\tb\n\t\t\t\t\t\t\tb\n\t\t\t\t\t\td\n\tx' != '* - - - - + * - b\n              b\n            d\n  x'
+- *	-	-	-	-	+	*	-	b
+- 							b
+- 						d
+- 	x+ * - - - - + * - b
++               b
++             d
++   x : The FormulaTree "(x*----(d+(b*-b)))" was incorrectly rendered (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 62, in test_mixed
+        self.compare('(x*----(d+(b*-b)))')
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 46, in compare
+        'The FormulaTree "%s" was incorrectly rendered' % formula
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 1193, in assertMultiLineEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 665, in fail
+        raise self.failureException(msg)
+
+    AssertionError: '*\t-\t-\t-\t-\t+\t*\t-\tb\n\t\t\t\t\t\t\tb\n\t\t\t\t\t\td\n\tx' != '* - - - - + * - b\n              b\n            d\n  x'
+    - *	-	-	-	-	+	*	-	b
+    - 							b
+    - 						d
+    - 	x+ * - - - - + * - b
+    +               b
+    +             d
+    +   x : The FormulaTree "(x*----(d+(b*-b)))" was incorrectly rendered
+
+4) test_a2.TestDrawFormulaTree.test_negation                                          .. failed
+.. because '-\t-\t-\t-\tx' != '- - - - x'
+- -	-	-	-	x
++ - - - - x
+ : The FormulaTree "----x" was incorrectly rendered (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 53, in test_negation
+        self.compare('----x')
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 46, in compare
+        'The FormulaTree "%s" was incorrectly rendered' % formula
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 1193, in assertMultiLineEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 665, in fail
+        raise self.failureException(msg)
+
+    AssertionError: '-\t-\t-\t-\tx' != '- - - - x'
+    - -	-	-	-	x
+    + - - - - x
+     : The FormulaTree "----x" was incorrectly rendered
+
+5) test_a2.TestDrawFormulaTree.test_disjunction                                       .. failed
+.. because '+\t+\ty\n\t\tx\n\tx' != '+ + y\n    x\n  x'
+- +	+	y
+- 		x
+- 	x+ + + y
++     x
++   x : The FormulaTree "(x+(x+y))" was incorrectly rendered (details below):
+
+    Traceback (most recent call last):
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 58, in testPartExecutor
+        yield
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 600, in run
+        testMethod()
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 59, in test_disjunction
+        self.compare('(x+(x+y))')
+
+      File "/home/a08test/submissions/ferna844/A2/test_a2.py", line 46, in compare
+        'The FormulaTree "%s" was incorrectly rendered' % formula
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 820, in assertEqual
+        assertion_func(first, second, msg=msg)
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 1193, in assertMultiLineEqual
+        self.fail(self._formatMessage(msg, standardMsg))
+
+      File "/home/a08test/python/lib/python3.5/unittest/case.py", line 665, in fail
+        raise self.failureException(msg)
+
+    AssertionError: '+\t+\ty\n\t\tx\n\tx' != '+ + y\n    x\n  x'
+    - +	+	y
+    - 		x
+    - 	x+ + + y
+    +     x
+    +   x : The FormulaTree "(x+(x+y))" was incorrectly rendered
+
+
+
+Tests for test_a2.TestEvaluate (6/6 passed)
+--
+
+1) test_a2.TestEvaluate.test_mixed                                                    .. ok!
+2) test_a2.TestEvaluate.test_conjunction                                              .. ok!
+3) test_a2.TestEvaluate.test_mixed_out_of_order                                       .. ok!
+4) test_a2.TestEvaluate.test_single_variable                                          .. ok!
+5) test_a2.TestEvaluate.test_disjunction                                              .. ok!
+6) test_a2.TestEvaluate.test_negation                                                 .. ok!
