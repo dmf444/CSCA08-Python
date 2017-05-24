@@ -1,8 +1,9 @@
 import unittest
-import TeachingPython.unittest_basic as test
-
 
 import TeachingPython.unittest_00 as post
+
+import TeachingPython.unittest.unittest_basic as test
+
 ASSIGNMENT = "assignment0"
 
 students = ["fernand029", "failur029"]

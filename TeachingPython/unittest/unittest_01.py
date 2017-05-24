@@ -46,7 +46,7 @@ class TestFile(unittest.TestCase):
 
 
 if(__name__ == "__main__"):
-    import TeachingPython.unittest_basic as test
+    import TeachingPython.unittest.unittest_basic as test
     file = open("unittest_01_test.txt", "w")
     runner = test.MyTestRunner(file)
     p = unittest.main(exit=False, verbosity=2, testRunner=runner)

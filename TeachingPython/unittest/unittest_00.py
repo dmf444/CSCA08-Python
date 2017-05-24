@@ -1,7 +1,7 @@
-import unittest
 import time
+import unittest
 
-from TeachingPython.unittest_basic import MyTestRunner, timeout
+from TeachingPython.unittest.unittest_basic import MyTestRunner, timeout
 
 
 class TestFile(unittest.TestCase):
